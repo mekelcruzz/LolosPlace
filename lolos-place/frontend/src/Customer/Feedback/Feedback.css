@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap');
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+    box-sizing: border-box; /* Ensure padding and border are included in element's total width and height */
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit; /* Apply box-sizing to all elements */
+}
+
+.feedback-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f7f7f7;
+}
+
+.feedback-section {
+    text-align: center;
+    padding: 2em;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+}
+
+.feedback-section h1 {
+    font-family: 'Tangerine', cursive;
+    font-weight: 700;
+    font-size: 3.5em;
+    margin-bottom: 0.5em;
+    color: black;
+}
+
+.feedback-section p {
+    font-size: 1.2em;
+    color: black;
+}
+
+.feedback-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    width: 100%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.form-group label {
+    font-size: 1em;
+    color: black;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%; /* Ensure form elements take full width of the container */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    font-family: Arial, sans-serif;
+    resize: none; /* Disable textarea resizing */
+    outline: none;
+    box-sizing: border-box; /* Ensure padding and borders don't cause overflow */
+}
+
+.form-group textarea {
+    min-height: 120px;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #888;
+}
+
+.submit-button {
+    padding: 10px 20px;
+    background-color: rgb(255, 228, 155);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: grey;
+    color: white;
+}
+
+.popup {
+    background-color: rgb(255, 255, 255);
+    color: white;
+    padding: 20px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.popup button {
+    background-color: rgb(255, 228, 155);
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 15px;
+}
+
+
+
+/* Responsive styles for screens under 600px */
+@media (max-width: 600px) {
+    .feedback-section {
+        padding: 1.5em;
+        max-width: 100%;
+        border-radius: 8px;
+    }
+
+    .feedback-section h1 {
+        font-size: 2.5em;
+    }
+
+    .feedback-section p {
+        font-size: 1.1em;
+    }
+
+    .submit-button {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        font-size: 0.9em;
+        padding: 8px;
+    }
+
+    .form-group textarea {
+        min-height: 100px;
+    }
+}
+
+/* Responsive styles for screens under 400px */
+@media (max-width: 400px) {
+    .feedback-section {
+        padding: 1em;
+    }
+
+    .feedback-section h1 {
+        font-size: 2em;
+        margin-bottom: 0.3em;
+    }
+
+    .feedback-section p {
+        font-size: 1em;
+        margin-bottom: 1em;
+    }
+
+    .submit-button {
+        padding: 8px;
+        font-size: 0.8em;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        font-size: 0.85em;
+        padding: 7px;
+    }
+
+    .form-group textarea {
+        min-height: 90px;
+    }
+}
+
+/* Ultra-small screens under 320px */
+@media (max-width: 320px) {
+    .feedback-section {
+        padding: 0.8em;
+    }
+
+    .feedback-section h1 {
+        font-size: 1.8em;
+    }
+
+    .feedback-section p {
+        font-size: 0.9em;
+    }
+
+    .submit-button {
+        padding: 6px;
+        font-size: 0.75em;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        font-size: 0.75em;
+        padding: 6px;
+    }
+
+    .form-group textarea {
+        min-height: 80px;
+    }
+}

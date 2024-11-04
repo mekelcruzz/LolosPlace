@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap');
+
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+.profile-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.profile-page .container {
+    display: flex;
+    padding: 2em;
+    flex-direction: row;
+}
+
+/* Sidebar adjustments */
+.profile-page .sidebar {
+    width: 180px;
+    background-color: rgba(255, 228, 155, 0.3);
+    padding: 15px;
+    border-radius: 8px;
+    position: fixed;
+    top: 6em;
+    left: 2em;
+    height: auto;
+    z-index: 1000;
+}
+
+.profile-page .sidebar h2 {
+    font-family: "Tangerine", sans-serif;
+    font-size: 2em;
+    color: black;
+    margin-bottom: 1em;
+}
+
+.profile-page .sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.profile-page .sidebar ul li {
+    padding: 1em 0;
+}
+
+.profile-page .sidebar ul li button {
+    width: 100%;
+    background-color: transparent;
+    color: black;
+    font-size: 1em;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    text-align: left;
+    transition: background-color 0.3s;
+}
+
+.profile-page .sidebar ul li button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.profile-page .logout-btn {
+    margin-top: 2em;
+    background-color: rgb(255, 99, 71);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.profile-page .logout-btn:hover {
+    background-color: rgb(220, 20, 60);
+}
+
+/* Main content adjustments */
+.profile-page .main-content {
+    flex: 1;
+    margin-left: 220px;
+    padding-left: 2em;
+    color: black;
+    padding-top: 2em;
+}
+
+.profile-page .section {
+    margin-bottom: 2em;
+    padding: 2em;
+    background-color: rgb(255, 228, 155);
+    border-radius: 8px;
+}
+
+.profile-page .section h3 {
+    font-family: "Tangerine", sans-serif;
+    font-size: 2.2em;
+    color: black;
+}
+
+.profile-page .section p {
+    font-size: 1.1em;
+    margin-bottom: 1em;
+}
+
+.profile-page .form-group {
+    margin-bottom: 1em;
+}
+
+.profile-page .form-group label {
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+.profile-page .form-group input {
+    width: 100%;
+    padding: 0.7em;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.profile-page .btn {
+    padding: 0.7em 1.5em;
+    background-color: grey;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.profile-page .btn:hover {
+    background-color: black;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .profile-page .container {
+        flex-direction: column;
+        padding: 1em;
+    }
+
+    .profile-page .sidebar {
+        width: 100%;
+        position: static;
+        margin-bottom: 1.5em;
+        left: 0;
+        top: 0;
+    }
+
+    .profile-page .main-content {
+        margin-left: 0;
+        padding-left: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-page .sidebar h2 {
+        font-size: 1.5em;
+    }
+
+    .profile-page .sidebar ul li button {
+        font-size: 0.9em;
+        padding: 8px;
+    }
+
+    .profile-page .section h3 {
+        font-size: 1.8em;
+    }
+
+    .profile-page .form-group input {
+        padding: 0.5em;
+    }
+
+    .profile-page .btn {
+        padding: 0.5em 1.2em;
+        font-size: 0.9em;
+    }
+}

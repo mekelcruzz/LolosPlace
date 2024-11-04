@@ -1,0 +1,43 @@
+/* SuccessPage.css */
+
+/* Ensure body and html take up the full height of the viewport */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+.success-page {
+    min-height: 100vh; /* Make sure success page takes up the full viewport */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Main section styles */
+.success-page .success-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    background-color: #ffffff; /* Light green background for success message */
+    color: #000000; /* Darker green color for text */
+}
+
+.success-page .success-section h1 {
+    font-family: "Tangerine", system-ui;
+    font-weight: 700;
+    font-size: 3.5em;
+    margin: 0 0 1em 0; /* Add margin at the bottom for spacing */
+}
+
+.success-page .success-section p {
+    font-size: 1.2em;
+    margin: 0.5em 0;
+    max-width: 800px; /* Limit width for better readability */
+    line-height: 1.6;
+}

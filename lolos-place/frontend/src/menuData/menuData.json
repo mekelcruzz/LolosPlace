@@ -1,0 +1,281 @@
+[
+    {
+        "name": "Lechon",
+        "category": "main",
+        "image": "assets/lechon.jpg"
+    },
+    {
+        "name": "Sinigang na Baboy",
+        "category": "soup",
+        "image": "assets/sinigang-na-baboy.jpg"
+    },
+    {
+        "name": "Kare-Kare",
+        "category": "main",
+        "image": "assets/kare-kare.jpg"
+    },
+    {
+        "name": "Bicol Express",
+        "category": "main",
+        "image": "assets/bicol-express.jpg"
+    },
+    {
+        "name": "Set A",
+        "price": 3430,
+        "category": "Bundle Meal",
+        "description": "Good for 6-8",
+        "items": [
+            "Buffalo Wings",
+            "Lolo's Crispy Pata",
+            "Shanghai Rolls",
+            "Choice of Sinigang (Pork, Shrimp, Bangus Belly, or Salmon Belly)",
+            "2 Plain Rice Platters",
+            "2 Carafes of Iced Tea (Cucumber or Gulaman Palamig)",
+            "Buko Pandan or Coffee Jelly"
+        ]
+    },
+    {
+        "name": "Set B",
+        "price": 4530,
+        "category": "Bundle Meal",
+        "description": "Good for 8",
+        "items": [
+            "Sisig",
+            "Calamari or Chicharon Bulaklak",
+            "1/2 Chicken Inasal",
+            "Seafood Chopsuey",
+            "2 Pansit Canton",
+            "Lumpiang Sariwa",
+            "Choice of Sinigang (Pork, Shrimp, Bangus Belly, or Salmon Belly)",
+            "Lolo's Crispy Pata",
+            "2 Lolo's Special Fried Rice Platters",
+            "2 Carafes of Iced Tea (Cucumber or Gulaman Palamig)",
+            "Buko Pandan or Coffee Jelly"
+        ]
+    },
+    {
+        "name": "Set C",
+        "price": 5649,
+        "category": "Bundle Meal",
+        "description": "Good for 8-10",
+        "items": [
+            "Chicharon Bulaklak",
+            "Fish and Fries",
+            "Lolo's Crispy Pata",
+            "Lolo's Special Fried Chicken",
+            "Choice of Sinigang (Pork, Shrimp, Bangus Belly, or Salmon Belly)",
+            "Humba or Bistek Tagalog",
+            "2 Pansit Canton",
+            "Lumpiang Sariwa",
+            "Lolo's Laing",
+            "2 Lolo's Special Fried Rice Platters",
+            "2 Carafes of Iced Tea (Cucumber or Gulaman Palamig)",
+            "Buko Pandan or Coffee Jelly"
+        ]
+    },
+    {
+        "name": "Set D",
+        "price": 7150,
+        "category": "Bundle Meal",
+        "description": "Good for 8-12",
+        "items": [
+            "Chicharon Bulaklak",
+            "Fish and Fries",
+            "Sweet and Sour Lapu-Lapu or Steamed Fish Pampano",
+            "Crispy Pata",
+            "Adobong Pusit",
+            "Whole Fried Chicken",
+            "2 Pansit Canton",
+            "Choice of Sinigang (Pork, Shrimp, Bangus Belly, or Salmon Belly)",
+            "Vegetable Kare-Kare",
+            "Lolo's Laing",
+            "2 Lolo's Special Fried Rice Platters",
+            "1 Plain Rice Platter",
+            "2 Carafes of Iced Tea (Cucumber or Gulaman Palamig)",
+            "Buko Pandan or Coffee Jelly"
+        ]
+    },
+    {
+        "name": "Set E",
+        "price": 8500,
+        "category": "Bundle Meal",
+        "description": "Good for 8-12",
+        "items": [
+            "Calamari",
+            "Chicharong Bulaklak",
+            "Lolo's Fried Chicken Whole",
+            "Crispy Pata",
+            "Humba Pata",
+            "Choice of Sinigang (Pork, Salmon Belly, Bangus Belly)",
+            "Bulalo",
+            "Inihaw na Tilapia",
+            "Stir-Fry Green Beans w/ minced Pork",
+            "Seafood Chopsuey",
+            "Buttered Garlic Shrimp (200g)",
+            "2 Pansit Canton",
+            "2 Lolo's Special Fried Rice Platters",
+            "2 Plain Rice Platters",
+            "2 Lecheflan",
+            "3 Carafes of Iced Tea or Cucumber Lemonade"
+        ]
+    },
+    
+    {
+            "name": "Sinigang na Baboy sa Sampalok",
+            "category": "Ultimo Paborito",
+            "price": 450,
+            "image": "assets/sinigang-na-baboy-sa-sampalok.jpg"
+        },
+        {
+            "name": "Sinigang na Hipon",
+            "category": "Ultimo Paborito",
+            "price": 475,
+            "image": "assets/sinigang-na-hipon.jpg"
+        },
+        {
+            "name": "Sinigang na Bangus Belly",
+            "category": "Ultimo Paborito",
+            "price": 450,
+            "image": "assets/sinigang-na-bangus-belly.jpg"
+        },
+        {
+            "name": "Sinigang na Tuna Belly",
+            "category": "Ultimo Paborito",
+            "price": 750,
+            "image": "assets/sinigang-na-tuna-belly.jpg"
+        },
+        {
+            "name": "Sinigang Salmon Belly",
+            "category": "Ultimo Paborito",
+            "price": 450,
+            "image": "assets/sinigang-salmon-belly.jpg"
+        },
+        {
+            "name": "Fried Salmon Belly",
+            "category": "Ultimo Paborito",
+            "price": 450,
+            "image": "assets/fried-salmon-belly.jpg"
+        },
+        {
+            "name": "Breaded Fried Chicken",
+            "category": "Ultimo Paborito",
+            "price": "360/580",
+            "image": "assets/breaded-fried-chicken.jpg"
+        },
+        {
+            "name": "Lolo’s Special Fried Chicken",
+            "category": "Ultimo Paborito",
+            "price": "330/550",
+            "image": "assets/lolos-special-fried-chicken.jpg"
+        },
+        {
+            "name": "Garlic Buttered Chicken",
+            "category": "Ultimo Paborito",
+            "price": "430/640",
+            "image": "assets/garlic-buttered-chicken.jpg"
+        },
+        {
+            "name": "Sizzling Chicken",
+            "category": "Ultimo Paborito",
+            "price": 330,
+            "image": "assets/sizzling-chicken.jpg"
+        },
+        {
+            "name": "Sizzling Sisig",
+            "category": "Ultimo Paborito",
+            "price": 260,
+            "image": "assets/sizzling-sisig.jpg"
+        },
+        {
+            "name": "Sizzling Gambas",
+            "category": "Ultimo Paborito",
+            "price": 375,
+            "image": "assets/sizzling-gambas.jpg"
+        },
+        {
+            "name": "Beef Caldereta",
+            "category": "Ultimo Paborito",
+            "price": 450,
+            "image": "assets/beef-caldereta.jpg"
+        },
+        {
+            "name": "Shanghai Rolls",
+            "category": "Ultimo Paborito",
+            "price": 250,
+            "image": "assets/shanghai-rolls.jpg"
+        },
+        {
+            "name": "Crispy Pork Dinuguan",
+            "category": "Ultimo Paborito",
+            "price": 380,
+            "image": "assets/crispy-pork-dinuguan.jpg"
+        },
+        {
+            "name": "Crispy Pork Binagoongan",
+            "category": "Ultimo Paborito",
+            "price": 350,
+            "image": "assets/crispy-pork-binagoongan.jpg"
+        },
+        {
+            "name": "Crispy Pork Kare-Kare",
+            "category": "Ultimo Paborito",
+            "price": 450,
+            "image": "assets/crispy-pork-kare-kare.jpg"
+        },
+        {
+            "name": "Lolo’s Crispy Pata",
+            "category": "Ultimo Paborito",
+            "price": 850,
+            "image": "assets/lolos-crispy-pata.jpg"
+        },
+        {
+            "name": "Spicy Garlic Crispy Pata",
+            "category": "Ultimo Paborito",
+            "price": 860,
+            "image": "assets/spicy-garlic-crispy-pata.jpg"
+        },
+        {
+            "name": "Inihaw na Tuna Belly",
+            "category": "Ultimo Paborito",
+            "price": 750,
+            "image": "assets/inihaw-na-tuna-belly.jpg"
+        },
+        {
+            "name": "Pompano (Steamed or Sweet and Sour)",
+            "category": "Ultimo Paborito",
+            "price": 800,
+            "image": "assets/pompano.jpg"
+        },
+        {
+            "name": "Beef Steak Tagalog",
+            "category": "Ultimo Paborito",
+            "price": 460,
+            "image": "assets/beef-steak-tagalog.jpg"
+        },
+        {
+            "name": "Humba Pata",
+            "category": "Ultimo Paborito",
+            "price": 380,
+            "image": "assets/humba-pata.jpg"
+        },
+        {
+            "name": "Adobong Pusit",
+            "category": "Ultimo Paborito",
+            "price": 280,
+            "image": "assets/adobong-pusit.jpg"
+        },
+        {
+            "name": "Adobong ",
+            "category": "Paborito",
+            "price": 280,
+            "image": "assets/adobong-pusit.jpg"
+        },
+        {
+            "name": "kanin ",
+            "category": "nicle",
+            "price": 280,
+            "image": "assets/adobong-pusit.jpg"
+        }
+
+    ]
+    

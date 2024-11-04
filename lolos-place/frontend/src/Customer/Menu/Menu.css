@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap');
+
+html {
+    overflow-x: hidden;
+}
+
+.menu-page, /* Apply styles to the menu-page class */
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex; /* Use flexbox on body */
+    flex-direction: column; /* Stack children vertically */
+}
+
+/* Menu styles */
+.menu-page .menu {
+    padding: 20px;
+    background-color: white;
+    flex: 1; /* Ensures that the main content area takes up available space */
+    display: flex; /* Use flexbox for centering content */
+    flex-direction: column; /* Stack children vertically */
+}
+
+.menu-page .menu-description {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.menu-page .menu-buttons {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.menu-page .filter-button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    background-color: #555;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.menu-page .filter-button.active {
+    background-color: #f39c12;
+}
+
+.menu-page .menu-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Adjust to distribute evenly */
+}
+
+.menu-page .menu-item {
+    width: 30%; /* Each item takes up 30% width for three columns */
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.menu-page .menu-item img {
+    max-width: 100%;
+    height: auto;
+}
+
+.menu-page .menu-item p {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Footer styles */
+
+/* Flexbox to keep footer at the bottom */
+.menu-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the page takes full height */
+}
+
+footer {
+    margin-top: auto; /* Pushes the footer to the bottom */
+}
