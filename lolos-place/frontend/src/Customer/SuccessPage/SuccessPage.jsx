@@ -8,22 +8,25 @@ import axios from "axios";
 
 
 const SuccessPage = () => {
-  const { customer, cartItems, setCartItems, isAdvanceOrder, formData, setIsAdvanceOrder } = useCustomer();
+  const { customer, cartReservations, setCartReservations, cartOrders, setCartOrders, isAdvanceOrder, formData, setIsAdvanceOrder, initialFormData, setFormData } = useCustomer();
   const urlLocation = useLocation();
   const queryParams = new URLSearchParams(urlLocation.search);
   const sessionId = queryParams.get('session_id');
   const navigate = useNavigate();
   const hasCalledPayment = useRef(false);
 
-  const getTotalAmount = () => {
-    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  const getTotalAmountOrders = () => {
+    return cartOrders.reduce((total, item) => total + item.price * item.quantity, 0);
+  };
+  const getTotalAmountReservation = () => {
+    return cartReservations.reduce((total, item) => total + item.price * item.quantity, 0);
   };
 
   const handleConfirmOrder = async () => {
     if (hasCalledPayment.current) return; 
     hasCalledPayment.current = true;
     const orderDetails = {
-      cart: cartItems.map(item => ({
+      cart: cartOrders.map(item => ({
         menu_id: item.menu_id,
         name: item.name,
         description: item.description,
@@ -35,7 +38,7 @@ const SuccessPage = () => {
       })),
       userId: customer.id,                
       mop: 'GCash',                    
-      totalAmount: getTotalAmount(),
+      totalAmount: getTotalAmountOrders(),
       date: new Date().toISOString().split('T')[0], 
       time: new Date().toTimeString().split(' ')[0], 
       deliveryLocation: customer.address,       
@@ -46,7 +49,7 @@ const SuccessPage = () => {
       const response = await axios.post('http://localhost:5000/api/orders', orderDetails);
   
       if (response.status === 201) {
-        setCartItems([]);
+        setCartOrders([]);
       } else {
         console.error('Failed to save order and delivery');
       }
@@ -58,7 +61,7 @@ const SuccessPage = () => {
     if (hasCalledPayment.current) return; 
     hasCalledPayment.current = true;
     const orderDetails = {
-        cart: cartItems.map(item => ({
+        cart: cartReservations.map(item => ({
             menu_id: item.menu_id,
             quantity: item.quantity,
         })), // Cart items to send to the server
@@ -67,7 +70,7 @@ const SuccessPage = () => {
         reservationDate: formData.date, // Date selected in the form
         reservationTime: formData.time, // Time selected in the form
         advanceOrder: isAdvanceOrder,   // Advance order boolean
-        totalAmount: getTotalAmount(),  // Total amount of the order
+        totalAmount: getTotalAmountReservation(),  // Total amount of the order
     };
 
 
@@ -75,8 +78,9 @@ const SuccessPage = () => {
         const response = await axios.post('http://localhost:5000/api/reservations', orderDetails);
 
         if (response.status === 201) {
-            setCartItems([]);
+            setCartReservations([]);
             setIsAdvanceOrder(false);
+            setFormData(initialFormData);
         } else {
             console.error('Failed to save reservation and order');
         }

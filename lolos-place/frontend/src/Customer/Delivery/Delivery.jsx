@@ -13,7 +13,7 @@ import axios from 'axios';
 
 
 const Delivery = () => {
-  const { customer, menuData, cartItems, setCartItems, deliveryLocation, setDeliveryLocation } = useCustomer();
+  const { customer, menuData, cartOrders, setCartOrders } = useCustomer();
   const [popupVisible, setPopupVisible] = useState(false);
   const [confirmationPopupVisible, setConfirmationPopupVisible] = useState(false);
   const [qrCodePopupVisible, setQrCodePopupVisible] = useState(false);
@@ -87,34 +87,34 @@ const Delivery = () => {
   const filteredMenu = getFilteredMenu();
 
   const handleAddToCart = (item) => {
-    setCartItems((prevCartItems) => {
-      const existingItemIndex = prevCartItems.findIndex(cartItem => cartItem.name === item.name);
+    setCartOrders((prevCartOrders) => {
+      const existingItemIndex = prevCartOrders.findIndex(cartItem => cartItem.name === item.name);
 
       if (existingItemIndex >= 0) {
-        const updatedCartItems = prevCartItems.map((cartItem, index) => {
+        const updatedCartOrders = prevCartOrders.map((cartItem, index) => {
           if (index === existingItemIndex) {
             return { ...cartItem, quantity: cartItem.quantity + 1 };
           }
           return cartItem;
         });
-        return updatedCartItems;
+        return updatedCartOrders;
       } else {
-        return [...prevCartItems, { ...item, quantity: 1 }];
+        return [...prevCartOrders, { ...item, quantity: 1 }];
       }
     });
   };
 
   const handleQuantityChange = (index, newQuantity) => {
-    const newCartItems = [...cartItems];
+    const newCartOrders = [...cartOrders];
     if (newQuantity <= 0) return;
-    newCartItems[index].quantity = newQuantity;
-    setCartItems(newCartItems);
+    newCartOrders[index].quantity = newQuantity;
+    setCartOrders(newCartOrders);
   };
 
   const handleRemoveFromCart = (index) => {
-    const newCartItems = [...cartItems];
-    newCartItems.splice(index, 1);
-    setCartItems(newCartItems);
+    const newCartOrders = [...cartOrders];
+    newCartOrders.splice(index, 1);
+    setCartOrders(newCartOrders);
   };
 
   const handlePlaceOrder = () => {
@@ -124,7 +124,7 @@ const Delivery = () => {
     } else if (!validateForm()) {
       setPopupVisible(true);
       window.scrollTo(0, 0);
-    } else if (cartItems.length === 0) {
+    } else if (cartOrders.length === 0) {
       setPopupVisible(true);
       window.scrollTo(0, 0);
     } else {
@@ -158,7 +158,7 @@ const Delivery = () => {
 
   const handleConfirmOrder = async () => {
     const orderDetails = {
-      cart: cartItems.map(item => ({
+      cart: cartOrders.map(item => ({
         menu_id: item.menu_id,
         name: item.name,
         description: item.description,
@@ -205,7 +205,7 @@ const Delivery = () => {
   };
 
   const getTotalAmount = () => {
-    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    return cartOrders.reduce((total, item) => total + item.price * item.quantity, 0);
   };
 
   const handleInputChange = (e) => {
@@ -219,7 +219,7 @@ const Delivery = () => {
   const makePaymentGCash = async () => {
     const body = {
         user_id: customer.id,
-        lineItems: cartItems.map(product => ({
+        lineItems: cartOrders.map(product => ({
             quantity: product.quantity,
             name: product.name,
             price: product.price
@@ -303,7 +303,7 @@ const Delivery = () => {
           <div className="cart">
             <h3>Your Cart</h3>
             <div id="cart-items">
-              {cartItems.map((item, index) => (
+              {cartOrders.map((item, index) => (
                 <div key={index} className="cart-item">
                   <div className="item-details">{item.name}</div>
                   <div className="item-actions">
@@ -345,7 +345,7 @@ const Delivery = () => {
                     </div>
                     <h4>Items Ordered:</h4>
                     <ul className="receipt-items">
-                      {cartItems.map((item, index) => (
+                      {cartOrders.map((item, index) => (
                         <li key={index}>
                           {item.name} (x{item.quantity}) - ₱{item.price * item.quantity}
                         </li>

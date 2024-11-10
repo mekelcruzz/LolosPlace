@@ -13,7 +13,7 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 
 const Reservation = () => {
-  const { customer, menuData, cartItems, setCartItems, formData, setFormData, isAdvanceOrder, setIsAdvanceOrder } = useCustomer();
+  const { customer, menuData, cartReservations, setCartReservations, formData, setFormData, isAdvanceOrder, setIsAdvanceOrder, initialFormData } = useCustomer();
   const [qrCodePopupVisible, setQrCodePopupVisible] = useState(false);
   const [popupVisible, setPopupVisible] = useState(false);
   const [popupVisibleLogin, setPopupVisibleLogin] = useState(false);
@@ -30,6 +30,8 @@ const Reservation = () => {
     return isValid;
   };
 
+  
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY < scrollPos) {
@@ -43,6 +45,14 @@ const Reservation = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, [scrollPos]);
+
+  useEffect(() => {
+    return () => {
+      setIsAdvanceOrder(false); // Reset when the component unmounts
+      setCartReservations([]);
+    };
+  }, []);
+  
 
   const getUniqueCategories = () => {
     const categories = menuData.map((item) => item.category);
@@ -62,33 +72,33 @@ const Reservation = () => {
   const filteredMenu = getFilteredMenu();
 
   const handleAddToCart = (item) => {
-    setCartItems((prevCartItems) => {
-      const existingItemIndex = prevCartItems.findIndex((cartItem) => cartItem.name === item.name);
+    setCartReservations((prevCartReservations) => {
+      const existingItemIndex = prevCartReservations.findIndex((cartItem) => cartItem.name === item.name);
 
       if (existingItemIndex >= 0) {
-        const updatedCartItems = prevCartItems.map((cartItem, index) => {
+        const updatedCartReservations = prevCartReservations.map((cartItem, index) => {
           if (index === existingItemIndex) {
             return { ...cartItem, quantity: cartItem.quantity + 1 };
           }
           return cartItem;
         });
-        return updatedCartItems;
+        return updatedCartReservations;
       } else {
-        return [...prevCartItems, { ...item, quantity: 1 }];
+        return [...prevCartReservations, { ...item, quantity: 1 }];
       }
     });
   };
 
   const handleQuantityChange = (index, newQuantity) => {
     if (newQuantity <= 0) return;
-    const newCartItems = [...cartItems];
-    newCartItems[index].quantity = newQuantity;
-    setCartItems(newCartItems);
+    const newCartReservations = [...cartReservations];
+    newCartReservations[index].quantity = newQuantity;
+    setCartReservations(newCartReservations);
   };
 
   const handleRemoveFromCart = (index) => {
-    const newCartItems = cartItems.filter((_, idx) => idx !== index);
-    setCartItems(newCartItems);
+    const newCartReservations = cartReservations.filter((_, idx) => idx !== index);
+    setCartReservations(newCartReservations);
   };
 
   const handleReserve = (event) => {
@@ -98,7 +108,7 @@ const Reservation = () => {
       window.scrollTo(0, 0);
     } else if (!validateForm()) {
       setPopupVisible(true);
-    }else if (isAdvanceOrder && cartItems.length === 0) {
+    }else if (isAdvanceOrder && cartReservations.length === 0) {
       setPopupVisible(true);
     }else {
       setConfirmationPopupVisible(true);
@@ -128,7 +138,7 @@ const Reservation = () => {
   const handleConfirmOrder = async () => {
 
     const orderDetails = {
-        cart: cartItems.map(item => ({
+        cart: cartReservations.map(item => ({
             menu_id: item.menu_id,
             quantity: item.quantity,
         })), // Cart items to send to the server
@@ -145,11 +155,9 @@ const Reservation = () => {
         const response = await axios.post('http://localhost:5000/api/reservations', orderDetails);
 
         if (response.status === 201) {
-            const { reservation, order } = response.data;
-            console.log('Reservation saved:', reservation);
-            console.log('Order created:', order);
             setConfirmationPopupVisible(false);
-            setQrCodePopupVisible(true); // Show QR code or confirmation
+            setFormData(initialFormData);
+            setIsAdvanceOrder(false);
         } else {
             console.error('Failed to save reservation and order');
         }
@@ -181,7 +189,7 @@ const Reservation = () => {
   };
 
   const getTotalAmount = () => {
-    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    return cartReservations.reduce((total, item) => total + item.price * item.quantity, 0);
   };
 
   const handleInputChange = (e) => {
@@ -199,7 +207,7 @@ const Reservation = () => {
   const makePaymentGCash = async () => {
     const body = {
         user_id: customer.id,
-        lineItems: cartItems.map(product => ({
+        lineItems: cartReservations.map(product => ({
             quantity: product.quantity,
             name: product.name,
             price: product.price
@@ -313,7 +321,7 @@ const Reservation = () => {
               <div className="cart">
                 <h3>Your Cart</h3>
                 <div id="cart-items">
-                  {cartItems.map((item, index) => (
+                  {cartReservations.map((item, index) => (
                     <div key={index} className="cart-item">
                       <div className="item-details">{item.name}</div>
                       <div className="item-actions">
@@ -340,7 +348,7 @@ const Reservation = () => {
       {popupVisible && (
         <div className="delivery-popup">
           <div className="delivery-popup-content">
-            {isAdvanceOrder && cartItems.length === 0 ? "Your cart is empty" : "Please fill out the form"}
+            {isAdvanceOrder && cartReservations.length === 0 ? "Your cart is empty" : "Please fill out the form"}
             <button onClick={closePopup}>OK</button>
           </div>
         </div>
@@ -375,7 +383,7 @@ const Reservation = () => {
                 </div>
                 <h4>Items Ordered:</h4>
                 <ul className="receipt-items">
-                  {cartItems.map((item, index) => (
+                  {cartReservations.map((item, index) => (
                     <li key={index}>
                       {item.name} (x{item.quantity}) - ₱{item.price * item.quantity}
                     </li>

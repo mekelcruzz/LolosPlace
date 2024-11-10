@@ -8,7 +8,8 @@ export function CustomerProvider({ children }) {
     const [customer, setCustomer] = usePersistState("user", null); // Initialize as null
     const [menuData, setMenuData] = useState([]); // State to store menu items
     const [categories, setCategories] = useState([]);
-    const [cartItems, setCartItems] = usePersistState("cart", []);
+    const [cartReservations, setCartReservations] = usePersistState("reservation", []);
+    const [cartOrders, setCartOrders] = usePersistState("orders", []);
     const [isAdvanceOrder, setIsAdvanceOrder] = usePersistState("order",false);
     const [formData, setFormData] = usePersistState("formdata",{
         name: customer?.fullName || '',
@@ -18,8 +19,16 @@ export function CustomerProvider({ children }) {
         guests: '',
       });
 
+      const initialFormData = {
+        name: customer?.fullName || '',
+        contact: customer?.phone || '',
+        date: '',
+        time: '',
+        guests: '',
+      };
+
     return (
-        <CustomerContext.Provider value={{ customer, setCustomer, menuData, setMenuData, categories, setCategories, cartItems, setCartItems, isAdvanceOrder, setIsAdvanceOrder, formData, setFormData }}>
+        <CustomerContext.Provider value={{ customer, setCustomer, menuData, setMenuData, categories, setCategories, cartReservations, setCartReservations, cartOrders, setCartOrders, isAdvanceOrder, setIsAdvanceOrder, formData, setFormData, initialFormData }}>
             {children}
         </CustomerContext.Provider>
     );
