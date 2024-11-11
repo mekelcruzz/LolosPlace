@@ -235,16 +235,34 @@ const Reservation = () => {
           <h2>Make a Reservation</h2>
 
           <form noValidate onSubmit={handleReserve}>
-            <div className="form-group">
-              <label htmlFor="name">Name <span>*</span>:</label>
-              <input type="text" id="name" required placeholder="Please Login to Autofill the your name" value={formData.name} onChange={handleInputChange} disabled/>
-              {!formValid && <small className="error-message">Please fill out this field.</small>}
-            </div>
-            <div className="form-group">
-              <label htmlFor="contact">Contact Number <span>*</span>:</label>
-              <input type="tel" id="contact" required placeholder="Please Login to Autofill the your phone number" value={formData.contact} onChange={handleInputChange} disabled/>
-              {!formValid && <small className="error-message">Please fill out this field.</small>}
-            </div>
+          <div className="form-group">
+  <label htmlFor="fullName">Full Name <span>*</span>:</label>
+  <input
+    type="text"
+    id="fullName"
+    required
+    placeholder="Please Login to Autofill your name"
+    value={customer ? customer.fullName : formData.name} // Autofill with customer.fullName if logged in
+    onChange={handleInputChange} // Update formData if not logged in
+    disabled={!!customer} // Disable input if customer is logged in
+  />
+  {!formValid && <small className="error-message">Please fill out this field.</small>}
+</div>
+
+<div className="form-group">
+  <label htmlFor="phone">Phone Number <span>*</span>:</label>
+  <input
+    type="tel"
+    id="phone"
+    required
+    placeholder="Please Login to Autofill your phone number"
+    value={customer ? customer.phone : formData.contact} // Autofill with customer.phone if logged in
+    onChange={handleInputChange} // Update formData if not logged in
+    disabled={!!customer} // Disable input if customer is logged in
+  />
+  {!formValid && <small className="error-message">Please fill out this field.</small>}
+</div>
+
             <div className="form-group">
               <label htmlFor="guests">Number of Guests <span>*</span>:</label>
               <input type="number" id="guests" required placeholder="Number of guests" value={formData.guests} onChange={handleInputChange} />
