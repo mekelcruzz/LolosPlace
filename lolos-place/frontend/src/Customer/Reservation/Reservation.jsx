@@ -373,6 +373,7 @@ oneYearLaterDate.setFullYear(today.getFullYear() + 1);
 
 <div className="form-group">
   <label htmlFor="date">Reservation Date <span>*</span>:</label>
+  <p className="note">Please press the calendar icon to pick a date.</p>
   <input
     type="date"
     id="date"
@@ -382,9 +383,15 @@ oneYearLaterDate.setFullYear(today.getFullYear() + 1);
     onChange={handleInputChange}
     min={today.toISOString().split("T")[0]}
     max={oneYearLaterDate.toISOString().split("T")[0]}
+    onKeyDown={(e) => e.preventDefault()} // Prevents typing
   />
-  {!formValid && <small className="error-message">Please select a valid date within the allowed range.</small>}
+  {!formValid && (
+    <small className="error-message">
+      Please select a valid date within the allowed range.
+    </small>
+  )}
 </div>
+
 
 
 

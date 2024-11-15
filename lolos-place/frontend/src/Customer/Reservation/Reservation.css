@@ -12,6 +12,12 @@
         flex-direction: column;
     }
 
+    .note {
+        font-size: 0.9em;
+        color: #666;
+        margin-bottom: 4px;
+      }
+
     /* Main section styles for reservation */
     .reservation-main {
         flex: 1;
