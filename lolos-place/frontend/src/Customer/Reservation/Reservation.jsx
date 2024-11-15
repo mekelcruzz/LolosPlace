@@ -25,11 +25,22 @@ const Reservation = () => {
 
   const validateForm = () => {
     const { name, date, time, guests, contact } = formData;
-    const isValid = name.trim() && date.trim() && time.trim() && guests.trim() && contact.trim();
+    const isValid = name.trim() && date.trim() && time.trim() && !isNaN(guests) && guests > 0 && contact.trim();
     setFormValid(isValid);
     return isValid;
   };
+  
 
+  useEffect(() => {
+    if (customer) {
+      setFormData((prevData) => ({
+        ...prevData,
+        name: customer.fullName || '',
+        contact: customer.phone || '',
+      }));
+    }
+  }, [customer, setFormData]);
+  
   
 
   useEffect(() => {
@@ -191,14 +202,105 @@ const Reservation = () => {
   const getTotalAmount = () => {
     return cartReservations.reduce((total, item) => total + item.price * item.quantity, 0);
   };
+////////////////////////////////////////////////////////////////////////////////
+const handleInputChange = (e) => {
+  const { id, value } = e.target;
 
-  const handleInputChange = (e) => {
-    const { id, value } = e.target;
+  // Handle 'guests' input
+  if (id === 'guests') {
+    const guestNumber = parseInt(value, 10);
+    // If value is not a number or empty, don't validate yet
+    if (isNaN(guestNumber) || value === '') {
+      setFormData((prevData) => ({
+        ...prevData,
+        [id]: value,
+      }));
+      return;
+    }
+    // Otherwise, update state
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: guestNumber,
+    }));
+  }
+
+  // Handle 'date' input with validation
+  else if (id === 'date') {
+    const inputDate = new Date(value);
+    const today = new Date();
+    const oneYearLaterDate = new Date(today);
+    oneYearLaterDate.setFullYear(today.getFullYear() + 1);
+
+    // If the date is not valid or is out of range, don't update the state
+    if (inputDate < today || inputDate > oneYearLaterDate || isNaN(inputDate)) {
+      setFormValid(false);
+      return; // Don't update the state if invalid
+    }
+
+    // Otherwise, update the state with the valid date
+    setFormValid(true);  // Reset form validity flag
     setFormData((prevData) => ({
       ...prevData,
       [id]: value,
     }));
+  }
+
+  // Handle 'time' input with validation
+  else if (id === 'time') {
+    // Define the allowed range for time
+    const minTime = "11:00";
+    const maxTime = "20:00";
+
+    // If the time is within the allowed range, update the state
+    if (value >= minTime && value <= maxTime) {
+      setFormData((prevData) => ({
+        ...prevData,
+        [id]: value,
+      }));
+    } else {
+      // Optionally show an alert or log for invalid time
+      alert("Please select a time between 11:00 AM and 8:00 PM.");
+    }
+  }
+
+  // Handle other inputs (if any)
+  else {
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
+  }
+};
+
+
+
+
+const today = new Date();
+const oneYearLaterDate = new Date(today);
+oneYearLaterDate.setFullYear(today.getFullYear() + 1);
+
+
+
+
+
+  //////////////////////////////////////////////////////
+  const handleInputBlur = (e) => {
+    const { id, value } = e.target;
+  
+    // Validate guest number on blur
+    if (id === 'guests') {
+      const guestNumber = parseInt(value, 10);
+      if (guestNumber < 2 || guestNumber > 60) {
+        alert("Number of guests must be between 2 and 60.");
+        setFormData((prevData) => ({
+          ...prevData,
+          [id]: '',
+        })); // Reset invalid value
+      }
+    }
   };
+  
+  
 
   const handleToggleChange = () => {
     setIsAdvanceOrder((prevState) => !prevState); // Toggle the advance order state
@@ -235,49 +337,71 @@ const Reservation = () => {
           <h2>Make a Reservation</h2>
 
           <form noValidate onSubmit={handleReserve}>
-          <div className="form-group">
-  <label htmlFor="fullName">Full Name <span>*</span>:</label>
+            <div className="form-group">
+              <label htmlFor="name">Name <span>*</span>:</label>
+              <input type="text" id="name" required placeholder="Please Login to Autofill the your name" value={formData.name} onChange={handleInputChange} disabled/>
+              {!formValid && <small className="error-message">Please fill out this field.</small>}
+            </div>
+
+
+            <div className="form-group">
+              <label htmlFor="contact">Contact Number <span>*</span>:</label>
+              <input type="tel" id="contact" required placeholder="Please Login to Autofill the your phone number" value={formData.contact} onChange={handleInputChange} disabled/>
+              {!formValid && <small className="error-message">Please fill out this field.</small>}
+            </div>
+
+
+            <div className="form-group">
+  <label htmlFor="guests">Number of Guests <span>*</span>:</label>
   <input
-    type="text"
-    id="fullName"
+    type="number"
+    id="guests"
     required
-    placeholder="Please Login to Autofill your name"
-    value={customer ? customer.fullName : formData.name} // Autofill with customer.fullName if logged in
-    onChange={handleInputChange} // Update formData if not logged in
-    disabled={!!customer} // Disable input if customer is logged in
+    placeholder="Number of guests"
+    value={formData.guests}
+    onChange={handleInputChange}
+    onBlur={handleInputBlur}
+    min="2"
+    max="60"
   />
-  {!formValid && <small className="error-message">Please fill out this field.</small>}
+  {(formData.guests < 2 || formData.guests > 60) && (
+    <small className="error-message">Guests must be between 2 and 60.</small>
+  )}
 </div>
+
+
 
 <div className="form-group">
-  <label htmlFor="phone">Phone Number <span>*</span>:</label>
+  <label htmlFor="date">Reservation Date <span>*</span>:</label>
   <input
-    type="tel"
-    id="phone"
+    type="date"
+    id="date"
+    name="date"
     required
-    placeholder="Please Login to Autofill your phone number"
-    value={customer ? customer.phone : formData.contact} // Autofill with customer.phone if logged in
-    onChange={handleInputChange} // Update formData if not logged in
-    disabled={!!customer} // Disable input if customer is logged in
+    value={formData.date}
+    onChange={handleInputChange}
+    min={today.toISOString().split("T")[0]}
+    max={oneYearLaterDate.toISOString().split("T")[0]}
   />
-  {!formValid && <small className="error-message">Please fill out this field.</small>}
+  {!formValid && <small className="error-message">Please select a valid date within the allowed range.</small>}
 </div>
 
-            <div className="form-group">
-              <label htmlFor="guests">Number of Guests <span>*</span>:</label>
-              <input type="number" id="guests" required placeholder="Number of guests" value={formData.guests} onChange={handleInputChange} />
-              {!formValid && <small className="error-message">Please fill out this field.</small>}
-            </div>
-            <div className="form-group">
-              <label htmlFor="date">Reservation Date <span>*</span>:</label>
-              <input type="date" id="date" required value={formData.date} onChange={handleInputChange} />
-              {!formValid && <small className="error-message">Please fill out this field.</small>}
-            </div>
-            <div className="form-group">
-              <label htmlFor="time">Reservation Time <span>*</span>:</label>
-              <input type="time" id="time" required value={formData.time} onChange={handleInputChange} />
-              {!formValid && <small className="error-message">Please fill out this field.</small>}
-            </div>
+
+
+<div className="form-group">
+  <label htmlFor="time">Reservation Time <span>*</span>:</label>
+  <input
+    type="time"
+    id="time"
+    name="time"
+    value={formData.time || ''}
+    onChange={handleInputChange}
+    min="11:00"
+    max="20:00"
+    required
+  />
+</div>
+
             
             
 
