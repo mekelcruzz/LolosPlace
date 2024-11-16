@@ -83,6 +83,11 @@ const LoginPage = () => {
       alert("Please enter a valid phone number.");
       return;
     }
+    
+    if (password.length < 8) {
+      alert("Password must be at least 8 characters long.");
+      return;
+    }
 
     // Proceed with the signup request
     try {
