@@ -249,17 +249,17 @@ const Delivery = () => {
             <div className="form-group">
               <label htmlFor="name">Name <span>*</span>:</label>
               <input type="text" id="name" required placeholder="" value={formData.name} onChange={handleInputChange} disabled />
-              {!formValid && <small className="error-message">Please fill out this field.</small>}
+              
             </div>
             <div className="form-group">
               <label htmlFor="address">Complete Address <span>*</span>:</label>
               <input type="text" id="address" required placeholder="" value={formData.address} onChange={handleInputChange}disabled />
-              {!formValid && <small className="error-message">Please fill out this field.</small>}
+              
             </div>
             <div className="form-group">
               <label htmlFor="contact">Contact Number <span>*</span>:</label>
               <input type="tel" id="contact" required placeholder="" value={formData.contact} onChange={handleInputChange}disabled />
-              {!formValid && <small className="error-message">Please fill out this field.</small>}
+              
             </div>
           </form>
 
@@ -291,7 +291,12 @@ const Delivery = () => {
                       ))}
                     </ul>
                   )}
-                  <div><button onClick={() => handleAddToCart(menuItem)}>Add to Cart</button></div>
+                  <div>
+                      <button className="add-to-cart-btn" onClick={() => handleAddToCart(menuItem)}>
+                          Add to Cart
+                      </button>
+                  </div>
+
                 </div>
               ))
             ) : (

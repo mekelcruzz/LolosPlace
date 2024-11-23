@@ -1,5 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap');
 
+/* Define CSS Variables for easy customization */
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #f39c12;
+    --error-color: #e74c3c;
+    --button-hover: #2980b9;
+    --button-active: #2980b9;
+    --background-color: #f9f9f9;
+    --font-family: 'Tangerine', sans-serif;
+}
+
+/* Reset and Base styles */
 html {
     overflow-x: hidden;
 }
@@ -7,17 +19,18 @@ html {
 body {
     margin: 0;
     padding: 0;
+    font-family: var(--font-family), sans-serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background-color: var(--background-color);
 }
 
-/* Header styles */
-
+/* Header styles (if any) */
 
 /* Main Section Styles */
 main {
-    flex: 1; /* Allows main section to grow and take up available space */
+    flex: 1;
     padding: 20px;
     background-color: white;
 }
@@ -25,12 +38,12 @@ main {
 /* Form Styles */
 form {
     display: flex;
-    flex-direction: column; /* Stack form fields vertically */
-    margin-bottom: 20px; /* Space between form and button */
+    flex-direction: column;
+    margin-bottom: 20px;
 }
 
 .form-group {
-    margin-bottom: 15px; /* Space between form groups */
+    margin-bottom: 15px;
 }
 
 label {
@@ -48,33 +61,41 @@ input {
 
 /* Error message styling */
 .error-message {
-    color: red;
+    color: var(--error-color);
     font-size: 0.9em;
-    display: none; /* Initially hidden */
+    display: none;
 }
 
 /* Filler Button Styles */
 .filler-buttons {
-    margin: 20px 0; /* Space above and below the buttons */
-    display: flex; /* Use flexbox for alignment */
-    justify-content: center; /* Center the buttons */
-    flex-wrap: wrap; /* Allow buttons to wrap if they overflow */
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .filler-buttons button {
-    margin: 1em; /* Margin around each button */
+    margin: 1em;
     padding: 10px 15px;
-    background-color: #3498db; /* Button background color */
-    color: white;
+    background-color:#ecaf4d; /* Initial background color */
+    color: rgb(0, 0, 0);
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
+/* Hover effect */
 .filler-buttons button:hover {
-    background-color: #2980b9; /* Darker shade on hover */
+    background-color: #f39c12;
+    transform: scale(1.05);
 }
+
+/* When button is clicked (active) */
+
+
+
+
 
 /* Menu Section */
 .menu {
@@ -84,21 +105,21 @@ input {
 .menu-content {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between; /* Distribute menu items evenly */
+    justify-content: space-between;
 }
 
 .menu-item {
-    width: 30%; /* Each item takes up 30% width for three columns */
+    width: 30%;
     padding: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
     text-align: center;
-    cursor: pointer; /* Indicate that the menu item is clickable */
-    transition: transform 0.2s;
+    cursor: pointer;
+    transition: transform 0.2s ease;
 }
 
 .menu-item:hover {
-    transform: scale(1.05); /* Slightly scale up on hover */
+    transform: scale(1.05);
 }
 
 .menu-item img {
@@ -128,7 +149,8 @@ input {
 }
 
 .item-details {
-    flex: 1; /* Take remaining space */
+    flex: 1;
+    margin-right: 2em;
 }
 
 .item-actions {
@@ -136,63 +158,62 @@ input {
     align-items: center;
 }
 
-/* Quantity Control Styles */
 .quantity-control {
     display: flex;
     align-items: center;
-    margin-right: 10px; /* Space between quantity controls and remove button */
+    margin-right: 10px;
 }
 
 .quantity-control button {
     padding: 5px 10px;
-    background-color: #f39c12;
+    background-color: var(--secondary-color);
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
 }
 
 .quantity-control button:hover {
-    background-color: #e67e22; /* Darker shade on hover */
+    background-color: #e67e22;
 }
 
 .quantity-text {
-    margin: 0 10px; /* Space between buttons and quantity text */
+    margin: 0 10px;
 }
 
-/* Remove Button */
 .cart-button {
     padding: 5px 10px;
-    background-color: #e74c3c;
+    background-color: var(--error-color);
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
 }
 
 .cart-button:hover {
-    background-color: #c0392b; /* Darker shade on hover */
+    background-color: #c0392b;
 }
 
 /* Submit Button Styles */
 .submit-btn {
-    margin-top: 20px; /* Space from cart section */
+    margin-top: 20px;
     padding: 10px 20px;
-    background-color: #f39c12;
+    background-color: var(--secondary-color);
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
-    display: block; /* Center the button */
-    margin-left: auto; /* Center alignment */
-    margin-right: auto; /* Center alignment */
+    transition: background-color 0.3s ease;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5em;
 }
 
 .submit-btn:hover {
-    background-color: #e67e22; /* Darker shade on hover */
+    background-color: #e67e22;
 }
 
 /* Popup Styles */
@@ -202,45 +223,43 @@ input {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 999; /* Ensure it appears above all content */
+    z-index: 999;
 }
 
 .delivery-popup-content {
     background-color: #fff;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Soft shadow for popup */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
     text-align: center;
-    width: 300px; /* Set fixed width for consistency */
+    width: 300px;
 }
 
 .delivery-popup-content p {
     margin-bottom: 20px;
-    font-size: 16px;
-    color: #333;
 }
 
 .delivery-popup-content button {
     margin: 0 10px;
     padding: 10px 20px;
-    background-color: #3498db;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
 }
 
 .delivery-popup-content button:hover {
-    background-color: #2980b9;
+    background-color: var(--button-hover);
 }
 
 .delivery-popup-content button.cancel-btn {
-    background-color: #e74c3c;
+    background-color: var(--error-color);
 }
 
 .delivery-popup-content button.cancel-btn:hover {
@@ -254,64 +273,47 @@ input {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.order-items {
-    margin: 10px 0; /* Space above and below items */
-    text-align: left; /* Align text to the left for better readability */
-}
-
-.order-item {
-    margin: 5px 0; /* Space between items */
-}
-
 /* Receipt Section Styles */
 .receipt {
-    margin: 20px 0; /* Space above and below the receipt */
-    text-align: left; /* Align text to the left */
+    background: var(--background-color);
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 300px;
+    margin: 0 auto;
+    text-align: left;
+    font-family: 'Courier New', monospace;
 }
 
-.receipt h4 {
-    margin-bottom: 10px; /* Margin below the total amount */
+.receipt-header {
+    text-align: center;
 }
 
-/* Delivery.css */
-
-.menu-item button {
-    background-color: #28a745; /* Green background */
-    color: white; /* White text color */
-    border: none; /* Remove border */
-    border-radius: 5px; /* Rounded corners */
-    padding: 10px 15px; /* Vertical and horizontal padding */
-    font-size: 16px; /* Font size */
-    cursor: pointer; /* Pointer cursor on hover */
+.receipt-items {
+    list-style-type: none;
+    padding: 0;
 }
 
-.menu-item button:hover {
-    background-color: #218838; /* Darker green on hover */
+.total {
+    font-weight: bold;
 }
 
-.menu-item button:active {
-    background-color: #1e7e34; /* Even darker green on click */
+.receipt-footer {
+    text-align: center;
+    margin-top: 20px;
 }
-
-.menu-item button:focus {
-    outline: none; /* Remove outline */
-}
-
-/* Footer styles */
-
 
 /* Button Group Styles for Order Confirmation */
 .button-group {
-    display: flex; /* Use flexbox to align buttons */
-    justify-content: center; /* Center the buttons */
-    margin-top: 20px; /* Space above the button group */
-    gap: 15px; /* Space between buttons */
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 15px;
 }
 
 .confirm-order-btn,
@@ -320,74 +322,66 @@ input {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
 }
 
 .confirm-order-btn {
-    background-color: #28a745; /* Green for confirm */
-    color: white; /* White text color */
+    background-color: #28a745;
+    color: white;
 }
 
 .continue-shopping-btn {
-    background-color: #007bff; /* Blue for continue shopping */
-    color: white; /* White text color */
+    background-color: #007bff;
+    color: white;
 }
 
 .confirm-order-btn:hover {
-    background-color: #218838; /* Darker green on hover */
+    background-color: #218838;
 }
 
 .continue-shopping-btn:hover {
-    background-color: #0069d9; /* Darker blue on hover */
+    background-color: #0069d9;
 }
 
-.receipt {
-    background: #f9f9f9; /* Light background */
-    border: 1px solid #ccc; /* Border around the receipt */
-    padding: 20px; /* Padding around content */
-    width: 300px; /* Width of the receipt */
-    margin: 0 auto; /* Center the receipt */
-    text-align: left; /* Align text to the left */
-    font-family: 'Courier New', Courer, monospace; /* Use a monospace font for a receipt feel */
-  }
-  
-  .receipt-header {
-    text-align: center; /* Center header content */
-  }
-  
-  .receipt-items {
-    list-style-type: none; /* Remove bullet points from the list */
-    padding: 0; /* Remove padding */
-  }
-  
-  .total {
-    font-weight: bold; /* Bold for total amount */
-  }
-  
-  .receipt-footer {
-    text-align: center; /* Center footer content */
-    margin-top: 20px; /* Margin above footer */
-  }
-  .confirm-btn,
-  .close-btn {
-    background-color: #4CAF50; /* Green background for confirm button */
-    color: white; /* White text color */
-    border: none; /* No border */
-    padding: 10px 20px; /* Padding around button */
-    text-align: center; /* Center text */
-    text-decoration: none; /* No underline */
-    display: inline-block; /* Inline block for side-by-side buttons */
-    font-size: 16px; /* Font size */
-    margin: 5px; /* Margin between buttons */
-    cursor: pointer; /* Pointer cursor on hover */
-    border-radius: 5px; /* Rounded corners */
-  }
-  
-  .close-btn {
-    background-color: #f44336; /* Red background for close button */
-  }
-  
-  .confirm-btn:hover,
-  .close-btn:hover {
-    opacity: 0.8; /* Slightly transparent on hover */
-  }
+/* Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+    .menu-item {
+        width: 48%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .menu-item {
+        width: 100%;
+    }
+
+    .filler-buttons button {
+        width: 100%;
+        margin: 0.5em 0;
+    }
+}
+
+
+/* Add to Cart Button Styles */
+.add-to-cart-btn {
+    padding: 10px 20px;
+    background-color: #f3c170; /* Use primary color from variables */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 10px;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #f39c12;
+    transform: scale(1.05); /* Slightly scale the button on hover */
+}
+
+
+
+.add-to-cart-btn:focus {
+    outline: none; /* Remove focus outline */
+}

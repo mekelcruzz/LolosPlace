@@ -3,15 +3,22 @@
 html {
     overflow-x: hidden;
 }
-
-.menu-page, /* Apply styles to the menu-page class */
-body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    display: flex; /* Use flexbox on body */
-    flex-direction: column; /* Stack children vertically */
+.menu-description {
+    margin-top: 5em;
+    text-align: center; /* Center-align text */
+    margin-bottom: 20px; /* Space below the section */
+    position: relative; /* For layering if needed */
 }
+
+.menu-title {
+    font-family: "Tangerine", system-ui; /* Apply the font family */
+    font-weight: 700; /* Use bold font */
+    font-size: 3.5em; /* Large font size for emphasis */
+    margin: 0 0 1em 0; /* No top margin, but with spacing at the bottom */
+    z-index: 1; /* Ensure the title stays on top of other elements */
+    color: #000000; /* Match the red wave's color for cohesion */
+}
+
 
 /* Menu styles */
 .menu-page .menu {
@@ -30,6 +37,7 @@ body {
 .menu-page .menu-buttons {
     text-align: center;
     margin-bottom: 20px;
+    z-index: 100;
 }
 
 .menu-page .filter-button {
@@ -50,6 +58,9 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between; /* Adjust to distribute evenly */
+}
+.white{
+    margin-bottom: 15em;
 }
 
 .menu-page .menu-item {
@@ -81,4 +92,46 @@ body {
 
 footer {
     margin-top: auto; /* Pushes the footer to the bottom */
+}
+
+
+.custom-shape-divider-top-1732374191 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-top-1732374191 svg {
+    position: relative;
+    display: block;
+    width: calc(147% + 1.3px);
+    height: 100px;
+}
+
+.custom-shape-divider-top-1732374191 .shape-fill {
+    fill: #FFE49B;
+}
+
+.custom-shape-divider-bottom-1732374289 {
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-bottom-1732374289 svg {
+    position: relative;
+    display: block;
+    width: calc(147% + 1.3px);
+    height: 117px;
+}
+
+.custom-shape-divider-bottom-1732374289 .shape-fill {
+    fill: #2C281B;
 }
