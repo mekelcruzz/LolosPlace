@@ -22,7 +22,7 @@ html, body {
     align-items: center;
     text-align: center;
     padding: 20px;
-    background-color: #fafafa; /* Light background for content area */
+    background-color: #D1BB80; /* Light background for content area */
 }
 
 .about-page .about-section h1 {
@@ -30,6 +30,7 @@ html, body {
     font-weight: 700;
     font-size: 3.5em;
     margin: 0 0 1em 0; /* Add margin at the bottom for spacing */
+    z-index: 1;
 }
 
 .about-page .about-section p {
@@ -39,3 +40,44 @@ html, body {
     line-height: 1.6;
 }
 
+.custom-shape-divider-top-1732263067 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-top-1732263067 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 266px;
+    transform: rotateY(180deg);
+}
+
+.custom-shape-divider-top-1732263067 .shape-fill {
+    fill: #FFE49B;
+}
+
+.custom-shape-divider-bottom-1732299224 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1732299224 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 101px;
+}
+
+.custom-shape-divider-bottom-1732299224 .shape-fill {
+    fill: #2C281B;
+}

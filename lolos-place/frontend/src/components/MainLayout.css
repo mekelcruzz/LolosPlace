@@ -7,6 +7,25 @@
   color: rgb(255, 255, 255);
   height: 5em;
   padding: 0 1em;
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #888 #f1f1f1; /* For Firefox */
+}
+/* Webkit-based browsers (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #D1BB80; /* Background of the track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #7c6f4c; /* Color of the scrollbar thumb */
+  border-radius: 5px; /* Rounded corners */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5f5741; /* Color when hovered */
 }
 
 /* Logo and Title */
@@ -93,10 +112,10 @@
   width: 25px;
   height: 18px;
   cursor: pointer;
-  position: fixed; /* Ensures the burger menu stays at the top */
-  top: 1em; /* Adjust this to position it slightly from the top */
-  right: 1em; /* Adjust this to position it slightly from the right */
-  z-index: 1001; /* Ensure it is in front of other elements */
+  position: fixed;
+  top: 1em;
+  right: 1em;
+  z-index: 1001;
 }
 
 .burger-menu div {
@@ -125,14 +144,14 @@
   .header-buttons.active {
     display: flex;
     flex-direction: column;
-    position: fixed; /* Ensure the header buttons also stay fixed */
+    position: fixed;
     top: 0;
     right: 0;
     width: 250px;
     height: 100vh;
     background-color: white;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-    z-index: 1001; /* Slightly lower z-index than burger menu */
+    z-index: 1001;
     padding: 2em;
     transform: translateX(100%);
     transition: transform 0.3s ease-in-out;
@@ -168,7 +187,7 @@
     padding: 1em;
     text-align: center;
     font-size: 1.2em;
-    color: black; /* Adjust the text color if needed */
+    color: black;
   }
 
   .burger-profile-buttons .burger-fullname {
@@ -180,13 +199,13 @@
 /* Responsive styles for iPhone SE and other small screens */
 @media (max-width: 320px) {
   .mainlayout-header h1 {
-    font-size: 2.5em; /* Adjust the font size to fit smaller screens */
-    margin-right: 0.5em; /* Reduce the margin to save space */
+    font-size: 2.5em;
+    margin-right: 0.5em;
   }
 
   .mainlayout-header .logo {
-    width: 4em; /* Optionally reduce the logo size as well */
-    margin-right: 0.5em; /* Adjust the logo margin */
+    width: 4em;
+    margin-right: 0.5em;
   }
 
   .burger-menu.active + .header-buttons .profile-dropdown-btn {
@@ -194,19 +213,22 @@
   }
 }
 
+/* Main content area styles */
+.main-layout main {
+  border: none; /* Remove any border */
+  margin: 0; /* Reset margin */
+  padding: 0; /* Reset padding */
+  width: 100%; /* Ensure it spans full width */
+}
+
+/* Footer styles */
 footer {
-  background-color: rgb(255, 228, 155);
+  color: white;
+  background-color: rgb(44, 40, 27);
   text-align: center;
   padding: 10px;
   width: 100%;
-  position: relative; /* Position relative to maintain layout */
-  margin-top: auto; /* Pushes the footer to the bottom */
+  position: relative;
+  margin-top: auto;
 }
 
-/* Responsive styles */
-@media (max-width: 1198px) {
-  /* Hide customer full name in the burger menu on small screens */
-  .small-screen-hidden .profile-dropdown-btn {
-    display: none;
-  }
-}

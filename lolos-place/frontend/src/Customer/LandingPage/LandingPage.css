@@ -23,38 +23,21 @@ html, body {
     align-items: center;
     text-align: center;
     padding: 2em;
-    background-image: url('../../assets/restaurant-background.jpg'); /* Example background image */
-    background-size: cover;
-    color: white;
+    background-color: rgb(255, 228, 155);
 }
 
 .landing-page .intro-section h1 {
     font-family: "Tangerine", system-ui;
     font-weight: 700;
     font-size: 3.5em;
-    margin: 0 0 0.5em;
+    margin: 2em 0 0.5em; /* Added margin-top here */
     color: black;
 }
 
 .landing-page .intro-section p {
     font-size: 1.2em;
-    margin: 0.5em 0;
+    margin: 0.5em 0 4em;
     color: black;
-}
-
-.landing-page .explore-button {
-    padding: 10px 20px;
-    background-color: rgb(255, 228, 155);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.landing-page .explore-button:hover {
-    background-color: grey;
-    color: white;
 }
 
 /* Footer styles */
@@ -165,4 +148,289 @@ html, body {
 .logout-dropdown-list-item i {
     margin-right: 10px; /* Space between icon and text */
     font-size: 1.2em; /* Icon size */
+}
+
+
+/* About Section */
+.landing-page .about-section {
+    padding: 2em;
+    background-color: #f9f9f9;
+    text-align: left;
+    color: #333;
+    background-color: rgb(209, 187, 128);
+}
+
+.landing-page .about-section h2 {margin-top: 4em;
+    font-family: "Tangerine", system-ui;
+    font-weight: 700;
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+}
+
+.landing-page .about-section p {
+    font-size: 1.1em;
+    max-width: 700px;
+    margin: 0 auto;
+    color: #555;
+}
+
+/* Best Sellers Section */
+/* Best Sellers Section */
+.landing-page .best-sellers-section {
+    padding: 2em;
+    text-align: center;
+    background-color: rgb(163, 147, 101);
+}
+
+.landing-page .best-sellers-section h2 {
+    margin-top: 5em;
+    font-family: "Tangerine", system-ui;
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+    z-index: 2;
+}
+
+.landing-page .best-sellers-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5em;
+    margin-top: 1em;
+}
+
+.landing-page .best-sellers-list .dish {
+    background-color: rgb(206, 193, 153);
+    padding: 1em;
+    border: 1px solid rgb(114, 102, 65);
+    border-radius: 5px;
+    text-align: left;
+    width: 250px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.landing-page .best-sellers-list .dish h3 {
+    font-size: 1.5em;
+    color: #333;
+}
+
+.landing-page .best-sellers-list .dish p {
+    font-size: 1em;
+    color: #666;
+}
+
+/* Button container */
+.landing-page .explore-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2em; /* Space between the dishes and button */
+    
+}
+
+.landing-page .explore-button {
+    background-color: rgb(97, 88, 60);
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 220px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+}
+
+.landing-page .explore-button:hover {
+    background-color: rgb(196, 183, 146);
+    transform: scale(1.05); /* Slightly increase the button size */
+}
+
+
+/* Order Now Section */
+.landing-page .order-now-section {
+    padding: 2em;
+    background-color: rgb(83, 75, 51);
+    text-align: center;
+    color: #000000;
+}
+
+.landing-page .order-now-section h2 {
+    margin-top: 5em;
+    font-family: "Tangerine", system-ui;
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+}
+
+.landing-page .order-now-section p {
+    font-size: 1.1em;
+    max-width: 700px;
+    margin: 0 auto 1em;
+}
+
+.landing-page .order-now-section .order-button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+     /* Smooth transition for hover effects */
+     margin-bottom: 9em;
+}
+
+.landing-page .order-now-section .order-button:hover {
+    background-color: #555;
+    transform: scale(1.05); /* Slightly increase the button size */
+}
+
+
+
+section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 4px;
+    padding-top: 100px;
+
+}
+
+.custom-shape-divider-top-1732113857 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-top-1732113857 svg {
+    position: relative;
+    display: block;
+    width: calc(115% + 1.3px);
+    height: 124px;
+}
+
+.custom-shape-divider-top-1732113857 .shape-fill {
+    fill: #FFE49B;
+}
+
+/*////////////////////////////////////////////////////*/
+.custom-shape-divider-top-1732114781 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-top-1732114781 svg {
+    position: relative;
+    display: block;
+    width: calc(145% + 1.3px);
+    height: 186px;
+}
+
+.custom-shape-divider-top-1732114781 .shape-fill {
+    fill: #D1BB80;
+}
+
+/* best sellers*/
+.custom-shape-divider-top-1732114863 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-top-1732114863 svg {
+    position: relative;
+    display: block;
+    width: calc(136% + 1.3px);
+    height: 354px;
+}
+
+.custom-shape-divider-top-1732114863 .shape-fill {
+    fill: #A39365;
+}
+
+
+/* Container styling for the Link component (optional, for positioning) */
+.Link {
+    text-decoration: none; /* Removes the default underline on the link */
+  }
+  
+  /* Styling for the button */
+  .about_button {
+    background-color: rgb(163, 147, 101); /* Updated background color */
+    color: white; /* Text color */
+    font-size: 16px; /* Font size */
+    padding: 12px 20px; /* Vertical and horizontal padding */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition for hover effects */
+    text-align: center; /* Center the text */
+    display: inline-block; /* Ensures the button doesn't take up full width */
+  }
+  
+  /* Hover effect */
+  .about_button:hover {
+    background-color: rgb(130, 115, 80); /* Darker shade of rgb(163, 147, 101) when hovered */
+    transform: scale(1.05); /* Slightly increase the button size */
+  }
+  
+  /* Focus state for accessibility */
+  .about_button:focus {
+    outline: 3px solid #ffcc00; /* Yellow outline for focus */
+  }
+  
+
+  .custom-shape-divider-top-1732261032 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-top-1732261032 svg {
+    position: relative;
+    display: block;
+    width: calc(123% + 1.3px);
+    height: 226px;
+    transform: rotateY(180deg);
+}
+
+.custom-shape-divider-top-1732261032 .shape-fill {
+    fill: #D1BB80;
+}
+
+
+.custom-shape-divider-bottom-1732261575 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1732261575 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 146px;
+    transform: rotateY(180deg);
+}
+
+.custom-shape-divider-bottom-1732261575 .shape-fill {
+    fill: #2C281B;
 }

@@ -1,221 +1,179 @@
-@import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap');
-
+/* General styles */
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
     overflow-x: hidden;
-    box-sizing: border-box; /* Ensure padding and border are included in element's total width and height */
-}
-
-*,
-*::before,
-*::after {
-    box-sizing: inherit; /* Apply box-sizing to all elements */
 }
 
 .feedback-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f7f7f7;
-}
-
-.feedback-section {
-    text-align: center;
-    padding: 2em;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
-    width: 100%;
-}
-
-.feedback-section h1 {
-    font-family: 'Tangerine', cursive;
-    font-weight: 700;
-    font-size: 3.5em;
-    margin-bottom: 0.5em;
-    color: black;
-}
-
-.feedback-section p {
-    font-size: 1.2em;
-    color: black;
-}
-
-.feedback-form {
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    gap: 1.5em;
+    justify-content: center;
+    align-items: center;
+    background-color: #D1BB80; /* Background color */
+    position: relative;
+}
+
+/* Custom shape divider at the top */
+.custom-shape-divider-top-1732331355 {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-top-1732331355 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 132px;
+}
+
+.custom-shape-divider-top-1732331355 .shape-fill {
+    fill: #FFE49B; /* Divider color */
+}
+
+/* Feedback form section */
+.feedback-page h1 {
+    font-family: "Tangerine", system-ui;
+    font-size: 3.5em;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #2C281B; /* Text color */
+    margin-top: 3em;
+}
+
+.feedback-page p {
+    font-size: 1.2em;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Feedback form styles */
+.feedback-form {
+    background-color: #FFF;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+   
+    margin-bottom: 15em;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
+    gap: 5px;
+    text-align: left;
 }
 
 .form-group label {
     font-size: 1em;
-    color: black;
+    color: #555;
 }
 
 .form-group input,
 .form-group textarea {
-    width: 100%; /* Ensure form elements take full width of the container */
     padding: 10px;
+    font-size: 1em;
     border: 1px solid #ccc;
     border-radius: 5px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+textarea {
+    resize: none;
+    width: 100%; /* Adjust to the container's width */
+    max-width: 100%; /* Prevent it from exceeding the form's width */
+    padding: 10px;
     font-size: 1em;
-    font-family: Arial, sans-serif;
-    resize: none; /* Disable textarea resizing */
-    outline: none;
-    box-sizing: border-box; /* Ensure padding and borders don't cause overflow */
-}
-
-.form-group textarea {
-    min-height: 120px;
-}
-
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-    color: #888;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
 }
 
 .submit-button {
     padding: 10px 20px;
-    background-color: rgb(255, 228, 155);
+    font-size: 1.2em;
+    background-color: #FFE49B;
+    color: #000;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s, color 0.3s;
+    transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .submit-button:hover {
-    background-color: grey;
-    color: white;
+    transform: scale(1.05);
+    background-color: #d3b45f;
 }
 
+/* Success popup styles */
 .popup {
-    background-color: rgb(255, 255, 255);
-    color: white;
+    position: fixed; /* Position relative to the viewport */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust position based on its size */
     padding: 20px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    background-color: #d4e4a8;
+    border: 1px solid #fdff73;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 1000; /* Ensure it appears above other elements */
+    animation: fadeIn 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .popup button {
-    background-color: rgb(255, 228, 155);
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
     margin-top: 10px;
-    border-radius: 15px;
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #c3e6cb;
+    color: #155724;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-
-
-/* Responsive styles for screens under 600px */
-@media (max-width: 600px) {
-    .feedback-section {
-        padding: 1.5em;
-        max-width: 100%;
-        border-radius: 8px;
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
     }
-
-    .feedback-section h1 {
-        font-size: 2.5em;
-    }
-
-    .feedback-section p {
-        font-size: 1.1em;
-    }
-
-    .submit-button {
-        padding: 10px;
-        font-size: 0.9em;
-    }
-
-    .form-group input,
-    .form-group textarea {
-        font-size: 0.9em;
-        padding: 8px;
-    }
-
-    .form-group textarea {
-        min-height: 100px;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
-
-/* Responsive styles for screens under 400px */
-@media (max-width: 400px) {
-    .feedback-section {
-        padding: 1em;
-    }
-
-    .feedback-section h1 {
-        font-size: 2em;
-        margin-bottom: 0.3em;
-    }
-
-    .feedback-section p {
-        font-size: 1em;
-        margin-bottom: 1em;
-    }
-
-    .submit-button {
-        padding: 8px;
-        font-size: 0.8em;
-    }
-
-    .form-group input,
-    .form-group textarea {
-        font-size: 0.85em;
-        padding: 7px;
-    }
-
-    .form-group textarea {
-        min-height: 90px;
-    }
+.custom-shape-divider-bottom-1732335861 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
 }
 
-/* Ultra-small screens under 320px */
-@media (max-width: 320px) {
-    .feedback-section {
-        padding: 0.8em;
-    }
+.custom-shape-divider-bottom-1732335861 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 184px;
+}
 
-    .feedback-section h1 {
-        font-size: 1.8em;
-    }
-
-    .feedback-section p {
-        font-size: 0.9em;
-    }
-
-    .submit-button {
-        padding: 6px;
-        font-size: 0.75em;
-    }
-
-    .form-group input,
-    .form-group textarea {
-        font-size: 0.75em;
-        padding: 6px;
-    }
-
-    .form-group textarea {
-        min-height: 80px;
-    }
+.custom-shape-divider-bottom-1732335861 .shape-fill {
+    fill: #2C281B;
 }
