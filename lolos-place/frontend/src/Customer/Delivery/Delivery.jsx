@@ -240,9 +240,8 @@ const Delivery = () => {
   return (
     <MainLayout>
     <div className="delivery">
-
-      <main>
         <section>
+          
           <h2>Place Your Delivery Order</h2>
 
           <form noValidate>
@@ -282,7 +281,7 @@ const Delivery = () => {
                   <p>{menuItem.description}</p> {/* Add the description here */}
                   {menuItem.category !== 'Bundle Meal' && menuItem.category !== 'Ultimo Paborito' ? (
                     <>
-                      <img src={menuItem.image} alt={menuItem.name} />
+            
                     </>
                   ) : (
                     <ul style={{ listStyleType: 'none', paddingLeft: 0 }}>
@@ -381,9 +380,9 @@ const Delivery = () => {
                 <Button onClick={closeQrCodePopup}>Close</Button>
               </DialogActions>
             </Dialog>
+            <div className='white'></div>
 
         </section>
-      </main>
     </div>
     </MainLayout>
   );
