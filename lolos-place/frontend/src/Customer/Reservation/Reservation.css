@@ -1,403 +1,540 @@
-    @import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap');
 
-    html {
-        overflow-x: hidden;
-    }
+.reservation {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+    background-color: #bda871;
+    font-family: Arial, sans-serif;
+}
 
-    body {
-        margin: 0;
-        padding: 0;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-    }
+/* Form section */
+.reservation .form-section {
+    width: 35%; /* Adjust the width as needed */
+    margin-right: 20px;
+}
 
-    .note {
-        font-size: 0.9em;
-        color: #666;
-        margin-bottom: 4px;
-      }
+/* Section heading styles */
+.reservation h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
 
-    /* Main section styles for reservation */
-    .reservation-main {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        padding: 20px;
-    }
+/* Form styles */
+.reservation .form-group {
+    margin-bottom: 15px;
+}
 
-    .reservation-section {
-        width: 100%;
-        max-width: 600px;
-    }
+.reservation .form-group label {
+    font-size: 17px;
+    color: #000000;
+    margin-bottom: 5px;
+    display: block;
+}
 
-    /* Reservation Form Styles */
-    .reservation-form {
-        display: flex;
-        flex-direction: column;
-        background-color: white;
-        padding: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-    }
+.reservation .form-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+}
 
-    .reservation-form-group {
-        margin-bottom: 1em;
-    }
+/* Buttons for filtering menu categories */
+.reservation .filler-buttons button {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: #555; /* Default background color */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
-    .reservation-form-group label {
-        display: block;
-        margin-bottom: 5px;
-    }
+.reservation .filler-buttons button:hover {
+    background-color:  #f39c12;
+}
 
-    .reservation-form-group input {
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
+/* Active state styling */
+.reservation .filler-buttons button:active,
+.reservation .filler-buttons button.active {
+    background-color: #f39c12; /* Active state background color */
+    color: #fff;
+}
 
-    .reservation-error-message {
-        color: red;
-        font-size: 0.9em;
-    }
+/* Menu and Cart section */
+.reservation .right-section {
+    width: 60%; /* Adjust this width as needed */
+    margin-left: 20px;
+}
 
-    /* Menu Section Styles */
-    .reservation-menu-section {
-        margin-top: 20px;
-    }
+/* Menu styles */
+.reservation .menu {
+    margin-top: 20px;
+}
 
-    /* Menu Section - 3 Columns */
-    .reservation-menu-content {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr); /* Create 3 equal columns */
-        gap: 20px; /* Add some spacing between the items */
-        margin-top: 20px;
-    }
+.reservation .menu h3 {
+    font-size: 22px;
+    color: #444;
+    margin-bottom: 15px;
+}
 
-    .reservation-menu-item {
-        border: 1px solid #ddd; /* Add a border around each item */
-        padding: 20px;
-        text-align: center;
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
-    }
+.reservation .menu-content {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 columns layout */
+    gap: 15px;
+}
 
-    .reservation-menu-item img {
-        width: 100%; /* Ensure the image fits within the item */
-        height: auto;
-        border-radius: 8px;
-        margin-bottom: 10px;
-    }
+.reservation .menu-item {
+    padding: 15px;
+    background-color: #ffffff8a;
 
-    .reservation-menu-item h4 {
-        font-size: 18px;
-        margin-bottom: 10px;
-    }
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-    .reservation-menu-item p {
-        margin-bottom: 10px;
-        font-size: 16px;
-    }
+.reservation .menu-item h3 {
+    font-size: 18px;
+    color: #222;
+}
 
-    .reservation-menu-item button {
-        margin-top: 10px;
-    }
+/* Style the included items list */
+.reservation .menu-item-details h4 {
+    font-size: 16px;
+    color: #555;
+    margin-top: 10px;
+}
 
-    /* Cart Section Styles */
-    .reservation-cart {
-        margin-top: 20px;
-    }
+.reservation .menu-item-details ul {
+    margin-top: 5px;
+    padding-left: 20px;
+}
 
-    .reservation-cart-items {
-        border: 1px solid #ddd;
-        padding: 10px;
-        border-radius: 5px;
-    }
+.reservation .menu-item-details li {
+    font-size: 14px;
+    color: #000000;
+}
 
-    /* Footer styles */
-    .reservation-footer {
-        background-color: rgb(255, 228, 155);
-        text-align: center;
-        padding: 10px;
-        width: 100%;
-    }
+.reservation .menu-item p {
+    font-size: 14px;
+    color: #666;
+    margin: 5px 0;
+}
 
-    /* Toggle Switch Styles */
-    .reservation-switch {
-        position: relative;
-        display: inline-block;
-        width: 60px; /* Width of the toggle */
-        height: 34px; /* Height of the toggle */
-    }
+.reservation .menu-item .add-to-cart-btn {
+    margin-top: 10px;
+    padding: 8px 12px;
+    font-size: 14px;
+    background-color: #555; /* Default background color */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
 
-    .reservation-switch input {
-        opacity: 0; /* Hides the checkbox */
-        width: 0; /* Sets width to 0 */
-        height: 0; /* Sets height to 0 */
-    }
+.reservation .menu-item .add-to-cart-btn:hover {
+    background-color: #f39c12; 
+}
 
-    .reservation-slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #ccc; /* Default background color */
-        transition: .4s; /* Smooth transition */
-        border-radius: 34px; /* Rounded corners for the toggle */
-    }
+.reservation .menu-item .add-to-cart-btn:active {
+    background-color: #f39c12; /* Active state background color */
+}
 
-    .reservation-slider:before {
-        position: absolute;
-        content: ""; /* Required for the slider */
-        height: 26px; /* Height of the circle */
-        width: 26px; /* Width of the circle */
-        left: 4px; /* Position from the left */
-        bottom: 4px; /* Position from the bottom */
-        background-color: white; /* Circle color */
-        transition: .4s; /* Smooth transition for circle */
-        border-radius: 50%; /* Rounded shape for the circle */
-    }
+/* Cart styles */
+.reservation .cart {
+    margin-top: 30px;
+}
 
-    /* When checked, change the background and move the slider */
-    .reservation-switch input:checked + .reservation-slider {
-        background-color: #4CAF50; /* Color when checked */
-    }
+.reservation .cart h3 {
+    font-size: 22px;
+    color: #444;
+    margin-bottom: 15px;
+}
 
-    .reservation-switch input:checked + .reservation-slider:before {
-        transform: translateX(26px); /* Move the circle to the right */
-    }
+.reservation .cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    background-color: #fff;
+}
 
-    /* Popup Styles */
-    .reservation-popup {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+.reservation .cart-item .item-details {
+    margin-right: 1em;
+    flex-grow: 1;
+    font-size: 16px;
+    color: #333;
+}
 
-    /* Updated Popup Styles */
-    .reservation-popup-content {
-        background-color: white;
-        padding: 20px;
-        border-radius: 10px;
-        text-align: center;
-    }
+.reservation .cart-item .item-actions {
+    display: flex;
+    align-items: center;
+}
 
-    /* Cart Item Layout */
-    .reservation-cart-item {
-        display: flex;
-        align-items: center; /* Aligns items in the same line */
-        justify-content: flex-start; /* Aligns all items to the left */
-        border: 1px solid #ddd; /* Adds a border to each item */
-        padding: 10px;
-        margin-bottom: 10px; /* Spacing between cart items */
-        border-radius: 5px; /* Rounded corners for a neat box */
-        background-color: #f9f9f9; /* Light background for the box */
-    }
+.quantity-text {
+    margin-left: 1em;
+    margin-right: 1em;
+}
 
-    /* Item Name and Quantity */
-    .reservation-cart-item span {
-        flex: 1; /* Makes the item name take up available space */
-        font-size: 16px;
-    }
+.reservation .cart-item .quantity-control {
+    display: flex;
+    align-items: center;
+}
 
-    /* Remove Button on the Left */
-    .reservation-cart-item .remove-button {
-        background-color: #ffc107; /* Yellow for remove button */
-        color: white;
-        border: none;
-        padding: 5px 10px;
-        cursor: pointer;
-        border-radius: 4px;
-        transition: background-color 0.3s ease;
-        margin-right: 50px; /* Space between remove button and quantity */
-    }
+.reservation .cart-item .quantity-control button {
+    background-color:#f39c12;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 5px;
+    cursor: pointer;
+}
 
-    /* Hover Effect for Remove Button */
-    .reservation-cart-item .remove-button:hover {
-        background-color: #e0a800;
-    }
+.reservation .cart-item .quantity-control button:disabled {
+    background-color: #aaa;
+}
 
-    /* Cart Buttons (Plus, Minus) */
-    .reservation-cart-buttons {
-        display: flex;
-        align-items: center; /* Align buttons vertically */
-        margin-left: auto; /* Push the buttons to the right */
-    }
+.reservation .cart-item .cart-button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
 
-    .reservation-cart-item button {
-        background-color: #28a745; /* Default to green for the plus button */
-        color: white;
-        border: none;
-        padding: 5px 10px;
-        cursor: pointer;
-        font-size: 16px;
-        border-radius: 4px;
-        transition: background-color 0.3s ease;
-    }
+.reservation .cart-item .cart-button:hover {
+    background-color: #c82333;
+}
 
-    /* Center Add and Minus Buttons */
-    .reservation-cart-buttons button {
-        margin: 0 50px; /* Space between buttons */
-    }
+/* Submit button */
+.reservation .submit-btn {
+    margin-top: 20px;
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color:#555;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
 
-    /* Hover Effect for Add Button */
-    .reservation-cart-item button:hover {
-        background-color: #218838;
-    }
+.reservation .submit-btn:hover {
+    background-color: #f39c12;
+}
 
-    /* Minus Button */
-    .reservation-cart-item button:nth-child(3) {
-        background-color: #dc3545; /* Red for minus button */
-    }
+/* Styling for the reservation-popup */
+.reservation-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Popup content styling */
+  .reservation-popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Container for buttons to create two columns */
+  .reservation-popup-content .button-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two equal-width columns */
+    gap: 10px; /* Space between buttons */
+    width: 100%;
+    margin-top: 20px; /* Space between text and buttons */
+  }
+  
+  /* Styling for individual buttons */
+  .reservation-popup-content .button-container button {
+    padding: 10px 20px;
+    background-color: #f39c12; /* Button background color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Hover effect for the buttons */
+  .reservation-popup-content .button-container button:hover {
+    background-color: #e67e22;
+  }
+  
+  /* Active state styling for the buttons */
+  .reservation-popup-content .button-container button:active {
+    background-color: #d35400;
+  }
+  
+.reservation .confirmation-popup {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    background-color: #ffffff00;
+    border-radius: 8px;
+    padding: 20px;
+    width: 90%;
+    max-width: 400px
+}
 
-    .reservation-cart-item button:nth-child(3):hover {
-        background-color: #c82333;
-    }
+.reservation .receipt {
+    font-size: 14px;
+    line-height: 1.6;
+}
 
-    /* Remove Button */
-    .reservation-cart-item button:nth-child(4) {
-        background-color: #ffc107; /* Yellow for remove button */
-    }
 
-    .reservation-cart-item button:nth-child(4):hover {
-        background-color: #e0a800;
-    }
-    /* Filler Button Styles */
-    .filter-buttons {
-        margin: 20px 0; /* Space above and below the buttons */
-        display: flex; /* Use flexbox for alignment */
-        justify-content: center; /* Center the buttons */
-        flex-wrap: wrap; /* Allow buttons to wrap if they overflow */
-    }
+.custom-shape-divider-top-1732463735 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
 
-    .filter-buttons button {
-        margin: 1em; /* Margin around each button */
-        padding: 10px 15px;
-        background-color: #3498db; /* Button background color */
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
+.custom-shape-divider-top-1732463735 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 90px;
+}
 
-    .filter-buttons button:hover {
-        background-color: #2980b9; /* Darker shade on hover */
-    }
-    .reserve-button {
-        display: block;
-        margin: 20px auto;
-        padding: 10px 20px;
-        background-color: #f0a500;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        font-size: 16px;
-        cursor: pointer;
-    }
-    
-    .reserve-button:hover {
-        background-color: #d48806;
-    }
-    
+.custom-shape-divider-top-1732463735 .shape-fill {
+    fill: #FFE49B;
+}
 
-    .reservation-popup {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+/* Style for the toggle container */
+.reservation-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+  }
+  
+  /* Hide the default checkbox */
+  .reservation-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* Style for the slider (the actual toggle) */
+  .reservation-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 25px;
+  }
+  
+  /* Style for the circle inside the slider */
+  .reservation-slider:before {
+    content: "";
+    position: absolute;
+    height: 17px;
+    width: 17px;
+    border-radius: 50%;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+  }
+  
+  /* When the toggle is checked */
+  .reservation-switch input:checked + .reservation-slider {
+    background-color: #ffe48c;
+  }
+  
+  /* Move the circle to the right when checked */
+  .reservation-switch input:checked + .reservation-slider:before {
+    transform: translateX(25px);
+  }
+  
+  /* Optional label style */
+  .toggle-label {
+    font-size: 14px;
+    color: #333;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+  
+  /* Default button styling */
+.filter-buttons button {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: #555; /* Default background color */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Hover effect */
+  .filter-buttons button:hover {
+    background-color: #f39c12; /* Hover background color */
+  }
+  
+  /* Active state styling (when button is clicked or active) */
+  .filter-buttons button:active,
+  .filter-buttons button.active {
+    background-color: #f39c12; /* Active state background color */
+    color: #fff;
+  }
+  
+  /* Default button styling for Reserve Now button */
+.reserve-button {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: #555; /* Default background color */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Hover effect for Reserve Now button */
+  .reserve-button:hover {
+    background-color: #f39c12; /* Hover background color */
+  }
+  
+  /* Active state styling for Reserve Now button */
+  .reserve-button:active,
+  .reserve-button.active {
+    background-color: #f39c12; /* Active state background color */
+    color: #fff;
+  }
+  /* Styling for the reservation-popup */
+.reservation-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Popup content styling */
+  .reservation-popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Styling for the buttons container to create two columns */
+  .reservation-popup-content .button-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns of equal width */
+    gap: 20px; /* Space between buttons */
+    width: 100%;
+    margin-top: 20px; /* Add margin to separate from the text */
+  }
+  
+  /* Style for the buttons inside the popup */
+  .reservation-popup-content button {
+    padding: 10px 20px;
+    background-color: #555; /* Default background color */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Hover effect for the buttons */
+  .reservation-popup-content button:hover {
+    background-color: #f39c12; /* Hover background color */
+  }
+  
+  /* Active state styling for the buttons */
+  .reservation-popup-content button:active,
+  .reservation-popup-content button.active {
+    background-color: #d35400; /* Active state background color */
+    color: #fff;
+  }
+  .custom-shape-divider-top-1732551801 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
 
-    .reservation-popup-content {
-        background-color: white;
-        padding: 20px;
-        border-radius: 5px;
-        text-align: center;
-    }
-    .confirmation-popup .popup-content.receipt {
-        max-height: 70vh; /* Set maximum height to 70% of the viewport */
-        overflow-y: auto; /* Enable vertical scrolling when content exceeds the height */
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-      }
-    
-    /* Receipt Section Styles */
-    .receipt {
-        margin: 20px 0; /* Space above and below the receipt */
-        text-align: left; /* Align text to the left */
-    }
+.custom-shape-divider-top-1732551801 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 143px;
+}
 
-    .receipt h4 {
-        margin-bottom: 10px; /* Margin below the total amount */
-    }
-    .receipt {
-        background: #f9f9f9; /* Light background */
-        border: 1px solid #ccc; /* Border around the receipt */
-        padding: 20px; /* Padding around content */
-        width: 300px; /* Width of the receipt */
-        margin: 0 auto; /* Center the receipt */
-        text-align: left; /* Align text to the left */
-        font-family: 'Courier New', Courer, monospace; /* Use a monospace font for a receipt feel */
-    }
-    
-    .receipt-header {
-        text-align: center; /* Center header content */
-    }
-    
-    .receipt-items {
-        list-style-type: none; /* Remove bullet points from the list */
-        padding: 0; /* Remove padding */
-    }
-    
-    .total {
-        font-weight: bold; /* Bold for total amount */
-    }
-    
-    .receipt-footer {
-        text-align: center; /* Center footer content */
-        margin-top: 20px; /* Margin above footer */
-    }
-    .confirm-btn,
-    .close-btn {
-        background-color: #4CAF50; /* Green background for confirm button */
-        color: white; /* White text color */
-        border: none; /* No border */
-        padding: 10px 20px; /* Padding around button */
-        text-align: center; /* Center text */
-        text-decoration: none; /* No underline */
-        display: inline-block; /* Inline block for side-by-side buttons */
-        font-size: 16px; /* Font size */
-        margin: 5px; /* Margin between buttons */
-        cursor: pointer; /* Pointer cursor on hover */
-        border-radius: 5px; /* Rounded corners */
-    }
-    
-    .close-btn {
-        background-color: #f44336; /* Red background for close button */
-    }
-    
-    .confirm-btn:hover,
-    .close-btn:hover {
-        opacity: 0.8; /* Slightly transparent on hover */
-    }
+.custom-shape-divider-top-1732551801 .shape-fill {
+    fill: #FFE49B;
+}
+.whitey{
+  margin-bottom: 10em;
+}
 
-    
-    
-    
+.custom-shape-divider-bottom-1732551956 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.custom-shape-divider-bottom-1732551956 svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 107px;
+}
+
+.custom-shape-divider-bottom-1732551956 .shape-fill {
+  fill: #2C281B;
+}

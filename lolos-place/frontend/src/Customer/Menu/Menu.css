@@ -18,7 +18,10 @@ html {
     z-index: 1; /* Ensure the title stays on top of other elements */
     color: #000000; /* Match the red wave's color for cohesion */
 }
+#menu{
+    background-color: #bda871;
 
+}
 
 /* Menu styles */
 .menu-page .menu {
@@ -64,6 +67,7 @@ html {
 }
 
 .menu-page .menu-item {
+    background-color: #e2d3ad;
     width: 30%; /* Each item takes up 30% width for three columns */
     padding: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
