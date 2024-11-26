@@ -90,7 +90,9 @@ const MainLayout = ({ children }) => {
         <Link to="/about"><button>About</button></Link>
         <Link to="/menu"><button>Menu</button></Link>
         <Link to="/delivery-and-reservation"><button>Delivery & Reservation</button></Link>
+        <Link to="/order-history"><button>Order History</button></Link>
         <Link to="/feedback"><button>Feedback</button></Link>
+        
 
         {customer ? (
             <>

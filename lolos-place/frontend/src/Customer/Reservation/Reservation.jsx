@@ -210,6 +210,12 @@ const Reservation = () => {
   const getTotalAmount = () => {
     return cartReservations.reduce((total, item) => total + item.price * item.quantity, 0);
   };
+  const formatDate = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
 ////////////////////////////////////////////////////////////////////////////////
 const handleInputChange = (e) => {
   const { id, value } = e.target;
@@ -236,6 +242,7 @@ const handleInputChange = (e) => {
   else if (id === 'date') {
     const inputDate = new Date(value);
     const today = new Date();
+    today.setHours(0, 0, 0, 0); // Ensure the time is set to 00:00:00 for today's date
     const oneYearLaterDate = new Date(today);
     oneYearLaterDate.setFullYear(today.getFullYear() + 1);
 
@@ -397,9 +404,9 @@ oneYearLaterDate.setFullYear(today.getFullYear() + 1);
     required
     value={formData.date}
     onChange={handleInputChange}
-    min={today.toISOString().split("T")[0]}
-    max={oneYearLaterDate.toISOString().split("T")[0]}
-    onKeyDown={(e) => e.preventDefault()} // Prevents typing
+    min={formatDate(today)} // Set today's date
+    max={formatDate(oneYearLaterDate)} // Set one year later as max
+    onKeyDown={(e) => e.preventDefault()} // Prevent manual typing
   />
   {!formValid && (
     <small className="error-message">

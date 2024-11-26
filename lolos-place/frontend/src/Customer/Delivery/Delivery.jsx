@@ -260,7 +260,7 @@ const Delivery = () => {
 
             <div className="form-group">
               <label htmlFor="address">Complete Address <span>*</span>:</label>
-              <input type="text" id="address" required placeholder="Login to autofill" value={formData.address} onChange={handleInputChange}disabled />
+              <input type="text" id="address" required placeholder="Login to autofill" value={formData.address} onChange={handleInputChange} />
             </div>
 
             <div className="form-group">
@@ -371,7 +371,7 @@ const Delivery = () => {
                     <h4 className="total">Total Amount: ₱{getTotalAmount()}</h4>
                     <div className="receipt-footer">
                       <button className="confirm-btn" onClick={makePaymentGCash}>
-                        Confir
+                        Confirm
                       </button>
                       <button className="close-btn" onClick={closeConfirmationPopup}>
                         Close

@@ -34,13 +34,13 @@
   font-family: "Tangerine", system-ui;
   font-weight: 700;
   font-size: 4em;
-  margin-right: 1em;
+
 }
 
 .mainlayout-header .logo {
   width: 5.5em;
   height: auto;
-  margin-right: -12em;
+  margin-right: -5em;
   margin-left: 1em;
 }
 
