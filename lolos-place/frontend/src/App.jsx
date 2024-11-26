@@ -11,6 +11,8 @@ import Reservation from './Customer/Reservation/Reservation';
 import Feedback from './Customer/Feedback/Feedback'
 import { CustomerProvider } from './api/CustomerProvider';
 import SuccessPage from './Customer/SuccessPage/SuccessPage';
+import OrderHistory from './Customer/OrderHistory/OrderHistory';
+
 
 
 
@@ -30,6 +32,7 @@ function App() {
         <Route path='/reservation' element={<Reservation/>}/>
         <Route path='/feedback' element={<Feedback/>}/>
         <Route path='/successpage' element={<SuccessPage/>}/>
+        <Route path='/order-history' element={<OrderHistory/>}/>
       </Routes>
     </Router>
     </CustomerProvider>

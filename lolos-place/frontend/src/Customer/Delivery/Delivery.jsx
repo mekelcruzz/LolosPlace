@@ -157,25 +157,8 @@ const Delivery = () => {
   };
 
   const handleConfirmOrder = async () => {
-    const orderDetails = {
-      cart: cartOrders.map(item => ({
-        menu_id: item.menu_id,
-        name: item.name,
-        description: item.description,
-        category: item.category,
-        price: item.price,
-        items: item.items,
-        img: item.img,
-        quantity: item.quantity,
-      })),
-      userId: customer.id,                
-      mop: 'GCash',                    
-      totalAmount: getTotalAmount(),
-      date: new Date().toISOString().split('T')[0], 
-      time: new Date().toTimeString().split(' ')[0], 
-      deliveryLocation: formData.address,       
-      deliveryStatus: 'Pending',                                 
-    };
+    
+      
   
     try {
       const response = await axios.post('http://localhost:5000/api/orders', orderDetails);

@@ -389,29 +389,38 @@
   }
   
   /* Default button styling */
-.filter-buttons button {
-    margin: 5px;
-    padding: 10px 20px;
-    font-size: 14px;
-    background-color: #555; /* Default background color */
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  /* Hover effect */
-  .filter-buttons button:hover {
-    background-color: #f39c12; /* Hover background color */
-  }
-  
-  /* Active state styling (when button is clicked or active) */
-  .filter-buttons button:active,
-  .filter-buttons button.active {
-    background-color: #f39c12; /* Active state background color */
-    color: #fff;
-  }
+/* Buttons for filtering menu categories */
+.reservation .filter-buttons {
+  display: flex;
+  flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+  justify-content: flex-start; /* Align buttons to the left */
+  gap: 10px; /* Add space between buttons */
+  margin-bottom: 20px; /* Space at the bottom of the buttons */
+}
+
+.reservation .filter-buttons button {
+  padding: 10px 20px;
+  font-size: 14px;
+  background-color: #555; /* Default background color */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex-shrink: 0; /* Prevent buttons from shrinking */
+}
+
+.reservation .filter-buttons button:hover {
+  background-color: #f39c12; /* Hover background color */
+}
+
+/* Active state styling (when button is clicked or active) */
+.reservation .filter-buttons button:active,
+.reservation .filter-buttons button.active {
+  background-color: #f39c12; /* Active state background color */
+  color: #fff;
+}
+
   
   /* Default button styling for Reserve Now button */
 .reserve-button {
@@ -424,6 +433,7 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-bottom: 20em;
   }
   
   /* Hover effect for Reserve Now button */
@@ -536,5 +546,144 @@
 }
 
 .custom-shape-divider-bottom-1732551956 .shape-fill {
-  fill: #2C281B;
+  fill: #2c281b;
+}
+/* Default styles (for larger devices) */
+
+/* Existing styles here */
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  /* Adjust the layout for smaller screens */
+  .reservation {
+      flex-direction: column; /* Stack sections vertically */
+      align-items: center; /* Center content */
+      padding: 15px;
+  }
+
+  /* Form section */
+  .reservation .form-section {
+      width: 100%; /* Make the form section take full width */
+      margin-right: 0;
+  }
+
+  /* Form heading */
+  .reservation h2 {
+      font-size: 24px; /* Smaller heading size */
+  }
+
+  /* Form fields */
+  .reservation .form-group input {
+      font-size: 16px; /* Adjust input font size */
+  }
+
+  /* Filter buttons */
+  .reservation .filler-buttons {
+      flex-direction: column; /* Stack buttons vertically */
+      align-items: center;
+  }
+
+  .reservation .filler-buttons button {
+      width: 100%; /* Make buttons full width */
+      margin-bottom: 10px; /* Space between buttons */
+  }
+
+  /* Menu and Cart section */
+  .reservation .right-section {
+      width: 100%; /* Make menu section take full width */
+      margin-left: 0;
+  }
+
+  /* Menu items */
+  .reservation .menu-content {
+      grid-template-columns: repeat(2, 1fr); /* 2 columns on small screens */
+  }
+
+  .reservation .menu-item {
+      padding: 10px; /* Reduce padding for small screens */
+      font-size: 14px; /* Smaller font size for items */
+  }
+
+  .reservation .menu-item h3 {
+      font-size: 16px; /* Smaller item heading */
+  }
+
+  /* Cart items */
+  .reservation .cart-item {
+      flex-direction: column; /* Stack cart item details vertically */
+      align-items: flex-start; /* Align items to the left */
+  }
+
+  .reservation .cart-item .item-details {
+      font-size: 14px; /* Smaller item text */
+  }
+
+  .reservation .cart-item .quantity-control button {
+      padding: 5px; /* Smaller quantity buttons */
+  }
+
+  /* Submit button */
+  .reservation .submit-btn {
+      padding: 10px 15px; /* Smaller submit button */
+      font-size: 14px; /* Smaller font size */
+  }
+
+  /* Adjust popup size for small screens */
+  .reservation-popup-content {
+      width: 90%; /* Use 90% width of the screen */
+      padding: 15px; /* Reduce padding */
+  }
+
+  .reservation-popup-content .button-container {
+      grid-template-columns: 1fr; /* Stack buttons vertically */
+  }
+
+  .reservation-popup-content button {
+      width: 100%; /* Make buttons full width */
+      margin-bottom: 10px; /* Space between buttons */
+  }
+}
+
+/* Media query for very small screens (e.g., smartphones) */
+@media (max-width: 480px) {
+  /* Further reduce font size and spacing for ultra-small screens */
+  .reservation h2 {
+      font-size: 20px;
+  }
+
+  .reservation .form-group input {
+      font-size: 14px; /* Even smaller input text */
+  }
+
+  .reservation .menu-item {
+      font-size: 12px; /* Smaller item font size */
+      padding: 8px; /* Reduce padding further */
+  }
+
+  .reservation .menu-item h3 {
+      font-size: 14px; /* Smaller item heading */
+  }
+
+  .reservation .cart-item .item-details {
+      font-size: 12px; /* Smaller cart item text */
+  }
+
+  .reservation .submit-btn {
+      padding: 8px 12px; /* Smaller submit button */
+      font-size: 12px; /* Smaller font size */
+  }
+
+  .reservation-popup-content {
+      width: 100%; /* Ensure popup takes full width */
+      padding: 10px; /* Less padding */
+  }
+
+  .reservation-popup-content button {
+      font-size: 12px; /* Smaller button font size */
+  }
+
+  /* Hide or collapse less essential sections for very small screens */
+  .reservation .cart {
+      display: none; /* Optionally hide the cart */
+  }
 }

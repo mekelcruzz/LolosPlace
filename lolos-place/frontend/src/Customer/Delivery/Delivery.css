@@ -1,20 +1,21 @@
 /* Root container for Delivery component */
 .delivery {
-
     justify-content: space-between;
     align-items: flex-start;
     padding: 20px;
     background-color: #bda871;
     font-family: Arial, sans-serif;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Added space between items on smaller screens */
 }
 
 /* Form section */
 .delivery .form-section {
-    width: 35%; /* Adjust the width as needed */
+    width: 35%; /* Default width for larger screens */
     margin-right: 20px;
 }
 
-/* Section heading styles */
 .delivery h2 {
     font-size: 28px;
     color: #333;
@@ -69,7 +70,7 @@
 
 /* Menu and Cart section */
 .delivery .right-section {
-    width: 60%; /* Adjust this width as needed */
+    width: 60%; /* Default width for larger screens */
     margin-left: 20px;
 }
 
@@ -93,7 +94,6 @@
 .delivery .menu-item {
     padding: 15px;
     background-color: #ffffff8a;
-
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -103,7 +103,6 @@
     color: #222;
 }
 
-/* Style the included items list */
 .delivery .menu-item-details h4 {
     font-size: 16px;
     color: #555;
@@ -138,7 +137,7 @@
 }
 
 .delivery .menu-item .add-to-cart-btn:hover {
-    background-color: #f39c12; 
+    background-color: #f39c12;
 }
 
 .delivery .menu-item .add-to-cart-btn:active {
@@ -263,10 +262,8 @@
     border-radius: 8px;
     padding: 20px;
     width: 90%;
-    max-width: 400px
+    max-width: 400px;
 }
-
-
 
 .receipt {
     background: white;
@@ -296,188 +293,61 @@
     margin-top: 20px;
 }
 
+/* Responsive styles */
+@media (max-width: 768px) {
+    .delivery .form-section, .delivery .right-section {
+        width: 100%; /* Full width for smaller devices */
+        margin: 0;
+    }
 
-.custom-shape-divider-top-1732463735 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
+    .delivery .menu-content {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns layout for smaller screens */
+    }
+
+    .delivery .menu-item {
+        padding: 10px;
+    }
+
+    .delivery h2 {
+        font-size: 24px; /* Smaller font size for smaller screens */
+    }
+
+    .delivery .submit-btn {
+        width: 100%; /* Full-width button on smaller screens */
+    }
+
+    .delivery .filler-buttons button {
+        width: 48%; /* Adjust button size */
+    }
+
+    .delivery .cart-item {
+        flex-direction: column; /* Stack cart items vertically on smaller screens */
+    }
+
+    .delivery .cart-item .item-actions {
+        flex-direction: column;
+    }
 }
 
-.custom-shape-divider-top-1732463735 svg {
-    position: relative;
-    display: block;
-    width: calc(100% + 1.3px);
-    height: 90px;
-}
+/* Additional media query for very small screens */
+@media (max-width: 480px) {
+    .delivery .form-section, .delivery .right-section {
+        padding: 10px; /* Reduced padding for smaller screens */
+    }
 
-.custom-shape-divider-top-1732463735 .shape-fill {
-    fill: #FFE49B;
-}
-/* Styling for the reservation-popup */
-.reservation-popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* Popup content styling */
-  .reservation-popup-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 400px;
-    width: 100%;
-    text-align: center;
-    display: flex;
-    flex-direction: column; /* Stack content vertically */
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* Container for buttons to create two columns */
-  .reservation-popup-content .button-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Two equal-width columns */
-    gap: 10px; /* Space between buttons */
-    width: 100%;
-    margin-top: 20px; /* Space between text and buttons */
-  }
-  
-  /* Styling for individual buttons */
-  .reservation-popup-content .button-container button {
-    padding: 10px 20px;
-    background-color: #f39c12; /* Button background color */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-  }
-  
-  /* Hover effect for the buttons */
-  .reservation-popup-content .button-container button:hover {
-    background-color: #e67e22;
-  }
-  
-  /* Active state styling for the buttons */
-  .reservation-popup-content .button-container button:active {
-    background-color: #d35400;
-  }
+    .delivery .filler-buttons button {
+        padding: 8px; /* Smaller padding */
+        font-size: 12px; /* Smaller font size */
+    }
 
-  /* Styling for the confirm-btn and close-btn */
-.confirm-btn,
-.close-btn {
-  margin: 5px;
-  padding: 10px 20px;
-  font-size: 14px;
-  background-color: #555; /* Default background color */
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+    .delivery .menu-content {
+        grid-template-columns: 1fr; /* Single column layout for very small screens */
+    }
 
-.confirm-btn:hover,
-.close-btn:hover {
-  background-color: #f39c12; /* Hover effect */
+    .delivery .menu-item {
+        padding: 8px; /* Reduced padding */
+    }
 }
-
-.confirm-btn:active,
-.confirm-btn.active,
-.close-btn:active,
-.close-btn.active {
-  background-color: #f39c12; /* Active state background color */
-  color: #fff;
-}
-
-/* Additional styling for close-btn if needed */
-.close-btn {
-  background-color: #c0392b; /* Different color for Close button */
-}
-
-.close-btn:hover {
-  background-color: #e74c3c;
-}
-
-.close-btn:active {
-  background-color: #e74c3c;
-}
-/* Styling for the popup container */
-.delivery-popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* Popup content styling */
-  .delivery-popup-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 400px;
-    width: 100%;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* Styling for the message text in the popup */
-  .delivery-popup-content p {
-    margin-bottom: 20px; /* Space between the text and buttons */
-    font-size: 16px;
-    color: #333;
-    width: 100%; /* Ensure text takes full width */
-  }
-  
-  /* Styling for the buttons container to display buttons in a row */
-  .delivery-popup-buttons {
-    display: flex;
-    justify-content: space-around; /* Space out buttons horizontally */
-    gap: 10px; /* Space between the buttons */
-    width: 100%;
-  }
-  
-  /* Style for the buttons inside the popup */
-  .delivery-popup-content button {
-    padding: 10px 20px;
-    background-color: #555;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-  }
-  
-  /* Hover effect for the buttons */
-  .delivery-popup-content button:hover {
-    background-color: #f39c12;
-  }
-  
-  /* Active state styling for the buttons */
-  .delivery-popup-content button:active {
-    background-color: #d35400;
-  }
-
 .custom-shape-divider-bottom-1732551681 {
     position: absolute;
     bottom: 0;

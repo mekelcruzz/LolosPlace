@@ -225,17 +225,23 @@ app.post('/api/orders', async (req, res) => {
 
     // Destructure order and delivery details from request body
     const { cart, userId, mop, totalAmount, date, time, deliveryLocation, deliveryStatus } = req.body;
+    
+    // Get the current date and time in the correct format
+    const currentDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+    const currentTime = new Date().toTimeString().split(' ')[0]; // HH:MM:SS
+
     const paymentResult = await pool.query('UPDATE payment SET payment_status = $1 WHERE user_id = $2', ['paid', userId])
     if (paymentResult.rowCount === 0) {
       return res.status(400).json({ message: 'No payment found for the customer' });
-  }
+    }
+
     // Insert order into orders table
     const orderQuery = `
       INSERT INTO orders (user_id, mop, total_amount, date, time, delivery)
       VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING order_id;
     `;
-    const orderValues = [userId, mop, totalAmount, date, time, true]; // Assuming 'delivery' is true
+    const orderValues = [userId, mop, totalAmount, currentDate, currentTime, true]; // Assuming 'delivery' is true
     const orderResult = await client.query(orderQuery, orderValues);
 
     // Retrieve the generated order_id
@@ -481,6 +487,106 @@ app.get('/api/check-payment-status/:user_id', async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+
+app.get('/api/order-history', async (req, res) => {
+  const { user_id } = req.query; // Ensure you are using `user_id` from query params
+
+  if (!user_id) {
+    return res.status(400).json({ error: 'User ID is required.' });
+  }
+
+  try {
+    // Query to fetch orders, including date and time from the orders table
+    const result = await pool.query(
+      `
+      SELECT o.order_id, o.user_id, o.mop, o.total_amount, o.date, o.time, o.delivery, o.reservation_id
+      FROM orders o
+      WHERE o.user_id = $1
+      ORDER BY o.date DESC;
+      `,
+      [user_id]
+    );
+
+    // Fetch the items for each order from the order_quantities table
+    const orderIds = result.rows.map(order => order.order_id);
+    const itemsResult = await pool.query(
+      `
+      SELECT oq.order_id, oq.menu_id, oq.order_quantity, mi.name as menu_name
+      FROM order_quantities oq
+      JOIN menu_items mi ON oq.menu_id = mi.menu_id
+      WHERE oq.order_id = ANY($1);
+      `,
+      [orderIds]
+    );
+
+    // Fetch reservation details for orders that have a reservation_id
+    const reservationResult = await pool.query(
+      `
+      SELECT r.reservation_id, r.reservation_date, r.reservation_time
+      FROM reservations r
+      WHERE r.reservation_id = ANY($1);
+      `,
+      [orderIds]
+    );
+
+    // Group the order items and combine with the orders
+    const groupedOrders = result.rows.reduce((acc, order) => {
+      const existingOrder = acc.find(o => o.order_id === order.order_id);
+      const orderItems = itemsResult.rows.filter(item => item.order_id === order.order_id);
+
+      // Get reservation details if the order is a reservation (not delivery)
+      const reservationDetails = order.reservation_id
+        ? reservationResult.rows.find(r => r.reservation_id === order.reservation_id)
+        : null;
+
+      if (existingOrder) {
+        existingOrder.items.push(...orderItems); // Add items for the existing order
+      } else {
+        acc.push({
+          order_id: order.order_id,
+          date: order.date,  // Order date from the orders table
+          time: order.time,  // Order time from the orders table
+          total_amount: parseFloat(order.total_amount), // Ensure it's treated as a number
+          mop: order.mop,
+          delivery: order.delivery,
+          reservation_id: order.reservation_id,
+          reservation_date: reservationDetails ? reservationDetails.reservation_date : null, // Reservation date (if applicable)
+          reservation_time: reservationDetails ? reservationDetails.reservation_time : null, // Reservation time (if applicable)
+          items: orderItems, // Add the items for the new order
+        });
+      }
+      return acc;
+    }, []);
+
+    // Log the groupedOrders in a readable format
+    console.log(JSON.stringify(groupedOrders, null, 2)); // Now it will log properly
+
+    res.json(groupedOrders); // Send the response as a JSON object
+  } catch (error) {
+    console.error("Error fetching order history:", error.message);
+    res.status(500).json({ error: 'Failed to fetch order history. Please try again later.' });
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
