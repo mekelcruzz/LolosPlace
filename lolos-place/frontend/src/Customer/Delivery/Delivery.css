@@ -292,6 +292,21 @@
     text-align: center;
     margin-top: 20px;
 }
+.confirm-btn, .close-btn {
+    background-color: #555;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 1em;
+  }
+  
+  .confirm-btn:hover, .close-btn:hover {
+    background-color: #f39c12;
+  }
+  
 
 /* Responsive styles */
 @media (max-width: 768px) {

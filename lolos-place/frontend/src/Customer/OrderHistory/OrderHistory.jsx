@@ -44,7 +44,7 @@ const OrderHistory = () => {
   const formatDate = (dateString, isDelivery) => {
     const date = new Date(dateString); // Parse the date string into a Date object
     if (isDelivery) {
-      date.setDate(date.getDate() + 1); // Shift date by 1 day if it's a delivery
+      date.setDate(date.getDate() ); // Shift date by 1 day if it's a delivery
     }
     const options = {
       weekday: 'long',
