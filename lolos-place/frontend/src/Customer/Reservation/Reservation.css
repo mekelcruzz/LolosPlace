@@ -240,7 +240,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    background-color: rgb(255, 0, 0); /* Semi-transparent background */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -248,7 +248,7 @@
   
   /* Popup content styling */
   .reservation-popup-content {
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     padding: 20px;
     border-radius: 8px;
     max-width: 400px;
@@ -258,6 +258,7 @@
     flex-direction: column; /* Stack content vertically */
     justify-content: center;
     align-items: center;
+    z-index: 100;
   }
   
   /* Container for buttons to create two columns */
@@ -307,7 +308,42 @@
     font-size: 14px;
     line-height: 1.6;
 }
-
+.reservation .popup-content.receipt {
+    max-height: 90vh; /* Adjust the height to fit smaller screens */
+    overflow-y: auto; /* Enable vertical scrolling */
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+    scrollbar-width: none; /* For Firefox */
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  
+  .reservation .popup-content.receipt::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+  }
+  /* Responsive adjustments for very small screens */
+  @media (max-width: 480px) {
+    .reservation .popup-content.receipt {
+      width: 100%;
+      padding: 15px;
+    }
+  
+    .reservation .popup-content.receipt h3,
+    .reservation .popup-content.receipt h4 {
+      font-size: 1rem;
+    }
+  
+    .reservation .popup-content.receipt p,
+    .reservation .popup-content.receipt li {
+      font-size: 0.9rem;
+    }
+  }
+  
 
 .custom-shape-divider-top-1732463735 {
     position: absolute;
@@ -460,52 +496,6 @@
     align-items: center;
   }
   
-  /* Popup content styling */
-  .reservation-popup-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 400px;
-    width: 100%;
-    text-align: center;
-    display: flex;
-    flex-direction: column; /* Stack content vertically */
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* Styling for the buttons container to create two columns */
-  .reservation-popup-content .button-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Two columns of equal width */
-    gap: 20px; /* Space between buttons */
-    width: 100%;
-    margin-top: 20px; /* Add margin to separate from the text */
-  }
-  
-  /* Style for the buttons inside the popup */
-  .reservation-popup-content button {
-    padding: 10px 20px;
-    background-color: #555; /* Default background color */
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-  }
-  
-  /* Hover effect for the buttons */
-  .reservation-popup-content button:hover {
-    background-color: #f39c12; /* Hover background color */
-  }
-  
-  /* Active state styling for the buttons */
-  .reservation-popup-content button:active,
-  .reservation-popup-content button.active {
-    background-color: #d35400; /* Active state background color */
-    color: #fff;
-  }
   .custom-shape-divider-top-1732551801 {
     position: absolute;
     top: 0;
@@ -687,3 +677,351 @@
       display: none; /* Optionally hide the cart */
   }
 }
+.reservation .floating-button {
+    z-index: 1;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 1;
+    background-color: #bda871;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .reservation .floating-button:hover {
+    transform: scale(1.1);
+  }
+  
+  .reservation .button-image {
+    width: 20px;
+    height: 20px;
+  }
+  
+/* Base styles */
+.reservation .cart-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5); /* Adds a semi-transparent background */
+}
+
+.reservation .cart {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 15px;
+  width: 90%;
+  max-width: 400px;
+  max-height: 90vh;
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+  scrollbar-width: none; /* For Firefox */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.reservation h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.reservation #cart-items {
+  flex-grow: 1;
+  margin-bottom: 1rem;
+}
+
+.reservation .cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.reservation .item-details {
+  font-size: 1rem;
+  flex: 1;
+}
+
+.reservation .item-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+}
+
+.reservation .quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.reservation .quantity-control button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.reservation .quantity-control button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.reservation .quantity-text {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.reservation .cart-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.reservation .submit-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Responsive styles */
+@media (max-width: 480px) {
+  .reservation .cart {
+    width: 100%;
+    border-radius: 0;
+    padding: 10px;
+  }
+
+  .reservation h3 {
+    font-size: 1.25rem;
+  }
+
+  .reservation .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .reservation .item-actions {
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .reservation .quantity-control button,
+  .reservation .cart-button,
+  .reservation .submit-btn {
+    font-size: 0.9rem;
+    padding: 5px;
+  }
+}
+
+@media (max-width: 320px) {
+  .reservation .cart {
+    font-size: 0.85rem;
+  }
+
+  .reservation h3 {
+    font-size: 1rem;
+  }
+
+  .reservation .quantity-text {
+    font-size: 0.9rem;
+  }
+}
+
+  
+  .reservation .cart-popup button {
+    padding: 10px 20px;
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .reservation .cart-popup button:hover {
+    background-color: #e67e22;
+  }
+  
+  .reservation .cart-popup button:active {
+    background-color: #d35400;
+  }
+  
+  .reservation .reservation-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+  }
+  
+  .reservation .reservation-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .reservation .reservation-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 25px;
+  }
+  
+  .reservation .reservation-slider:before {
+    content: "";
+    position: absolute;
+    height: 17px;
+    width: 17px;
+    border-radius: 50%;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+  }
+  
+  .reservation .reservation-switch input:checked + .reservation-slider {
+    background-color: #ffe48c;
+  }
+  
+  .reservation .reservation-switch input:checked + .reservation-slider:before {
+    transform: translateX(25px);
+  }
+  
+  .reservation .toggle-label {
+    font-size: 14px;
+    color: #333;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+
+  
+  .reservation .cart-item .item-details {
+    margin-right: 1em;
+    flex-grow: 1;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  /* Responsiveness */
+  @media (max-width: 768px) {
+    .reservation .reservation {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .reservation .form-section {
+      width: 100%;
+      margin-right: 0;
+    }
+  
+    .reservation .right-section {
+      width: 100%;
+      margin-left: 0;
+    }
+  
+    .reservation .menu-content {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .reservation .menu-item {
+      padding: 10px;
+      font-size: 14px;
+    }
+  
+    .reservation .menu-item h3 {
+      font-size: 16px;
+    }
+  
+    .reservation .cart-item {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .reservation .submit-btn {
+      padding: 10px 15px;
+      font-size: 14px;
+    }
+  
+    .reservation .cart-popup-content {
+      width: 90%;
+      padding: 15px;
+    }
+  
+    .reservation .cart-popup-content button {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .reservation h2 {
+      font-size: 20px;
+    }
+  
+    .reservation .form-group input {
+      font-size: 14px;
+    }
+  
+    .reservation .menu-item {
+      font-size: 12px;
+      padding: 8px;
+    }
+  
+    .reservation .menu-item h3 {
+      font-size: 14px;
+    }
+  
+    .reservation .cart-item .item-details {
+      font-size: 12px;
+    }
+  
+    .reservation .submit-btn {
+      padding: 8px 12px;
+      font-size: 12px;
+    }
+  
+    .reservation .cart-popup-content {
+      width: 100%;
+      padding: 10px;
+    }
+  
+    .reservation .cart-popup-content button {
+      font-size: 12px;
+    }
+  }
+  

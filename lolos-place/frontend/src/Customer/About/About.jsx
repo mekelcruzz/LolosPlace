@@ -19,11 +19,15 @@ const AboutPage = () => {
         </div>
           <h1>About Lolo's Place</h1>
           <p className="description">
-            At Lolo's Place, we pride ourselves on offering a unique dining experience that combines culinary excellence with a warm, inviting atmosphere. Established in [Year], our restaurant has become a beloved destination for those seeking high-quality meals and exceptional service.
-          </p>
-          <p className="description">
-            Whether you're joining us for an intimate dinner, a family gathering, or a special event, Lolo's Place is dedicated to making every moment memorable. From our seasonal green market to our in-house bake shop and winery, we bring the best of local ingredients and flavors to your table.
-          </p>
+  Welcome to Lolo's Place, your go-to spot for comfort food and good company in Sitio Maligaya, Cuta, Batangas City. Established in 2017, Lolo's Place started with a humble selection of Filipino comfort dishes and has since grown to cater to a wider audience while staying true to its roots.
+</p>
+<p className="description">
+  In 2020, amidst the challenges of the pandemic, we embraced change by introducing delivery services, ensuring our community could still enjoy their favorite meals safely at home. 
+</p>
+<p className="description">
+  With over seven years of serving delicious meals and welcoming more than a thousand guests, we take pride in being a part of Batangas City's vibrant food scene. As a single-branch establishment, we focus on delivering exceptional service and unforgettable dining experiences, one plate at a time.
+</p>
+
           <div class="custom-shape-divider-bottom-1732299224">
     <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
         <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>

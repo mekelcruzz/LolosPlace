@@ -404,3 +404,171 @@
 .custom-shape-divider-top-1732551728 .shape-fill {
     fill: #FFE49B;
 }
+
+.delivery .floating-button {
+    z-index: 1;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 1;
+    background-color: #bda871;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .delivery .floating-button:hover {
+    transform: scale(1.1);
+  }
+  
+  .delivery .floating-button:active {
+    transform: scale(0.9);
+  }
+  
+  .delivery .button-image {
+    width: 30px;
+    height: 30px;
+  }
+  
+  /* Centered Cart Popup Styles within .delivery */
+  .delivery .cart-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%; /* Make popup width responsive */
+    max-width: 350px; /* Maximum width to prevent it from being too wide */
+    max-height: 90%; /* Max height to fit the screen */
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow-y: auto;
+    z-index: 1000;
+    padding: 10px; /* Add some padding inside the popup */
+  }
+  
+  .delivery .cart {
+    padding: 10px; /* Reduced padding for smaller screens */
+    font-size: 14px; /* Smaller font size */
+  }
+  
+  .delivery .cart h3 {
+    margin-top: 0;
+    text-align: center;
+    font-size: 16px; /* Smaller header font size */
+  }
+  
+  /* Cart item layout for small screens inside .delivery */
+  .delivery .cart-item {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    padding: 8px; /* Add some padding for touch friendliness */
+  }
+  
+  /* Item details and actions for small screens inside .delivery */
+  .delivery .item-details {
+    flex: 1;
+    font-size: 14px; /* Adjust text size for item details */
+    margin-bottom: 5px; /* Space between details and actions */
+  }
+  
+  .delivery .item-actions {
+    width: 100%; /* Full width for actions */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px; /* Add space between buttons */
+  }
+  
+  /* Quantity control for small screens inside .delivery */
+  .delivery .quantity-control button {
+    padding: 5px 8px; /* Adjust padding for smaller buttons */
+    font-size: 12px; /* Smaller font size */
+  }
+  
+  /* Cart button for removing items inside .delivery */
+  .delivery .cart-button {
+    padding: 6px 12px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px; /* Smaller button text */
+  }
+  
+  .delivery .cart-button:hover {
+    background-color: #c82333;
+  }
+  
+  /* Submit button styles inside .delivery */
+  .delivery .submit-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px; /* Smaller font size */
+  }
+  
+  .delivery .submit-btn:hover {
+    background-color: #218838;
+  }
+  
+  /* Responsive styles for very small screens (e.g., 320px width) inside .delivery */
+  @media (max-width: 480px) {
+    .delivery .cart-popup {
+      width: 90%; /* Ensure it's fully responsive on smaller screens */
+      max-width: 300px; /* Limit the max width for smaller screens */
+      padding: 5px; /* Reduced padding */
+    }
+  
+    .delivery .cart {
+      font-size: 12px; /* Reduce font size */
+    }
+  
+    .delivery .cart h3 {
+      font-size: 14px; /* Smaller title */
+    }
+  
+    .delivery .cart-item {
+      padding: 5px; /* Less padding for very small screens */
+    }
+  
+    .delivery .item-details {
+      font-size: 12px; /* Smaller item detail text */
+    }
+  
+    .delivery .item-actions {
+      gap: 5px; /* Reduce space between buttons */
+    }
+  
+    .delivery .quantity-control button {
+      padding: 4px 8px; /* Smaller button size */
+      font-size: 10px; /* Adjust text size for buttons */
+    }
+  
+    .delivery .cart-button {
+      padding: 5px 10px; /* Adjust padding */
+      font-size: 12px; /* Smaller button text */
+    }
+  
+    .delivery .submit-btn {
+      font-size: 12px; /* Smaller font size */
+      padding: 8px 12px; /* Compact button padding */
+    }
+  }

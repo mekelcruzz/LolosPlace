@@ -11,6 +11,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import axios from 'axios';
+import cartImage from '../../assets/cart.png';
 
 const Reservation = () => {
   const { customer, menuData, cartReservations, setCartReservations, formData, setFormData, isAdvanceOrder, setIsAdvanceOrder, initialFormData } = useCustomer();
@@ -28,6 +29,11 @@ const Reservation = () => {
     const isValid = name.trim() && date.trim() && time.trim() && !isNaN(guests) && guests > 0 && contact.trim();
     setFormValid(isValid);
     return isValid;
+  };
+
+  const [showCart, setShowCart] = useState(false);
+  const toggleCart = () => {
+    setShowCart((prev) => !prev);
   };
   
 
@@ -497,24 +503,49 @@ oneYearLaterDate.setFullYear(today.getFullYear() + 1);
   </div>
 </div>
 
-              <div className="cart">
-                <h3>Your Cart</h3>
-                <div id="cart-items">
-                  {cartReservations.map((item, index) => (
-                    <div key={index} className="cart-item">
-                      <div className="item-details">{item.name}</div>
-                      <div className="item-actions">
-                        <div className="quantity-control">
-                          <button onClick={() => handleQuantityChange(index, item.quantity - 1)} disabled={item.quantity <= 1}>-</button>
-                          <span className="quantity-text">{item.quantity}</span>
-                          <button onClick={() => handleQuantityChange(index, item.quantity + 1)}>+</button>
-                        </div>
-                        <button className="cart-button" onClick={() => handleRemoveFromCart(index)}>Remove</button>
-                      </div>
+<>
+      {/* Floating Button */}
+      <button className="floating-button" onClick={toggleCart}>
+        <img src={cartImage} alt="Cart" className="button-image" />
+      </button>
+
+      {/* Cart Popup */}
+      {showCart && (
+        <div className="cart-popup">
+          <div className="cart">
+            <h3>Your Cart</h3>
+            <div id="cart-items">
+              {cartReservations.map((item, index) => (
+                <div key={index} className="cart-item">
+                  <div className="item-details">{item.name}</div>
+                  <div className="item-actions">
+                    <div className="quantity-control">
+                      <button
+                        onClick={() => handleQuantityChange(index, item.quantity - 1)}
+                        disabled={item.quantity <= 1}
+                      >
+                        -
+                      </button>
+                      <span className="quantity-text">{item.quantity}</span>
+                      <button onClick={() => handleQuantityChange(index, item.quantity + 1)}>+</button>
                     </div>
-                  ))}
+                    <button className="cart-button" onClick={() => handleRemoveFromCart(index)}>
+                      Remove
+                    </button>
+                  </div>
                 </div>
-              </div>
+              ))}
+            </div>
+            <button className="submit-btn" onClick={handleReserve}>
+              Place Order
+            </button>
+            <button className="close-btn" onClick={() => setShowCart(false)}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+    </>
 
               {/* Reserve with Advance Order button */}
               <button type="submit" className="reserve-button" onClick={handleReserve}>Reserve with Advance Order</button>
@@ -610,14 +641,6 @@ oneYearLaterDate.setFullYear(today.getFullYear() + 1);
             </div>
               </>
             )}
-            {/* <div className="receipt-footer">
-              <button className="confirm-btn" onClick={handleConfirmOrder}>
-                Confirm
-              </button>
-              <button className="close-btn" onClick={closeConfirmationPopup}>
-                Close
-              </button>
-            </div> */}
           </div>
         </div>
       )}

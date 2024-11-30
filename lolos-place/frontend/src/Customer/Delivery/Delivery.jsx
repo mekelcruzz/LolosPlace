@@ -9,6 +9,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import axios from 'axios';
+import cartImage from '../../assets/cart.png';
 
 
 
@@ -27,6 +28,10 @@ const Delivery = () => {
     });
     const navigate = useNavigate();
     
+    const [showCart, setShowCart] = useState(false);
+    const toggleCart = () => {
+      setShowCart((prev) => !prev);
+    };
 
   
     useEffect(() => {
@@ -296,7 +301,15 @@ const Delivery = () => {
   </div>
 </div>
 
+<>
+      {/* Floating Button */}
+      <button className="floating-button" onClick={toggleCart}>
+        <img src={cartImage} alt="Cart" className="button-image" />
+      </button>
 
+      {/* Cart Popup */}
+      {showCart && (
+        <div className="cart-popup">
           <div className="cart">
             <h3>Your Cart</h3>
             <div id="cart-items">
@@ -305,18 +318,34 @@ const Delivery = () => {
                   <div className="item-details">{item.name}</div>
                   <div className="item-actions">
                     <div className="quantity-control">
-                      <button onClick={() => handleQuantityChange(index, item.quantity - 1)} disabled={item.quantity <= 1}>-</button>
+                      <button
+                        onClick={() => handleQuantityChange(index, item.quantity - 1)}
+                        disabled={item.quantity <= 1}
+                      >
+                        -
+                      </button>
                       <span className="quantity-text">{item.quantity}</span>
                       <button onClick={() => handleQuantityChange(index, item.quantity + 1)}>+</button>
                     </div>
-                    <button className="cart-button" onClick={() => handleRemoveFromCart(index)}>Remove</button>
+                    <button className="cart-button" onClick={() => handleRemoveFromCart(index)}>
+                      Remove
+                    </button>
                   </div>
                 </div>
               ))}
             </div>
+            <button className="submit-btn" onClick={handlePlaceOrder}>
+              Place Order
+            </button>
           </div>
+        </div>
+      )}
+    </>
 
-          <button className="submit-btn" onClick={handlePlaceOrder}>Place Order</button>
+
+          
+
+          
 
           {popupVisible && (
   <div className="delivery-popup">
