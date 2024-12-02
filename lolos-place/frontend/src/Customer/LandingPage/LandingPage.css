@@ -40,117 +40,6 @@ html, body {
     color: black;
 }
 
-/* Footer styles */
-
-
-/* Dropdown Menu Styles */
-.profile-dropdown {
-    position: relative;
-    display: inline-block;
-    margin-left: 1em;
-    font-size: .9em;
-    color: black;
-    cursor: pointer;
-}
-
-
-.profile-dropdown-btn .profile-img {
-    margin-right: 8px;
-}
-
-.profile-dropdown-btn i {
-    margin-right: 8px;
-    font-size: 1.5em;
-    color: black;
-}
-
-.profile-dropdown-btn span {
-    display: flex;
-    align-items: center;
-    font-size: 1em;
-}
-
-.profile-dropdown-btn:hover {
-    color: rgb(134, 115, 61);;
-}
-
-/* Dropdown List Styles */
-.profile-dropdown-list {
-    display: none; /* Initially hidden */
-    position: absolute;
-    right: 0;
-    top: 100%;
-    background-color: white;
-    min-width: 200px;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
-    z-index: 1;
-    border-radius: 5px;
-    overflow: hidden;
-    padding: 0; /* Remove padding */
-    margin: 0;  /* Remove margin */
-}
-
-.profile-dropdown-list.active {
-    display: block; /* Show when active */
-}
-
-.profile-dropdown-list-item {
-    padding: 0; /* No padding */
-    margin: 0;  /* No margin */
-    width: 100%; /* Full width */
-}
-
-.profile-dropdown-list-item a {
-    padding: 12px 16px;
-    display: block;
-    color: black; /* Ensures the text color is black */
-    text-decoration: none;
-    transition: background-color 0.3s;
-}
-
-.profile-dropdown-list-item a:hover {
-    background-color: rgba(168, 168, 168, 0.397); /* Adjust hover background if needed */
-    color: black; /* Ensure the text remains black on hover */
-}
-
-.profile-dropdown-list-item i {
-    margin-right: 10px; /* Spacing for icon */
-    font-size: 1.2em; /* Icon size */
-}
-
-/* Divider for the dropdown */
-.profile-dropdown-list-item hr {
-    border: none;
-    height: 1px;
-    background-color: rgba(0, 0, 0, 0.2); /* Divider color */
-}
-
-/* Logout Item Styles */
-.logout-dropdown-list-item {
-    padding: 0; /* No padding for the list item */
-    margin: 0;  /* No margin for the list item */
-    width: 100%; /* Full width to match the dropdown */
-}
-
-.logout-dropdown-list-item a {
-    padding: 12px 16px; /* Consistent padding */
-    display: block; /* Block display for the anchor */
-    color: black; /* Text color */
-    text-decoration: none; /* No underline */
-    background-color: rgb(255, 138, 138); /* Background color for logout */
-    transition: background-color 0.3s; /* Smooth background transition */
-}
-
-.logout-dropdown-list-item a:hover {
-    background-color: rgb(192, 105, 105); /* Hover background color */
-}
-
-.logout-dropdown-list-item i {
-    margin-right: 10px; /* Space between icon and text */
-    font-size: 1.2em; /* Icon size */
-}
-
-
 /* About Section */
 .landing-page .about-section {
     padding: 2em;
@@ -171,52 +60,107 @@ html, body {
     font-size: 1.1em;
     max-width: 700px;
     margin: 0 auto;
-    color: #555;
+    color: #000000;
 }
 
-/* Best Sellers Section */
 /* Best Sellers Section */
 .landing-page .best-sellers-section {
     padding: 2em;
     text-align: center;
     background-color: rgb(163, 147, 101);
-}
-
-.landing-page .best-sellers-section h2 {
+  }
+  
+  .landing-page .best-sellers-section h2 {
     margin-top: 5em;
     font-family: "Tangerine", system-ui;
     font-size: 2.5em;
     margin-bottom: 0.5em;
     z-index: 2;
-}
 
-.landing-page .best-sellers-list {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 1.5em;
+
+    
+  }
+
+  .landing-page .best-sellers-section p {
+    font-size: 1.1em;
+    max-width: 700px;
+    margin: 0 auto;
+    color: #000000;
+  }
+  
+  /* Grid layout for best-sellers */
+  .landing-page .best-sellers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 equal-width columns */
+    gap: 1.5em; /* Space between columns */
     margin-top: 1em;
-}
-
-.landing-page .best-sellers-list .dish {
+    justify-items: center; /* Center cards in each grid cell */
+  }
+  
+  /* Styling for each best-seller card */
+  .landing-page .best-seller-card {
     background-color: rgb(206, 193, 153);
-    padding: 1em;
+    padding: 1.5em;
     border: 1px solid rgb(114, 102, 65);
-    border-radius: 5px;
-    text-align: left;
-    width: 250px;
+    border-radius: 10px;
+    text-align: center;
+    width: 70%; /* Base width */
+    max-width: 400px; /* Add a maximum width for large screens */
+    height: 7em; /* Let height adjust naturally to content */
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.landing-page .best-sellers-list .dish h3 {
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    margin: auto; /* Center card */
+    margin-bottom: 2em;
+  }
+  
+  .landing-page .best-seller-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .landing-page .best-seller-card h3 {
     font-size: 1.5em;
     color: #333;
-}
-
-.landing-page .best-sellers-list .dish p {
-    font-size: 1em;
-    color: #666;
-}
+    margin-bottom: 1em;
+  }
+  
+  .landing-page .best-seller-card p {
+    font-size: 1.1em;
+    color: #555;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .landing-page .best-seller-card {
+      width: 80%; /* Increase width to use more space on smaller screens */
+      padding: 1em; /* Reduce padding for a tighter layout */
+    }
+  
+    .landing-page .best-seller-card h3 {
+      font-size: 1.3em; /* Adjust heading size */
+    }
+  
+    .landing-page .best-seller-card p {
+      font-size: 1em; /* Adjust paragraph size */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .landing-page .best-seller-card {
+      width: 75%; /* Take up full width on very small screens */
+      padding: 0.8em; /* Further reduce padding */
+    }
+  
+    .landing-page .best-seller-card h3 {
+      font-size: 1.2em; /* Smaller heading size */
+    }
+  
+    .landing-page .best-seller-card p {
+      font-size: 0.9em; /* Smaller paragraph size */
+    }
+  }
+  
+  
 
 /* Button container */
 .landing-page .explore-button-container {
@@ -248,26 +192,29 @@ html, body {
 
 /* Order Now Section */
 .landing-page .order-now-section {
-    padding: 2em;
+    padding: 4em;
     background-color: rgb(83, 75, 51);
     text-align: center;
     color: #000000;
 }
 
 .landing-page .order-now-section h2 {
-    margin-top: 5em;
+    margin-top: 3em;
     font-family: "Tangerine", system-ui;
     font-size: 2.5em;
     margin-bottom: 0.5em;
+    z-index: 1;
 }
 
 .landing-page .order-now-section p {
     font-size: 1.1em;
     max-width: 700px;
     margin: 0 auto 1em;
+    z-index: 1;
 }
 
 .landing-page .order-now-section .order-button {
+
     padding: 10px 20px;
     background-color: #333;
     color: white;
@@ -277,7 +224,8 @@ html, body {
     font-size: 1em;
     transition: background-color 0.3s ease, transform 0.2s ease;
      /* Smooth transition for hover effects */
-     margin-bottom: 9em;
+     margin-bottom: 10em;
+
 }
 
 .landing-page .order-now-section .order-button:hover {
@@ -297,68 +245,6 @@ section {
 
 }
 
-.custom-shape-divider-top-1732113857 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-}
-
-.custom-shape-divider-top-1732113857 svg {
-    position: relative;
-    display: block;
-    width: calc(115% + 1.3px);
-    height: 124px;
-}
-
-.custom-shape-divider-top-1732113857 .shape-fill {
-    fill: #FFE49B;
-}
-
-/*////////////////////////////////////////////////////*/
-.custom-shape-divider-top-1732114781 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-}
-
-.custom-shape-divider-top-1732114781 svg {
-    position: relative;
-    display: block;
-    width: calc(145% + 1.3px);
-    height: 186px;
-}
-
-.custom-shape-divider-top-1732114781 .shape-fill {
-    fill: #D1BB80;
-}
-
-/* best sellers*/
-.custom-shape-divider-top-1732114863 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-}
-
-.custom-shape-divider-top-1732114863 svg {
-    position: relative;
-    display: block;
-    width: calc(136% + 1.3px);
-    height: 354px;
-}
-
-.custom-shape-divider-top-1732114863 .shape-fill {
-    fill: #A39365;
-}
-
 
 /* Container styling for the Link component (optional, for positioning) */
 .Link {
@@ -367,6 +253,7 @@ section {
   
   /* Styling for the button */
   .about_button {
+    margin-top: 1em;
     background-color: rgb(163, 147, 101); /* Updated background color */
     color: white; /* Text color */
     font-size: 16px; /* Font size */
@@ -391,7 +278,7 @@ section {
   }
   
 
-  .custom-shape-divider-top-1732261032 {
+  .custom-shape-divider-top-1733154295 {
     position: absolute;
     top: 0;
     left: 0;
@@ -400,20 +287,62 @@ section {
     line-height: 0;
 }
 
-.custom-shape-divider-top-1732261032 svg {
+.custom-shape-divider-top-1733154295 svg {
     position: relative;
     display: block;
-    width: calc(123% + 1.3px);
-    height: 226px;
+    width: calc(100% + 1.3px);
+    height: 175px;
     transform: rotateY(180deg);
 }
 
-.custom-shape-divider-top-1732261032 .shape-fill {
+.custom-shape-divider-top-1733154295 .shape-fill {
+    fill: #FFE49B;
+}
+
+.custom-shape-divider-top-1733154424 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-top-1733154424 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 130px;
+}
+
+.custom-shape-divider-top-1733154424 .shape-fill {
     fill: #D1BB80;
 }
 
 
-.custom-shape-divider-bottom-1732261575 {
+
+.custom-shape-divider-top-1733154549 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-top-1733154549 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 208px;
+    transform: rotateY(180deg);
+}
+
+.custom-shape-divider-top-1733154549 .shape-fill {
+    fill: #A39365;
+}
+
+.custom-shape-divider-bottom-1733154741 {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -423,14 +352,14 @@ section {
     transform: rotate(180deg);
 }
 
-.custom-shape-divider-bottom-1732261575 svg {
+.custom-shape-divider-bottom-1733154741 svg {
     position: relative;
     display: block;
     width: calc(100% + 1.3px);
-    height: 146px;
+    height: 208px;
     transform: rotateY(180deg);
 }
 
-.custom-shape-divider-bottom-1732261575 .shape-fill {
+.custom-shape-divider-bottom-1733154741 .shape-fill {
     fill: #2C281B;
 }

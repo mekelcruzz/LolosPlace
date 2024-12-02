@@ -96,6 +96,9 @@ const Menu = () => {
                   <h3>{menuItem.name}</h3>
                   <p>Price: ₱{menuItem.price}</p>
                   <p>{menuItem.description || "Good for 2 people"}</p> {/* Set description with fallback for bundles */}
+                   <>
+                      <img src={menuItem.image} alt={menuItem.name} />
+                    </>
                   <ul style={{ listStyleType: 'none', paddingLeft: 0 }}>
                     {menuItem.items && menuItem.items.map((item, itemIndex) => (
                       <li key={itemIndex}>{item}</li>

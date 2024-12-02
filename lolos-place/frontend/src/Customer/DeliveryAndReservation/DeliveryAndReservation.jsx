@@ -23,12 +23,14 @@ const DeliveryAndReservation = () => {
           <h2>Order Now</h2>
           <p>Choose your order type:</p>
           <div className="orderOptionsButtons">
-            <button onClick={() => handleOrderType('Delivery')}>
-              <Link to="/delivery">Delivery</Link>
-            </button>
-            <button onClick={() => handleOrderType('Reservation')}>
-              <Link to="/reservation">Reservation</Link>
-            </button>
+
+          <Link to="/delivery" onClick={() => handleOrderType('Delivery')}>
+            <button>Delivery</button>
+          </Link>
+
+          <Link to="/reservation" onClick={() => handleOrderType('Reservation')}>
+          <button>Reservation</button>
+          </Link>
 
             <div class="custom-shape-divider-bottom-1732303829">
     <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">

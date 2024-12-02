@@ -569,6 +569,32 @@ app.get('/api/order-history', async (req, res) => {
   }
 });
 
+app.get('/api/top-best-sellers', async (req, res) => {
+  try {
+    // Query to fetch the top 3 best-selling products
+    const result = await pool.query(
+      `
+      SELECT 
+        product_name,
+        SUM(quantity_sold) AS total_sold,
+        SUM(amount) AS total_revenue
+      FROM sales_data
+      GROUP BY product_name
+      ORDER BY total_sold DESC
+      LIMIT 3;
+      `
+    );
+
+    // Send the result as JSON
+    res.status(200).json({
+      message: 'Top 3 best-selling products retrieved successfully',
+      data: result.rows,
+    });
+  } catch (error) {
+    console.error('Error fetching best-sellers:', error.message);
+    res.status(500).json({ message: 'Server error while fetching best sellers' });
+  }
+});
 
 
 

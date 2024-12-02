@@ -477,7 +477,9 @@ oneYearLaterDate.setFullYear(today.getFullYear() + 1);
           <h3>{menuItem.name}</h3>
           <p>Price: ₱{menuItem.price}</p>
           <p>{menuItem.description}</p> {/* Add the description here */}
-          
+          <>
+                      <img src={menuItem.image} alt={menuItem.name} />
+                    </>
           {/* Check for bundle items and render them */}
           {menuItem.items && menuItem.items.length > 0 ? (
             <ul style={{ listStyleType: 'none', paddingLeft: 0 }}>
