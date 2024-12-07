@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 const PAYMONGO_SECRET_KEY = 'sk_test_Uarb4zRpXZb9PXmTHeK1ZTEp';
 const axios = require('axios');
 
-// this is an update
+// this is an update lmaolmao
 
 const app = express();
 app.use(cors());
