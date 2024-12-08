@@ -82,15 +82,6 @@
   margin-left: 1em; /* Adjust this value as needed for spacing */
 }
 
-
-
-
-
-
-
-
-
-
 /* Responsive styles */
 @media (max-width: 1000px) {
   .mainlayout-header h1 {
@@ -281,7 +272,7 @@ footer {
   cursor: pointer;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1255px) {
   /* Show burger icon on small screens */
   .burger-icon {
     display: block;
@@ -384,3 +375,211 @@ footer {
 }
 
 
+/* Responsive styles for screens up to 375px */
+@media (max-width: 375px) {
+  /* Header adjustments */
+  .mainlayout-header {
+    flex-wrap: wrap; /* Allow the logo and text to stack */
+    padding: 0.5em; /* Reduce padding for smaller screens */
+    height: auto; /* Allow the height to adjust dynamically */
+  }
+
+  .mainlayout-header .logo {
+    width: 4em; /* Reduce logo size */
+    height: auto; /* Maintain aspect ratio */
+    margin: 0 auto; /* Center the logo */
+    display: block; /* Ensure it doesn't conflict with other elements */
+  }
+
+  .mainlayout-header h1 {
+    font-size: 2.2em; /* Adjust font size for better fit */
+    margin: 0.5em 0; /* Add spacing around the title */
+    text-align: center; /* Center-align the title */
+    white-space: normal; /* Allow text to wrap */
+  }
+
+  /* Hide header buttons to prioritize space */
+  .mainlayout-header .header-buttons {
+    display: none; /* Hide buttons to simplify the layout */
+  }
+
+  /* Burger menu for navigation */
+  .burger-icon {
+    display: block; /* Show burger menu */
+    margin: 0 auto; /* Center burger menu */
+  }
+
+  .header-buttons.active {
+    flex-direction: column;
+    padding: 1em;
+  }
+
+  /* Footer adjustments */
+  footer {
+    font-size: 0.8em; /* Reduce font size for smaller screens */
+    padding: 5px; /* Reduce padding */
+  }
+
+  /* Profile dropdown adjustments */
+  .profile-dropdown {
+    display: none; /* Hide dropdown for smaller screens */
+  }
+
+  /* Social buttons adjustments */
+  .social-buttons {
+    gap: 1em; /* Reduce gap between icons */
+  }
+
+  .social-icon {
+    width: 20px; /* Reduce size of social icons */
+    height: 20px;
+  }
+
+  /* Title overflow handling */
+  .mainlayout-header h1 {
+    overflow: hidden; /* Prevent title from overflowing */
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+/* Responsive styles for screens up to 414px */
+@media (max-width: 414px) {
+  /* Header adjustments */
+  .mainlayout-header {
+    flex-wrap: wrap; /* Allow wrapping for better layout */
+    padding: 0.7em; /* Slightly larger padding for better spacing */
+    height: auto; /* Dynamic height */
+  }
+
+  .mainlayout-header .logo {
+    width: 4.5em; /* Slightly larger logo */
+    height: auto; /* Maintain aspect ratio */
+    margin: 0 auto; /* Center logo */
+    display: block; /* Ensure proper layout alignment */
+  }
+
+  .mainlayout-header h1 {
+    font-size: 2.5em; /* Larger title size for better visibility */
+    margin: 0.5em 0; /* Maintain spacing around the title */
+    text-align: center; /* Center the title */
+    white-space: normal; /* Allow text to wrap */
+  }
+
+  /* Header buttons adjustments */
+  .mainlayout-header .header-buttons {
+    display: none; /* Hide buttons to save space */
+  }
+
+  /* Burger menu for navigation */
+  .burger-icon {
+    display: block; /* Show burger menu */
+    margin: 0 auto; /* Center burger menu */
+  }
+
+  .header-buttons.active {
+    flex-direction: column;
+    padding: 1em;
+  }
+
+  /* Footer adjustments */
+  footer {
+    font-size: 0.9em; /* Slightly larger font size for readability */
+    padding: 7px; /* Adjust padding for balance */
+  }
+
+  /* Profile dropdown adjustments */
+  .profile-dropdown {
+    display: none; /* Hide dropdown to simplify layout */
+  }
+
+  /* Social buttons adjustments */
+  .social-buttons {
+    gap: 1.5em; /* Slightly larger gap for spacing */
+  }
+
+  .social-icon {
+    width: 25px; /* Slightly larger icons for better visibility */
+    height: 25px;
+  }
+
+  /* Title overflow handling */
+  .mainlayout-header h1 {
+    overflow: hidden; /* Prevent text overflow */
+    text-overflow: ellipsis;
+    white-space: nowrap; /* Ensure title fits in a single line */
+  }
+}
+/* Responsive styles for screens up to 430px */
+@media (max-width: 430px) {
+  /* Header adjustments */
+  .mainlayout-header {
+    flex-wrap: wrap; /* Allow wrapping for better alignment */
+    padding: 0.8em; /* Slightly larger padding for balanced spacing */
+    height: auto; /* Allow dynamic height */
+  }
+
+  .mainlayout-header .logo {
+    width: 5em; /* Slightly larger logo */
+    height: auto; /* Maintain aspect ratio */
+    margin: 0 auto; /* Center the logo */
+    display: block; /* Ensure proper layout */
+  }
+
+  .mainlayout-header h1 {
+    font-size: 2.8em; /* Adjust font size for better readability */
+    margin: 0.6em 0; /* Maintain spacing around the title */
+    text-align: center; /* Center align the title */
+    white-space: normal; /* Allow the text to wrap */
+  }
+
+  /* Header buttons adjustments */
+  .mainlayout-header .header-buttons {
+    display: none; /* Hide header buttons to save space */
+  }
+
+  /* Burger menu for navigation */
+  .burger-icon {
+    display: block; /* Show burger menu icon */
+    margin: 0 auto; /* Center the burger menu */
+  }
+
+  .header-buttons.active {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+  }
+
+  /* Footer adjustments */
+  footer {
+    font-size: 1em; /* Slightly larger font size for better readability */
+    padding: 10px; /* Adjust padding */
+  }
+
+  /* Profile dropdown adjustments */
+  .profile-dropdown {
+    display: none; /* Hide dropdown for simplicity */
+  }
+
+  /* Social buttons adjustments */
+  .social-buttons {
+    gap: 1.8em; /* Adjust the gap between social icons */
+  }
+
+  .social-icon {
+    width: 28px; /* Slightly larger social icons */
+    height: 28px;
+  }
+
+  /* Title overflow handling */
+  .mainlayout-header h1 {
+    overflow: hidden; /* Prevent text overflow */
+    text-overflow: ellipsis;
+    white-space: nowrap; /* Ensure title fits in one line */
+  }
+
+  /* Adjustments for extra spacing */
+  .mainlayout-header .logo,
+  .mainlayout-header h1 {
+    margin-bottom: 0.5em; /* Add spacing between logo and title */
+  }
+}

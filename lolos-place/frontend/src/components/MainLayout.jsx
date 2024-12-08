@@ -156,9 +156,10 @@ const MainLayout = ({ children }) => {
           </a>
           
           {/* Mail Button */}
-          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=lolosplace85@gmail.com" target="_blank">
-              <img src={mailIcon} alt="Mail" className="social-icon" />
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=lawrence.ebora@yahoo.com" target="_blank">
+            <img src={mailIcon} alt="Mail" className="social-icon" />
           </a>
+
 
 
           
