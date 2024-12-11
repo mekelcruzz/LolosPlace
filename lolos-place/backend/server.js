@@ -360,21 +360,24 @@ app.post('/api/reservations', async (req, res) => {
 });
 
 app.post('/api/feedback', async (req, res) => {
-  const { name, comment } = req.body;
+  const { name, feedbackType, comment } = req.body;
 
-  if (!name || !comment) {
-      return res.status(400).json({ message: 'Name and comment are required.' });
-  }
+  // Ensure feedbackType is a string if it's an array
+  const feedbackTypeString = Array.isArray(feedbackType) ? feedbackType.join(', ') : feedbackType;
 
+  // Insert feedback data into the database
   try {
-      const result = await pool.query(
-          'INSERT INTO feedback (name, comment, date) VALUES ($1, $2, NOW()) RETURNING *',
-          [name, comment]
-      );
-      res.status(201).json({ message: 'Feedback submitted successfully!', feedback: result.rows[0] });
-  } catch (error) {
-      console.error('Error saving feedback:', error);
-      res.status(500).json({ message: 'Server error while submitting feedback', error: error.message });
+      const query = `
+          INSERT INTO feedback (name, comment, date, feedback_type)
+          VALUES ($1, $2, NOW(), $3)
+      `;
+      const values = [name, comment, feedbackTypeString]; // Adding feedbackTypeString here
+      const result = await pool.query(query, values);
+
+      res.status(200).json({ message: 'Feedback successfully submitted!' });
+  } catch (err) {
+      console.error('Error inserting feedback:', err);
+      res.status(500).json({ message: 'Error submitting feedback' });
   }
 });
 
