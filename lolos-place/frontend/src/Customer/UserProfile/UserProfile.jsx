@@ -143,108 +143,106 @@ const handleSaveDetails = async () => {
   };
 
   return (
-    <MainLayout>
-      <div className="profile-page">
-        <div className="container">
-          <div className="sidebar">
-            <h2>Account Management</h2>
-            <ul>
-              <li><button onClick={() => scrollToSection('account-name')}>Account Name</button></li>
-              <li><button onClick={() => scrollToSection('personal-info')}>Personal Information</button></li>
-              <li><button onClick={() => scrollToSection('change-password')}>Change Password</button></li>
-            </ul>
-            <button onClick={handleLogout} className="logout-btn">Logout</button>
-          </div>
-
-          <div className="main-content">
-            <div className="section" id="account-name">
-              <h3>Full Name</h3>
-              <div className="form-group">
-                <label htmlFor="firstName">Full Name</label>
-                <input 
-                  type="text" 
-                  id="firstName" 
-                  value={userInfo.fullName} 
-                  onChange={handleChange} 
-                />
-              </div>
-            </div>
-
-            <div className="section" id="personal-info">
-              <h3>Personal Information</h3>
-              <p>This information is used to personalize your account.</p>
-
-              <div className="form-group">
-                <label htmlFor="email">Email Address</label>
-                <input 
-                  type="email" 
-                  id="email" 
-                  value={userInfo.email} 
-                  onChange={handleChange} 
-                />
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="phone">Phone Number</label>
-                <input 
-                  type="text" 
-                  id="phone" 
-                  value={userInfo.phone} 
-                  onChange={handleChange} 
-                />
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="address">Address</label>
-                <input 
-                  type="text" 
-                  id="address" 
-                  value={userInfo.address} 
-                  onChange={handleChange} 
-                />
-              </div>
-
-
-
-
-              <button className="btn" onClick={handleSaveDetails}>Save and Verify</button>
-            </div>
-
-            <div className="section" id="change-password">
-              <h3>Change Password</h3>
-              <div className="form-group">
-                <label htmlFor="oldPassword">Old Password</label>
-                <input 
-                  type="password" 
-                  id="oldPassword" 
-                  value={userInfo.oldPassword}
-                  onChange={handleChange} 
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="newPassword">New Password</label>
-                <input 
-                  type="password" 
-                  id="newPassword" 
-                  value={userInfo.newPassword}
-                  onChange={handleChange} 
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="confirmNewPassword">Confirm New Password</label>
-                <input 
-                  type="password" 
-                  id="confirmNewPassword" 
-                  value={userInfo.confirmNewPassword}
-                  onChange={handleChange} 
-                />
-              </div>
-              <button className="btn" onClick={handleSavePassword}>Change Password</button>
-            </div>
-          </div>
-        </div>
+<MainLayout>
+  <section className="profile-page">
+    <div className="container">
+      <div className="sidebar">
+        <h2>Account Management</h2>
+        <ul>
+          <li><button onClick={() => scrollToSection('account-name')}>Account Name</button></li>
+          <li><button onClick={() => scrollToSection('personal-info')}>Personal Information</button></li>
+          <li><button onClick={() => scrollToSection('change-password')}>Change Password</button></li>
+        </ul>
+        <button onClick={handleLogout} className="logout-btn">Logout</button>
       </div>
-    </MainLayout>
+
+      <div className="main-content">
+        <section className="account-name" id="account-name">
+          <h3>Full Name</h3>
+          <div className="form-group">
+            <label htmlFor="firstName">Full Name</label>
+            <input 
+              type="text" 
+              id="firstName" 
+              value={userInfo.fullName} 
+              onChange={handleChange} 
+            />
+          </div>
+        </section>
+
+        <section className="personal-info" id="personal-info">
+          <h3>Personal Information</h3>
+          <p>This information is used to personalize your account.</p>
+
+          <div className="form-group">
+            <label htmlFor="email">Email Address</label>
+            <input 
+              type="email" 
+              id="email" 
+              value={userInfo.email} 
+              onChange={handleChange} 
+            />
+          </div>
+          
+          <div className="form-group">
+            <label htmlFor="phone">Phone Number</label>
+            <input 
+              type="text" 
+              id="phone" 
+              value={userInfo.phone} 
+              onChange={handleChange} 
+            />
+          </div>
+          
+          <div className="form-group">
+            <label htmlFor="address">Address</label>
+            <input 
+              type="text" 
+              id="address" 
+              value={userInfo.address} 
+              onChange={handleChange} 
+            />
+          </div>
+
+          <button className="btn" onClick={handleSaveDetails}>Save and Verify</button>
+        </section>
+
+        <section className="change-password" id="change-password">
+          <h3>Change Password</h3>
+          <div className="form-group">
+            <label htmlFor="oldPassword">Old Password</label>
+            <input 
+              type="password" 
+              id="oldPassword" 
+              value={userInfo.oldPassword}
+              onChange={handleChange} 
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="newPassword">New Password</label>
+            <input 
+              type="password" 
+              id="newPassword" 
+              value={userInfo.newPassword}
+              onChange={handleChange} 
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="confirmNewPassword">Confirm New Password</label>
+            <input 
+              type="password" 
+              id="confirmNewPassword" 
+              value={userInfo.confirmNewPassword}
+              onChange={handleChange} 
+            />
+          </div>
+          <button className="btn" onClick={handleSavePassword}>Change Password</button>
+        </section>
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
   );
 };
 

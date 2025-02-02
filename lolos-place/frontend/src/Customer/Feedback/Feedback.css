@@ -1,242 +1,174 @@
-/* General styles */
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    overflow-x: hidden;
-}
 
 .feedback-page {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #D1BB80; /* Background color */
-    position: relative;
-}
-/* Feedback form section */
-.feedback-page h1 {
-    font-family: "Tangerine", system-ui;
-    font-size: 3.5em;
-    text-align: center;
-    margin-bottom: 10px;
-    color: #2C281B; /* Text color */
-    margin-top: 3em;
-}
-
-.feedback-page p {
-    font-size: 1.2em;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f9f9f9;
+    min-height: 100vh; /* Minimum height of 110% of the viewport height */
+    height: auto; /* Let the element grow based on content */
+    
+  }
+  
+  .feedback-page h1 {
+    font-family: 'Tangerine', cursive;
+    font-size: 6em;
+    color: #333;
     text-align: center;
     margin-bottom: 20px;
-    color: #333;
-}
-
-/* Feedback form styles */
-.feedback-form {
-    background-color: #ffecad;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-bottom: 15em;
-}
-
-/* Styling the select dropdown and label */
-.form-group label {
-    font-size: 1.1em;
-    color: #555;
-    margin-bottom: 2em;
-}
-
-/* Ensures the text input is the same size as the select dropdown */
-.form-group input,
-.form-group select {
-    margin-bottom: 2em;
-    padding: 10px;
+  }
+  
+  .feedback-page p {
     font-size: 1em;
-    border: 1px solid #a8a8a8;
-    border-radius: 5px;
-    background-color: #ebebeb;
-    width: 15em;
-    box-sizing: border-box;
-    transition: border-color 0.2s ease, background-color 0.2s ease;
-}
-
-/* Focus style for both input and select */
-.form-group input:focus,
-.form-group select:focus {
-    border-color: #FFD700; /* Highlight border on focus */
-    background-color: #fff;
-    outline: none;
-}
-
-.form-group select option {
-    padding: 10px;
-}
-
-textarea {
-    resize: none;
-    width: 100%; /* Adjust to the container's width */
-    max-width: 100%; /* Prevent it from exceeding the form's width */
+    color: #555;
+    margin-bottom: 15px;
+  }
+  
+  .feedback-page .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .feedback-page .form-group label {
+    display: block;
+    font-size: 0.9em;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .feedback-page .form-group input[type="text"],
+  .feedback-page .form-group select,
+  .feedback-page .form-group textarea {
+    width: 100%;
     padding: 10px;
     font-size: 1em;
     border: 1px solid #ccc;
     border-radius: 5px;
+    background-color: #fff;
     box-sizing: border-box;
-    font-family: Poppins;
-}
-
-/* Feedback Type Selection */
-.feedback-type-container {
+  }
+  
+  .feedback-page .form-group textarea {
+    resize: none;
+  }
+  
+  .feedback-page .feedback-options {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 20px;
-}
-
-.feedback-type-container label {
-    font-size: 1.1em;
+    margin-bottom: 15px;
+  }
+  
+  .feedback-page .feedback-option {
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 0.9em;
+    color: #555;
     cursor: pointer;
-}
-
-.feedback-type-container input {
-    display: none;
-}
-
-.feedback-type-container input:checked + label {
+    transition: all 0.3s ease;
+  }
+  
+  .feedback-page .feedback-option.selected {
+    background-color: #ffe49b;
+    color: #a08f62;
+    border-color: #a08f62;
+  }
+  
+  .feedback-page .feedback-option:hover {
+    background-color: #a08f62;
+    color: #ffe49b;
+  }
+  
+  .feedback-page .submit-button {
+    display: inline-block;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
     font-weight: bold;
-    color: #333;
-}
-
-/* Feedback options buttons */
-.feedback-options {
-    margin-bottom: 2em;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 15px;
-}
-
-.feedback-option {
-    padding: 8px 15px;
-    font-size: 1em;
-    background-color: #FFE49B;
-    color: #000;
-    border: 1px solid #a8a8a8;
-    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-.feedback-option:hover {
-    background-color: #d3b45f;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .feedback-page .submit-button:hover {
+    background-color: #45a049;
     transform: scale(1.05);
-}
-
-.feedback-option.selected {
-    background-color: #d3b45f;
-    color: #fff;
-}
-
-/* Submit Button */
-.submit-button {
-    padding: 10px 20px;
-    font-size: 1.2em;
-    background-color: #FFE49B;
-    color: #000;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-.submit-button:hover {
-    transform: scale(1.05);
-    background-color: #d3b45f;
-}
-
-/* Success popup styles */
-.popup {
-    position: fixed; /* Position relative to the viewport */
-    top: 50%; /* Center vertically */
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Adjust position based on its size */
-    padding: 20px;
-    background-color: #e4dba8;
-    border: 1px solid #817a54;
-    border-radius: 10px;
-    text-align: center;
-    z-index: 1000; /* Ensure it appears above other elements */
-    animation: fadeIn 0.3s ease-in-out;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-.popup button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    font-size: 1em;
-    background-color: #9d9e60;
-    color: #000000;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.custom-shape-divider-top-1733895035 {
-    position: absolute;
+  }
+  
+  .feedback-page .modal-overlay {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    overflow: hidden;
-    line-height: 0;
-}
-
-.custom-shape-divider-top-1733895035 svg {
-    position: relative;
-    display: block;
-    width: calc(100% + 1.3px);
-    height: 161px;
-}
-
-.custom-shape-divider-top-1733895035 .shape-fill {
-    fill: #FFE49B;
-}
-.custom-shape-divider-bottom-1733895105 {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-    transform: rotate(180deg);
-}
-
-.custom-shape-divider-bottom-1733895105 svg {
-    position: relative;
-    display: block;
-    width: calc(100% + 1.3px);
-    height: 93px;
-    transform: rotateY(180deg);
-}
-
-.custom-shape-divider-bottom-1733895105 .shape-fill {
-    fill: #2C281B;
-}
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+  
+  .feedback-page .popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    text-align: center;
+  }
+  
+  .feedback-page .popup p {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+  }
+  
+  .feedback-page .popup button {
+    background-color: #ffe49b;
+    color: #a08f62;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .feedback-page .popup button:hover {
+    background-color: #a08f62;
+    color: #ffe49b;
+    transform: scale(1.05);
+  }
+  
+  .feedback-page ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0;
+  }
+  
+  .feedback-page ul li {
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+    color: #555;
+  }
+  
+  @media (max-width: 600px) {
+    .feedback-page {
+      padding: 10px;
+    }
+  
+    .feedback-page .submit-button {
+      width: 100%;
+      padding: 15px;
+    }
+  
+    .feedback-page .feedback-option {
+      flex: 1 1 100%;
+    }
+  }
+  

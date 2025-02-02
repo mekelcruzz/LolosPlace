@@ -1,114 +1,94 @@
-/* Ensure body and html take up the full height of the viewport */
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    overflow-x: hidden;
-}
-
 .delivery-reservation-page {
-    min-height: 100vh; /* Make sure the page takes up the full viewport */
-    display: flex;
-    flex-direction: column;
-    position: relative; /* For the custom shape divider */
-}
-/* Order Options Section */
-.orderOptions {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    font-family: 'Arial', sans-serif;
+    color: #333;
     text-align: center;
-    padding: 20px;
-    background-color: #D1BB80; /* Light background for content area */
-}
-
-.orderOptions h2 {
-    font-family: "Tangerine", system-ui;
-    font-weight: 700;
-    font-size: 3.5em;
-    margin: 0 0 1em 0; /* Add margin at the bottom for spacing */
-    z-index: 1;
-}
-
-.orderOptions p {
-    font-size: 1.1em;
-    margin: 0.5em 0;
-    max-width: 800px; /* Limit width for better readability */
-    line-height: 1.6;
-    z-index: 1;
-}
-
-.orderOptionsButtons {
+    background-color: #f9f9f9;
+    padding: 50px 20px;
     display: flex;
-    gap: 20px; /* Add spacing between buttons */
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Changed from center to flex-start */
+    min-height: 75vh;
+  }
+  
+  
+  .delivery-reservation-page .orderOptions {
+    margin-top: 5.5em;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 40px 30px;
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  .delivery-reservation-page .orderOptions h2 {
+    font-family: 'Tangerine', cursive;
+    font-size: 3em;
+    color: #a08f62;
+    margin-bottom: 10px;
+  }
+  
+  .delivery-reservation-page .orderOptions p {
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 30px;
+  }
+  
+  .delivery-reservation-page .orderOptionsButtons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
     margin-top: 20px;
-}
-
-.orderOptionsButtons button {
-    padding: 10px 20px;
-    font-size: 1.1em;
-    background-color: #FFE49B; /* Dark background for buttons */
-    color: #000000; /* Light text color */
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-.orderOptionsButtons button:hover {
-    transform: scale(1.05); /* Slightly enlarge button on hover */
-    background-color: #d3b45f; /* Lighten button background on hover */
-}
-
-.orderOptionsButtons a {
+  }
+  
+  .delivery-reservation-page .orderOptionsButtons a {
     text-decoration: none;
-    color: inherit; /* Ensure link inherits button text color */
-}
-
-
-.custom-shape-divider-top-1732302539 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-}
-
-.custom-shape-divider-top-1732302539 svg {
-    position: relative;
-    display: block;
-    width: calc(100% + 1.3px);
-    height: 390px;
-    transform: rotateY(180deg);
-}
-
-.custom-shape-divider-top-1732302539 .shape-fill {
-    fill: #FFE49B;
-}
-
-
-.custom-shape-divider-bottom-1732303829 {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-    transform: rotate(180deg);
-}
-
-.custom-shape-divider-bottom-1732303829 svg {
-    position: relative;
-    display: block;
-    width: calc(100% + 1.3px);
-    height: 135px;
-    transform: rotateY(180deg);
-}
-
-.custom-shape-divider-bottom-1732303829 .shape-fill {
-    fill: #2C281B;
-}
+  }
+  
+  .delivery-reservation-page .orderOptionsButtons button {
+    background-color: #FFE49B;
+    color: #a08f62;
+    border: none;
+    border-radius: 20px;
+    padding: 15px 30px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+  }
+  
+  .delivery-reservation-page .orderOptionsButtons button:hover {
+    background-color: #a08f62;
+    color: #FFE49B;
+    transform: scale(1.05);
+  }
+  
+  .delivery-reservation-page .orderOptionsButtons button:active {
+    transform: scale(0.95);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .delivery-reservation-page .orderOptions {
+      padding: 30px 20px;
+    }
+  
+    .delivery-reservation-page .orderOptions h2 {
+      font-size: 2.5em;
+    }
+  
+    .delivery-reservation-page .orderOptions p {
+      font-size: 1em;
+    }
+  
+    .delivery-reservation-page .orderOptionsButtons {
+      flex-direction: column;
+      gap: 15px;
+    }
+  
+    .delivery-reservation-page .orderOptionsButtons button {
+      width: 100%;
+    }
+  }
+  

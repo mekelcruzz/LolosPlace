@@ -123,6 +123,7 @@ const Delivery = () => {
   };
 
   const handlePlaceOrder = () => {
+    setShowCart(false);
     if (!customer || customer === '') {
       setPopupVisible(true);
       window.scrollTo(0, 0);
@@ -226,199 +227,224 @@ const Delivery = () => {
 }
 
   return (
-    <MainLayout>
-      <section>
-      <div class="custom-shape-divider-top-1732551728">
-    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-        <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path>
-        <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="shape-fill"></path>
-        <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="shape-fill"></path>
-    </svg>
-</div>
+<MainLayout>
+  <section>
     <div className="delivery">
-        <section>
-          
-          <h2>Place Your Delivery Order</h2>
-
-          <form noValidate>
-            <div className="form-group">
-              <label htmlFor="name">Name <span>*</span>:</label>
-              <input type="text" id="name" required placeholder="Login to autofill" value={formData.name} onChange={handleInputChange} disabled />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="address">Complete Address <span>*</span>:</label>
-              <input type="text" id="address" required placeholder="Login to autofill" value={formData.address} onChange={handleInputChange} />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="contact">Contact Number <span>*</span>:</label>
-              <input type="tel" id="contact" required placeholder="Login to autofill" value={formData.contact} onChange={handleInputChange}disabled />
-            </div>
-
-          </form>
-
-          <div className="filler-buttons">
-            {getUniqueCategories().map((category, index) => (
-              <button key={index} onClick={() => handleFilterClick(category)}>
-                {category.charAt(0).toUpperCase() + category.slice(1)}
-              </button>
-            ))}
+      <section>
+        <h2>Place Your Delivery Order</h2>
+        <form noValidate>
+          <div className="form-group">
+            <label htmlFor="name">
+              Name <span>*</span>:
+            </label>
+            <input
+              type="text"
+              id="name"
+              required
+              placeholder="Login to autofill"
+              value={formData.name}
+              onChange={handleInputChange}
+              disabled
+            />
           </div>
 
-          <div className="menu">
-  <h3>Our Menu</h3>
-  <div className="menu-content" id="menu-content">
-    {filteredMenu.length > 0 ? (
-      filteredMenu.map((menuItem, index) => (
-        <div key={index} className="menu-item">
-          <h3>{menuItem.name}</h3>
-          <p>Price: ₱{menuItem.price}</p>
-          <p>{menuItem.description}</p> {/* Add the description here */}
-          <>
-                      <img src={menuItem.image} alt={menuItem.name} />
-                    </>
-          
-          {/* Check for bundle items and render them */}
-          {menuItem.items && menuItem.items.length > 0 ? (
-            <ul style={{ listStyleType: 'none', paddingLeft: 0 }}>
-              {menuItem.items.map((bundleItem, itemIndex) => (
-                <li key={itemIndex}>{bundleItem}</li>
-              ))}
-            </ul>
-          ) : null}
+          <div className="form-group">
+            <label htmlFor="address">
+              Complete Address <span>*</span>:
+            </label>
+            <input
+              type="text"
+              id="address"
+              required
+              placeholder="Login to autofill"
+              value={formData.address}
+              onChange={handleInputChange}
+            />
+          </div>
 
-          <div>
-            <button
-              className="add-to-cart-btn"
-              onClick={() => handleAddToCart(menuItem)}
-            >
-              Add to Cart
+          <div className="form-group">
+            <label htmlFor="contact">
+              Contact Number <span>*</span>:
+            </label>
+            <input
+              type="tel"
+              id="contact"
+              required
+              placeholder="Login to autofill"
+              value={formData.contact}
+              onChange={handleInputChange}
+              disabled
+            />
+          </div>
+        </form>
+
+        {/* Filter Buttons */}
+        <div className="filler-buttons">
+          {getUniqueCategories().map((category, index) => (
+            <button key={index} onClick={() => handleFilterClick(category)}>
+              {category.charAt(0).toUpperCase() + category.slice(1)}
             </button>
-          </div>
+          ))}
         </div>
-      ))
-    ) : (
-      <p>No items found for this category.</p>
-    )}
-  </div>
-</div>
 
-<>
-      {/* Floating Button */}
-      <button className="floating-button" onClick={toggleCart}>
-        <img src={cartImage} alt="Cart" className="button-image" />
-      </button>
-
-      {/* Cart Popup */}
-      {showCart && (
-        <div className="cart-popup">
-          <div className="cart">
-            <h3>Your Cart</h3>
-            <div id="cart-items">
-              {cartOrders.map((item, index) => (
-                <div key={index} className="cart-item">
-                  <div className="item-details">{item.name}</div>
-                  <div className="item-actions">
-                    <div className="quantity-control">
-                      <button
-                        onClick={() => handleQuantityChange(index, item.quantity - 1)}
-                        disabled={item.quantity <= 1}
-                      >
-                        -
-                      </button>
-                      <span className="quantity-text">{item.quantity}</span>
-                      <button onClick={() => handleQuantityChange(index, item.quantity + 1)}>+</button>
-                    </div>
-                    <button className="cart-button" onClick={() => handleRemoveFromCart(index)}>
-                      Remove
+        {/* Menu */}
+        <div className="menu">
+          <h3>Our Menu</h3>
+          <div className="menu-content" id="menu-content">
+            {filteredMenu.length > 0 ? (
+              filteredMenu.map((menuItem, index) => (
+                <div key={index} className="menu-item">
+                  <h3>{menuItem.name}</h3>
+                  <p>Price: ₱{menuItem.price}</p>
+                  <p>{menuItem.description}</p>
+                  <img src={menuItem.image} alt={menuItem.name} />
+                  {menuItem.items && menuItem.items.length > 0 && (
+                    <ul style={{ listStyleType: 'none', paddingLeft: 0 }}>
+                      {menuItem.items.map((bundleItem, itemIndex) => (
+                        <li key={itemIndex}>{bundleItem}</li>
+                      ))}
+                    </ul>
+                  )}
+                  <div>
+                    <button
+                      className="add-to-cart-btn"
+                      onClick={() => handleAddToCart(menuItem)}
+                    >
+                      Add to Cart
                     </button>
                   </div>
                 </div>
-              ))}
-            </div>
-            <button className="submit-btn" onClick={handlePlaceOrder}>
-              Place Order
-            </button>
+              ))
+            ) : (
+              <p>No items found for this category.</p>
+            )}
           </div>
         </div>
-      )}
-    </>
 
-
-          
-
-          
-
-          {popupVisible && (
-  <div className="delivery-popup">
-    <div className="delivery-popup-content">
-      <p>{formValid && customer ? "Your cart is empty" : "Please Login"}</p>
-      <div className="delivery-popup-buttons">
-        <button onClick={closeToLogin}>Okay</button>
-        <button onClick={closeToHome}>Cancel</button>
-      </div>
-    </div>
-  </div>
-)}
-
-              {confirmationPopupVisible && customer && (
-                <div className="confirmation-popup">
-                  <div className="popup-content receipt">
-                    <h3>Order Confirmation</h3>
-                    <div className="receipt-header">
-                      <h1>Lolo's Place</h1>
-                      <p>Thank you for your order!</p>
-                    </div>
-                    <div className="receipt-details">
-                      <p><strong>Name:</strong> {formData.name}</p>
-                      <p><strong>Address:</strong> {formData.address}</p>
-                      <p><strong>Contact:</strong> {formData.contact}</p>
-                    </div>
-                    <h4>Items Ordered:</h4>
-                    <ul className="receipt-items">
-                      {cartOrders.map((item, index) => (
-                        <li key={index}>
-                          {item.name} (x{item.quantity}) - ₱{item.price * item.quantity}
-                        </li>
-                      ))}
-                    </ul>
-                    <h4 className="total">Total Amount: ₱{getTotalAmount()}</h4>
-                    <div className="receipt-footer">
-                      <button className="confirm-btn" onClick={makePaymentGCash}>
-                        Confirm
-                      </button>
-                      <button className="close-btn" onClick={closeConfirmationPopup}>
-                        Close
+        {/* Floating Button & Cart Popup */}
+        <button className="floating-button" onClick={toggleCart}>
+          <img src={cartImage} alt="Cart" className="button-image" />
+        </button>
+        {showCart && (
+          <div className="cart-popup">
+            <div className="cart">
+              <h3>Your Cart</h3>
+              <div id="cart-items">
+                {cartOrders.map((item, index) => (
+                  <div key={index} className="cart-item">
+                    <div className="item-details">{item.name}</div>
+                    <div className="item-actions">
+                      <div className="quantity-control">
+                        <button
+                          onClick={() =>
+                            handleQuantityChange(index, item.quantity - 1)
+                          }
+                          disabled={item.quantity <= 1}
+                        >
+                          -
+                        </button>
+                        <span className="quantity-text">{item.quantity}</span>
+                        <button
+                          onClick={() =>
+                            handleQuantityChange(index, item.quantity + 1)
+                          }
+                        >
+                          +
+                        </button>
+                      </div>
+                      <button
+                        className="cart-button"
+                        onClick={() => handleRemoveFromCart(index)}
+                      >
+                        Remove
                       </button>
                     </div>
                   </div>
+                ))}
+              </div>
+              <button className="submit-btn" onClick={handlePlaceOrder}>
+                Place Order
+              </button>
+              <button
+                className="close-button"
+                onClick={() => setShowCart(false)}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Popups */}
+        {popupVisible && (
+          <>
+            <div className="delivery-popup-overlay" onClick={closeToHome}></div>
+            <div className="delivery-popup">
+              <div className="delivery-popup-content">
+                <p>
+                  {formValid && customer ? 'Your cart is empty' : 'Please Login'}
+                </p>
+                <div className="delivery-popup-buttons">
+                  <button onClick={closeToLogin}>Okay</button>
+                  <button onClick={closeToHome}>Cancel</button>
                 </div>
-              )}
+              </div>
+            </div>
+          </>
+        )}
 
-              {/* Confirmation Dialog */}
 
-            {/* QR Code Dialog */}
-            <Dialog open={qrCodePopupVisible} onClose={closeQrCodePopup}>
-              <DialogTitle>Lolo's Place QR Code</DialogTitle>
-              <DialogContent>
-                <img src="https://placehold.co/400" alt="qr" />
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={closeQrCodePopup}>Close</Button>
-              </DialogActions>
-            </Dialog>
-            <div className='white'></div>
-
-        </section>
+        {confirmationPopupVisible && customer && (
+          <div className="confirmation-popup">
+            <div className="popup-content receipt">
+              <h3>Order Confirmation</h3>
+              <div className="receipt-header">
+                <h1>Lolo's Place</h1>
+                <p>Thank you for your order!</p>
+              </div>
+              <div className="receipt-details">
+                <p>
+                  <strong>Name:</strong> {formData.name}
+                </p>
+                <p>
+                  <strong>Address:</strong> {formData.address}
+                </p>
+                <p>
+                  <strong>Contact:</strong> {formData.contact}
+                </p>
+              </div>
+              <h4>Items Ordered:</h4>
+              <ul className="receipt-items">
+                {cartOrders.map((item, index) => (
+                  <li key={index}>
+                    {item.name} (x{item.quantity}) - ₱
+                    {item.price * item.quantity}
+                  </li>
+                ))}
+              </ul>
+              <h4 className="total">Total Amount: ₱{getTotalAmount()}</h4>
+              <div className="receipt-footer">
+                <button
+                  className="confirm-btn"
+                  onClick={makePaymentGCash}
+                >
+                  Confirm
+                </button>
+                <button
+                  className="close-btn"
+                  onClick={closeConfirmationPopup}
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </section>
     </div>
-    <div class="custom-shape-divider-bottom-1732551681">
-    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
-    </svg>
-</div>
-    </section>
-    </MainLayout>
+  </section>
+</MainLayout>
+
   );
 };
 

@@ -9,11 +9,11 @@ html, body {
     overflow-x: hidden;
 }
 .success-page h1{
-    margin-top: -5em;
+    margin-top: -1em;
     color: rgb(0, 0, 0);
     font-family: "Tangerine", system-ui;
     font-weight: 700;
-    font-size: 3.5em;
+    font-size: 6em;
 
 }
 
@@ -39,48 +39,6 @@ html, body {
     align-items: center;
     text-align: center;
     padding: 20px;
-    background-color: #bda871;
+    background-color: #ffe49b81;
     color: #000000; /* Darker green color for text */
-}
-.success-section {}
-
-
-.custom-shape-divider-top-1732602286 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-}
-
-.custom-shape-divider-top-1732602286 svg {
-    position: relative;
-    display: block;
-    width: calc(100% + 1.3px);
-    height: 183px;
-}
-
-.custom-shape-divider-top-1732602286 .shape-fill {
-    fill: #FFE49B;
-}
-.custom-shape-divider-bottom-1732602707 {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-    transform: rotate(180deg);
-}
-
-.custom-shape-divider-bottom-1732602707 svg {
-    position: relative;
-    display: block;
-    width: calc(100% + 1.3px);
-    height: 126px;
-}
-
-.custom-shape-divider-bottom-1732602707 .shape-fill {
-    fill: #2C281B;
 }

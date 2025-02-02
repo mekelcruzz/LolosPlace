@@ -1,143 +1,165 @@
-@import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap');
-
+/* General Layout */
 html, body {
     height: 100%;
     margin: 0;
     font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
     display: flex;
     flex-direction: column;
-    overflow-x: hidden;
 }
 
+/* Profile Page Container */
 .profile-page {
     display: flex;
+    flex: 1;
     flex-direction: column;
     min-height: 100vh;
-}
-
-.profile-page .container {
-    display: flex;
     padding: 2em;
-    flex-direction: row;
 }
 
-/* Sidebar adjustments */
+/* Sidebar Layout */
 .profile-page .sidebar {
-    width: 180px;
-    background-color: rgba(255, 228, 155, 0.3);
-    padding: 15px;
-    border-radius: 8px;
-    position: fixed;
-    top: 6em;
-    left: 2em;
-    height: auto;
+    width: 220px;
+    background-color: #fff3cd;
+    padding: 20px;
+    border-radius: 10px;
+    position: sticky;
+    top: 2em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 1000;
 }
 
 .profile-page .sidebar h2 {
-    font-family: "Tangerine", sans-serif;
-    font-size: 2em;
-    color: black;
-    margin-bottom: 1em;
+    font-family: 'Tangerine', cursive;
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 1.5em;
+    text-align: center;
 }
 
 .profile-page .sidebar ul {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .profile-page .sidebar ul li {
-    padding: 1em 0;
+    margin: 1em 0;
 }
 
 .profile-page .sidebar ul li button {
     width: 100%;
     background-color: transparent;
-    color: black;
-    font-size: 1em;
+    color: #333;
+    font-size: 1.2em;
     border: none;
-    cursor: pointer;
     padding: 10px;
     text-align: left;
-    transition: background-color 0.3s;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .profile-page .sidebar ul li button:hover {
     background-color: rgba(0, 0, 0, 0.1);
+    color: #000;
 }
 
 .profile-page .logout-btn {
     margin-top: 2em;
-    background-color: rgb(255, 99, 71);
+    background-color: #ff6347;
     color: white;
     border: none;
     border-radius: 5px;
     padding: 10px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .profile-page .logout-btn:hover {
-    background-color: rgb(220, 20, 60);
+    background-color: #dc143c;
 }
 
-/* Main content adjustments */
+/* Main Content Section */
+.profile-page .container {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    width: 100%;
+    align-items: flex-start;
+}
+
 .profile-page .main-content {
     flex: 1;
-    margin-left: 220px;
+    margin-left: 240px;
     padding-left: 2em;
-    color: black;
     padding-top: 2em;
+    color: #333;
+    width: calc(100% - 240px);
 }
 
-.profile-page .section {
+/* Form Section Styling */
+.profile-page .main-content section {
+    margin-left: -6em;
     margin-bottom: 2em;
     padding: 2em;
-    background-color: rgb(255, 228, 155);
     border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffe49b81;
 }
 
-.profile-page .section h3 {
-    font-family: "Tangerine", sans-serif;
-    font-size: 2.2em;
-    color: black;
-}
-
-.profile-page .section p {
-    font-size: 1.1em;
+.profile-page .main-content section h3 {
+    font-family: 'Tangerine', cursive;
+    font-size: 2.5em;
+    color: #333;
     margin-bottom: 1em;
 }
 
+/* Form Group */
 .profile-page .form-group {
-    margin-bottom: 1em;
+    margin-bottom: 1.5em;
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
 }
 
 .profile-page .form-group label {
-    display: block;
+    font-size: 1.1em;
+    font-weight: bold;
     margin-bottom: 0.5em;
 }
 
 .profile-page .form-group input {
-    width: 100%;
-    padding: 0.7em;
-    border: none;
+    padding: 1em;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.8);
+    font-size: 1em;
+    width: 100%;
+    background-color: #f9f9f9;
 }
 
 .profile-page .btn {
-    padding: 0.7em 1.5em;
-    background-color: grey;
+    padding: 1em 2em;
+    color: #a08f62;
+    background-color: #FFE49B;
     border: none;
     border-radius: 5px;
-    color: white;
     cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1.1em;
 }
 
 .profile-page .btn:hover {
-    background-color: black;
+    background-color: #a08f62; /* Darker red on hover */
+    color: #FFE49B
 }
 
-/* Media Queries for Responsiveness */
+.profile-page .btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Responsive Styling */
 @media (max-width: 768px) {
     .profile-page .container {
         flex-direction: column;
@@ -148,8 +170,6 @@ html, body {
         width: 100%;
         position: static;
         margin-bottom: 1.5em;
-        left: 0;
-        top: 0;
     }
 
     .profile-page .main-content {
@@ -160,24 +180,23 @@ html, body {
 
 @media (max-width: 480px) {
     .profile-page .sidebar h2 {
-        font-size: 1.5em;
+        font-size: 2em;
     }
 
     .profile-page .sidebar ul li button {
-        font-size: 0.9em;
-        padding: 8px;
+        font-size: 1em;
     }
 
-    .profile-page .section h3 {
-        font-size: 1.8em;
+    .profile-page .main-content section h3 {
+        font-size: 2em;
     }
 
     .profile-page .form-group input {
-        padding: 0.5em;
+        padding: 0.7em;
     }
 
     .profile-page .btn {
-        padding: 0.5em 1.2em;
-        font-size: 0.9em;
+        padding: 0.8em 1.5em;
+        font-size: 1em;
     }
 }

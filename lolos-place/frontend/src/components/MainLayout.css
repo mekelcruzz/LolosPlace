@@ -1,9 +1,9 @@
-/* General Header styles */
+@import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap');
 .mainlayout-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(255, 228, 155);
+  background-color: rgb(255, 255, 255);
   color: rgb(255, 255, 255);
   height: 5em;
   padding: 0 1em;
@@ -16,16 +16,16 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #D1BB80; /* Background of the track */
+  background: #ffffff; /* Background of the track */
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #7c6f4c; /* Color of the scrollbar thumb */
-  border-radius: 5px; /* Rounded corners */
+  background-color: #cfb87a;
+  border-radius: 5px; 
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #5f5741; /* Color when hovered */
+  background-color: #726646; /* Darker red on hover */
 }
 
 /* Logo and Title */
@@ -33,15 +33,13 @@
   color: black;
   font-family: "Tangerine", system-ui;
   font-weight: 700;
-  font-size: 4em;
-
+  font-size: 3em;
 }
 
 .mainlayout-header .logo {
   width: 5.5em;
   height: auto;
-  margin-right: -5em;
-  margin-left: 1em;
+  margin-right: -2em;
 }
 
 /* Header buttons */
@@ -56,6 +54,7 @@
 }
 
 .mainlayout-header .header-buttons button {
+  font-size: .90em;
   padding: 10px 15px;
   background-color: rgba(0, 0, 0, 0);
   color: rgb(0, 0, 0);
@@ -63,7 +62,7 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
-  margin: 1em;
+  margin: .5em;
 }
 
 .mainlayout-header .header-buttons button:hover {
@@ -151,7 +150,7 @@
 /* Footer styles */
 footer {
   color: white;
-  background-color: rgb(44, 40, 27);
+  background-color: rgb(77, 77, 77);
   text-align: center;
   padding: 10px;
   width: 100%;

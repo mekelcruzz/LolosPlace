@@ -65,6 +65,7 @@ const MainLayout = ({ children }) => {
     setCustomer(null);
     setDropdownActive(false);
     setBurgerMenuActive(false);
+    window.location.href = '/';
   };
 
   const toggleBurgerMenu = () => {

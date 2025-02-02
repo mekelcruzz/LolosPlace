@@ -1,85 +1,119 @@
 /* General Styles */
+body {
+  font-family: 'Roboto', sans-serif;
+  color: #000000; /* Set all text to black */
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f4f8;
+}
+
 .order-history-page {
-    padding: 20px;
-    font-family: Arial, sans-serif;
+  max-width: 1100px;
+  margin: 95px auto;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.order-history-page h1 {
+  font-family: 'tangirine', serif;
+  font-size: 3em;
+  color: #000000; /* Added a vibrant color */
+  text-align: center;
+  margin-bottom: 30px;
+  text-transform: capitalize;
+}
+
+.order-history-page p {
+  font-size: 1.1em;
+  color: #68614a; /* A soft text color for better contrast */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.order-history-page .order-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+  gap: 20px;
+}
+
+/* Order Card Styles */
+.order-history-page .order-card {
+background-color: #e9d6a2;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.order-history-page .order-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.order-history-page .order-card p {
+  margin: 10px 0;
+  font-size: 1em;
+  color: #000000; /* Text color to enhance readability */
+}
+
+.order-history-page .order-card strong {
+  font-weight: bold;
+  color: #000000; /* Vibrant color for emphasis */
+}
+
+.order-history-page .order-card h3 {
+  font-size: 1.3em;
+  margin-bottom: 15px;
+  color: #000000; /* Vibrant heading color */
+  border-bottom: 2px solid #bda972;
+  padding-bottom: 5px;
+}
+
+.order-history-page ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin: 15px 0;
+}
+
+.order-history-page ul li {
+  padding: 8px 0;
+  color: #000000; /* Text color for consistency */
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .order-history-page {
+    padding: 30px;
   }
-  
-  h1 {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 20px;
+
+  .order-history-page h1 {
+    font-size: 2.5em;
   }
-  
-  .filter-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .filter-buttons button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-  }
-  
-  .filter-buttons button:hover {
-    background-color: #45a049;
-  }
-  
-  .order-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .order-card {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+
+  .order-history-page .order-card {
     padding: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
-  
-  .order-card h2 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+}
+
+@media (max-width: 480px) {
+  .order-history-page {
+    padding: 20px;
   }
-  
-  .order-card p {
-    font-size: 1rem;
-    margin: 5px 0;
+
+  .order-history-page h1 {
+    font-size: 2em;
   }
-  
-  .order-card strong {
-    font-weight: bold;
+
+  .order-history-page .order-card {
+    padding: 10px;
   }
-  
-  .order-card ul {
-    list-style-type: none;
-    padding-left: 0;
+
+  .order-history-page ul {
+    padding-left: 15px;
   }
-  
-  .order-card li {
-    margin-bottom: 5px;
-  }
-  
-  .loading, .error {
-    text-align: center;
-    font-size: 1.2rem;
-    margin-top: 20px;
-  }
-  
-  .loading {
-    color: #4CAF50;
-  }
-  
-  .error {
-    color: red;
-  }
-  
+}
