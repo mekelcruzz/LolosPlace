@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link for routing
 import './Login.css';
-import logo from '../../assets/logo.png'; // Correct path to the logo
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useCustomer } from '../../api/CustomerProvider';
