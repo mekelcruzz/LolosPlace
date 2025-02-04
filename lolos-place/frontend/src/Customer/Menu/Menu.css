@@ -1,7 +1,7 @@
 .menu-page {
   font-family: 'Arial', sans-serif;
   color: #333;
-  background-color: #f9f9f9;
+  background-color: #CDA678;
   padding: 20px;
 }
 
@@ -11,6 +11,7 @@
 }
 
 .menu-page .menu-title {
+  margin-top: -1em;
   font-family: 'Tangerine', cursive;
   font-size: 3.5em;
   color: #000000;
@@ -34,9 +35,9 @@
 }
 
 .menu-page .filter-button {
-  background-color: #ffe49b;
-  color: #a08f62;
-  border: 1px solid #a08f62;
+  background-color: #A0764B;
+  color: #ffffff;
+  border: 1px solid #a08f6200;
   border-radius: 20px;
   padding: 10px 20px;
   cursor: pointer;
@@ -46,8 +47,8 @@
 
 .menu-page .filter-button.active,
 .menu-page .filter-button:hover {
-  background-color: #a08f62;
-  color: #ffe49b;
+  background-color: #6e4924;
+  color: #ffffff;
 }
 
 .menu-page .menu-content {
