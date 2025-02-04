@@ -16,6 +16,8 @@ import cartImage from '../../assets/cart.png';
 const Delivery = () => {
   const { customer, menuData, cartOrders, setCartOrders } = useCustomer();
   const [popupVisible, setPopupVisible] = useState(false);
+  const [mainFilter, setMainFilter] = useState('all');
+  const [subFilter, setSubFilter] = useState(null);
   const [confirmationPopupVisible, setConfirmationPopupVisible] = useState(false);
   const [qrCodePopupVisible, setQrCodePopupVisible] = useState(false);
   const [filter, setFilter] = useState('all');
@@ -46,14 +48,33 @@ const Delivery = () => {
 
     
     const getFilteredMenu = () => {
-      if (filter === 'all') {
+      if (mainFilter === 'all') {
         return menuData;
-      } else {
-        return menuData.filter((menuItem) =>
-          menuItem.category.toLowerCase() === filter.toLowerCase()
-        );
       }
+      return menuData.filter(
+        (menuItem) =>
+          menuItem.main_category === mainFilter &&
+          (!subFilter || menuItem.category === subFilter)
+      );
     };
+    const handleMainFilterClick = (selectedFilter) => {
+      setMainFilter(selectedFilter);
+      setSubFilter(null); // Reset subFilter when selecting a new main category
+    };
+    
+    const handleSubFilterClick = (selectedSubFilter) => {
+      setSubFilter(selectedSubFilter);
+    };
+    const groupedCategories = menuData.reduce((acc, item) => {
+      const mainCategory = item.main_category;
+      if (!acc[mainCategory]) {
+        acc[mainCategory] = new Set();
+      }
+      acc[mainCategory].add(item.category);
+      return acc;
+    }, {});
+    
+    const mainCategories = Object.keys(groupedCategories);
 
   const validateForm = () => {
     const { name, address, contact } = formData;
@@ -278,47 +299,75 @@ const Delivery = () => {
           </div>
         </form>
 
-        {/* Filter Buttons */}
-        <div className="filler-buttons">
-          {getUniqueCategories().map((category, index) => (
-            <button key={index} onClick={() => handleFilterClick(category)}>
-              {category.charAt(0).toUpperCase() + category.slice(1)}
-            </button>
-          ))}
-        </div>
+        <div className="menu-buttons">
+  <button
+    data-filter="all"
+    className={`filter-button ${mainFilter === 'all' ? 'active' : ''}`}
+    onClick={() => handleMainFilterClick('all')}
+  >
+    All Food
+  </button>
+  {mainCategories.map((mainCategory, index) => (
+    <button
+      key={index}
+      data-filter={mainCategory}
+      className={`filter-button ${mainFilter === mainCategory ? 'active' : ''}`}
+      onClick={() => handleMainFilterClick(mainCategory)}
+    >
+      {mainCategory}
+    </button>
+  ))}
+</div>
+
+{/* Subcategory Buttons */}
+{mainFilter !== 'all' && groupedCategories[mainFilter] && (
+  <div className="subcategory-buttons">
+    {[...groupedCategories[mainFilter]].map((subcategory, index) => (
+      <button
+        key={index}
+        data-filter={subcategory}
+        className={`filter-button ${subFilter === subcategory ? 'active' : ''}`}
+        onClick={() => handleSubFilterClick(subcategory)}
+      >
+        {subcategory}
+      </button>
+    ))}
+  </div>
+)}
 
         {/* Menu */}
         <div className="menu">
           <h3>Our Menu</h3>
-          <div className="menu-content" id="menu-content">
-            {filteredMenu.length > 0 ? (
-              filteredMenu.map((menuItem, index) => (
-                <div key={index} className="menu-item">
-                  <h3>{menuItem.name}</h3>
-                  <p>Price: ₱{menuItem.price}</p>
-                  <p>{menuItem.description}</p>
-                  <img src={menuItem.image} alt={menuItem.name} />
-                  {menuItem.items && menuItem.items.length > 0 && (
-                    <ul style={{ listStyleType: 'none', paddingLeft: 0 }}>
-                      {menuItem.items.map((bundleItem, itemIndex) => (
-                        <li key={itemIndex}>{bundleItem}</li>
-                      ))}
-                    </ul>
-                  )}
-                  <div>
-                    <button
-                      className="add-to-cart-btn"
-                      onClick={() => handleAddToCart(menuItem)}
-                    >
-                      Add to Cart
-                    </button>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <p>No items found for this category.</p>
-            )}
-          </div>
+          {/* Display Filtered Menu Items */}
+<div className="menu-content" id="menu-content">
+  {filteredMenu.length > 0 ? (
+    filteredMenu.map((menuItem, index) => (
+      <div key={index} className="menu-item">
+        <h3>{menuItem.name}</h3>
+        <p>Price: ₱{menuItem.price}</p>
+        <p>{menuItem.description}</p>
+        <img src={menuItem.image} alt={menuItem.name} />
+        {menuItem.items && menuItem.items.length > 0 && (
+          <ul style={{ listStyleType: 'none', paddingLeft: 0 }}>
+            {menuItem.items.map((bundleItem, itemIndex) => (
+              <li key={itemIndex}>{bundleItem}</li>
+            ))}
+          </ul>
+        )}
+        <div>
+          <button
+            className="add-to-cart-btn"
+            onClick={() => handleAddToCart(menuItem)}
+          >
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    ))
+  ) : (
+    <p>No items found for this category.</p>
+  )}
+</div>
         </div>
 
         {/* Floating Button & Cart Popup */}
