@@ -25,6 +25,9 @@ const LandingPage = () => {
       setDropdownActive(false);
     }
   };
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
 
   useEffect(() => {
     window.addEventListener('click', handleOutsideClick);
@@ -97,7 +100,15 @@ const LandingPage = () => {
               ))}
             </div>
           )}
+
+          {/* Menu Button */}
+          <div className="button-container">
+            <Link to="/menu" onClick={scrollToTop}>
+              <button className="menu-button">Explore Our Menu</button>
+            </Link>
+          </div>
         </section>
+
 
         {/* About Section */}
         <section className="about-section">

@@ -3,29 +3,18 @@
   font-family: 'Arial, sans-serif';
   color: #333;
   line-height: 1.6;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column; /* Stack sections vertically */
 }
 
-.landing-page .section {
-  display: flex;
-  align-items: center; /* Vertically align content */
-  justify-content: space-between; /* Space out text and image */
-  background-color: white;
-  padding: 50px;
-  max-width: 1200px;
-  margin: 0 auto;
-  height: 100vh; /* Set height to full viewport height */
-}
-
 .landing-page .intro-section {
-  background-color: white;
+  background-color: #CDA678;
   display: flex;
   align-items: center; /* Vertically align content */
   justify-content: space-between; /* Space out text and image */
   padding: 50px;
-  max-width: 1200px;
+  max-width: 1500px;
   margin: 0 auto;
 }
 
@@ -37,13 +26,13 @@
   font-family: 'Tangerine', cursive; /* Ensure the correct font */
   font-size: 4em; /* Adjust as needed */
   font-weight: bold;
-  color: #1a202c;
+  color: #000000;
   margin-top: -5em;
 }
 
 .landing-page .text-content p {
   font-size: 1.2em;
-  color: #4a5568;
+  color: #000000;
   line-height: 1.6; /* Improve text readability */
   margin-bottom: 2em;
 }
@@ -52,8 +41,8 @@
   display: inline-block;
   padding: 10px 20px;
   font-size: 1em;
-  color: #a08f62;
-  background-color: #FFE49B;
+  color: #ffffff;
+  background-color: #6e4924;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -63,8 +52,8 @@
 }
 
 .landing-page .order-now-button:hover {
-  background-color: #a08f62; /* Darker red on hover */
-  color: #FFE49B;
+  background-color: #A0764B; /* Darker red on hover */
+  color: #ffffff;
 }
 
 .landing-page .image-right {
@@ -108,7 +97,7 @@
 }
 
 .landing-page .best-seller-card {
-  background-color: #FFE49B;
+  background-color: #A0764B;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -120,14 +109,14 @@
 
 .landing-page .best-seller-card:hover {
   transform: scale(1.05); /* Slightly enlarge the card on hover */
-  background-color: #a08f62; /* Darker color on hover */
-  color: #FFE49B;
+  background-color: #6e4924; /* Darker color on hover */
+  color: #ffffff;
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Enhance the shadow on hover */
 }
 
 .landing-page .best-seller-card h3 {
   font-size: 1.2em;
-  color: #61573b; /* Default color for h3 */
+  color: #ffffff; /* Default color for h3 */
   transition: color 0.3s ease; /* Smooth color transition */
 }
 
@@ -140,9 +129,9 @@
   align-items: center; /* Vertically align content */
   justify-content: space-between; /* Space out text and image */
   padding: 50px;
-  max-width: 1200px;
+  max-width: 1500px;
   margin: 0 auto;
-  background-color: #fff;
+  background-color: #CDA678;
 }
 
 .landing-page .about-section .text-content {
@@ -174,8 +163,8 @@
   display: inline-block;
   padding: 10px 20px;
   font-size: 1em;
-  color: #a08f62;
-  background-color: #FFE49B;
+  color: #ffffff;
+  background-color: #A0764B;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -186,8 +175,8 @@
 }
 
 .landing-page .about-button:hover {
-  background-color: #a08f62; /* Darker red on hover */
-  color: #FFE49B;
+  background-color: #6e4924; /* Darker red on hover */
+  color: #ffffff;
 }
 
 .landing-page .order-now-section {
@@ -226,8 +215,8 @@
   display: inline-block;
   padding: 10px 20px;
   font-size: 1em;
-  color: #a08f62;
-  background-color: #FFE49B;
+  color: #ffffff;
+  background-color: #A0764B;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -238,9 +227,33 @@
 }
 
 .landing-page .order-button:hover {
-  background-color: #a08f62; /* Darker red on hover */
-  color: #FFE49B;
+  background-color: #6e4924; /* Darker red on hover */
+  color: #fafafa;
 }
+
+.button-container {
+  display: flex;
+  justify-content: center; /* Centers the button horizontally */
+  margin-top: 6em; /* Adds some space above the button */
+}
+
+.menu-button {
+  padding: 10px 20px;
+  font-size: 1em;
+  color: #fff;
+  background-color: #A0764B; /* Adjust the color as needed */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.menu-button:hover {
+  background-color: #6e4924; /* Lighter color on hover */
+}
+
 
 
 /* Base styles remain unchanged, responsive adjustments below */
