@@ -364,7 +364,15 @@ oneYearLaterDate.setFullYear(today.getFullYear() + 1);
           <form noValidate onSubmit={handleReserve}>
   <div className="form-group">
     <label htmlFor="name">Name:</label>
-    <input type="text" id="name" required placeholder="Please Login to autofill" value={formData.name} onChange={handleInputChange} disabled />
+    <input
+      type="text"
+      id="name"
+      required
+      placeholder="Please Login to autofill"
+      value={formData.name}
+      onChange={handleInputChange}
+      disabled={!customer} // Disable if no customer is logged in
+    />
     {!formValid && <small className="error-message"></small>}
   </div>
 
@@ -372,7 +380,15 @@ oneYearLaterDate.setFullYear(today.getFullYear() + 1);
   <div className="form-columns">
     <div className="form-group">
       <label htmlFor="contact">Contact Number:</label>
-      <input type="tel" id="contact" required placeholder="Please Login to autofill" value={formData.contact} onChange={handleInputChange} disabled />
+      <input
+        type="tel"
+        id="contact"
+        required
+        placeholder="Please Login to autofill"
+        value={formData.contact}
+        onChange={handleInputChange}
+        disabled={!customer} // Disable if no customer is logged in
+      />
       {!formValid && <small className="error-message"></small>}
     </div>
 
@@ -388,6 +404,7 @@ oneYearLaterDate.setFullYear(today.getFullYear() + 1);
         onBlur={handleInputBlur}
         min="2"
         max="60"
+        disabled={!customer} // Disable if no customer is logged in
       />
       {(formData.guests < 2 || formData.guests > 60) && (
         <small className="error-message">Guests must be between 2 and 60.</small>
@@ -396,7 +413,6 @@ oneYearLaterDate.setFullYear(today.getFullYear() + 1);
 
     <div className="form-group">
       <label htmlFor="date">Reservation Date:</label>
-
       <input
         type="date"
         id="date"
@@ -407,6 +423,7 @@ oneYearLaterDate.setFullYear(today.getFullYear() + 1);
         min={formatDate(today)}
         max={formatDate(oneYearLaterDate)}
         onKeyDown={(e) => e.preventDefault()}
+        disabled={!customer} // Disable if no customer is logged in
       />
       {!formValid && (
         <small className="error-message">
@@ -426,6 +443,7 @@ oneYearLaterDate.setFullYear(today.getFullYear() + 1);
         min="11:00"
         max="20:00"
         required
+        disabled={!customer} // Disable if no customer is logged in
       />
     </div>
   </div>
@@ -434,13 +452,20 @@ oneYearLaterDate.setFullYear(today.getFullYear() + 1);
   <div className="form-group">
     <label htmlFor="toggle" className="toggle-label">Advance Order</label>
     <label className="reservation-switch">
-      <input type="checkbox" checked={isAdvanceOrder} onChange={handleToggleChange} />
+      <input
+        type="checkbox"
+        checked={isAdvanceOrder}
+        onChange={handleToggleChange}
+        disabled={!customer} // Disable if no customer is logged in
+      />
       <span className="reservation-slider"></span>
     </label>
   </div>
 
   {!isAdvanceOrder && (
-    <button type="submit" className="reserve-button">Reserve Now</button>
+    <button type="submit" className="reserve-button" disabled={!customer}>
+      Reserve Now
+    </button>
   )}
 </form>
           <div className='whitey'></div>
