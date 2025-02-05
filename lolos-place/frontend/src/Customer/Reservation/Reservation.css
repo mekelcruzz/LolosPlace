@@ -431,7 +431,29 @@
   }
 }
 
+/* Two-column layout for form fields */
+.form-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  gap: 15px; /* Space between columns */
+  margin-bottom: 15px; /* Space below the two-column section */
+}
 
+/* Ensure form groups inside the columns take full width */
+.form-columns .form-group {
+  width: 35em;
+}
+
+/* Responsive design: Stack columns on smaller screens */
+@media (max-width: 768px) {
+  .form-columns {
+    grid-template-columns: 1fr; /* Single column on small screens */
+  }
+}
+
+#name{
+  width: 77em;
+}
 
 .menu-buttons {
   display: flex;
