@@ -11,6 +11,10 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const { setCustomer } = useCustomer();
 
+  const [showOTPModal, setShowOTPModal] = useState(false);
+  const [email, setEmail] = useState('');
+  const [otp, setOtp] = useState('');
+
   // Function to toggle between login and signup forms
   const toggleForms = () => {
     setIsLoginVisible(!isLoginVisible);
@@ -63,49 +67,44 @@ const LoginPage = () => {
     const phone = document.getElementById('signup-phone').value;
     const password = document.getElementById('signup-password').value;
 
-    // Validate the input fields
+    // Validate input fields
     if (!firstName || !lastName || !address || !email || !phone || !password) {
-      alert("Please fill in all fields.");
+      alert('Please fill in all fields.');
       return;
     }
 
-    const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    const isPhone = /^\d{10,15}$/.test(phone);
-
-    if (!isEmail) {
-      alert("Please enter a valid email address.");
-      return;
-    }
-
-    if (!isPhone) {
-      alert("Please enter a valid phone number.");
-      return;
-    }
-    
-    if (password.length < 8) {
-      alert("Password must be at least 8 characters long.");
-      return;
-    }
-
-    // Proceed with the signup request
+    // Send OTP
     try {
-      const response = await axios.post('http://localhost:5000/api/signup', {
-        firstName,
-        lastName,
-        address,
-        email,
-        phone,
-        password,
-      });
+      await axios.post('http://localhost:5000/api/send-otp', { email });
+      setEmail(email); // Store email for OTP verification
+      setShowOTPModal(true); // Show OTP modal
+    } catch (error) {
+      alert('Failed to send OTP. Please try again.');
+    }
+  };
 
-      if (response.status === 201) {
-        alert('Sign up successful! You can now log in.');
-        toggleForms(); // Switch to the login form
-      } else {
-        alert('Sign up failed. Please try again.');
+  const handleOTPVerification = async () => {
+    try {
+      const response = await axios.post('http://localhost:5000/api/verify-otp', { email, otp });
+      if (response.status === 200) {
+        alert('OTP verified successfully!');
+        setShowOTPModal(false); // Hide OTP modal
+        // Proceed with signup
+        const signupResponse = await axios.post('http://localhost:5000/api/signup', {
+          firstName: document.getElementById('signup-firstname').value,
+          lastName: document.getElementById('signup-lastname').value,
+          address: document.getElementById('signup-address').value,
+          email,
+          phone: document.getElementById('signup-phone').value,
+          password: document.getElementById('signup-password').value,
+        });
+        if (signupResponse.status === 201) {
+          alert('Sign up successful! You can now log in.');
+          setIsLoginVisible(true); // Switch to login form
+        }
       }
     } catch (error) {
-      alert(error.response?.data?.message || `Sign up failed. Please check your information.`);
+      alert('Invalid OTP. Please try again.');
     }
   };
 
@@ -150,29 +149,43 @@ const LoginPage = () => {
 
         {/* Sign Up Section */}
         {!isLoginVisible && (
-          <section id="signupSection">
-            <h2>Sign Up</h2>
-            <form className="signup" id="signupForm">
-              <input type="text" id="signup-firstname" placeholder="First Name" required />
-              <input type="text" id="signup-lastname" placeholder="Last Name" required />
-              <input type="text" id="signup-address" placeholder="Complete Address" required />
-              <input type="email" id="signup-email" placeholder="Email" required />
-              <input type="text" id="signup-phone" placeholder="Phone Number" required />
-              <input type="password" id="signup-password" placeholder="Password" required />
-              <button id="signup-submit" type="button" onClick={handleSignUpSubmit}>Sign Up</button>
+        <section id="signupSection">
+          <h2>Sign Up</h2>
+          <form className="signup" id="signupForm">
+            <input type="text" id="signup-firstname" placeholder="First Name" required />
+            <input type="text" id="signup-lastname" placeholder="Last Name" required />
+            <input type="text" id="signup-address" placeholder="Complete Address" required />
+            <input type="email" id="signup-email" placeholder="Email" required />
+            <input type="text" id="signup-phone" placeholder="Phone Number" required />
+            <input type="password" id="signup-password" placeholder="Password" required />
+            <button id="signup-submit" type="button" onClick={handleSignUpSubmit}>
+              Sign Up
+            </button>
+            <p>
+              Already have an account?{' '}
+              <button type="button" onClick={toggleForms}>
+                Login
+              </button>
+            </p>
+          </form>
+        </section>
+      )}
 
-              <p>
-                Already have an account? 
-                <button type="button" onClick={toggleForms}>Login</button>
-              </p>
-            </form>
-            
-          </section>
-          
-        )}
-          <div className='white'></div>
-
-
+      {/* OTP Modal */}
+      {showOTPModal && (
+        <div className="otp-modal">
+          <div className="otp-modal-content">
+            <h2>Enter OTP</h2>
+            <input
+              type="text"
+              placeholder="Enter OTP"
+              value={otp}
+              onChange={(e) => setOtp(e.target.value)}
+            />
+            <button onClick={handleOTPVerification}>Verify OTP</button>
+          </div>
+        </div>
+      )}
     </div>
     </section>
     </MainLayout>

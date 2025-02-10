@@ -21,7 +21,9 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.6",
     "nodemailer": "^6.10.0",
-    "pg": "^8.13.0"
+    "otp-generator": "^4.0.1",
+    "pg": "^8.13.0",
+    "twilio": "^5.4.3"
   },
   "description": ""
 }

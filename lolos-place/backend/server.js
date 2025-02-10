@@ -4,6 +4,13 @@ const { Pool } = require('pg');
 const bcrypt = require('bcryptjs');
 const PAYMONGO_SECRET_KEY = 'sk_test_Uarb4zRpXZb9PXmTHeK1ZTEp';
 const axios = require('axios');
+const formatTimeTo12Hour = (time) => {
+  const [hour, minute] = time.split(':');
+  const parsedHour = parseInt(hour, 10);
+  const suffix = parsedHour >= 12 ? 'PM' : 'AM';
+  const twelveHour = parsedHour % 12 || 12;
+  return `${twelveHour}:${minute} ${suffix}`;
+};
 
 // kangkongchips
 
@@ -108,6 +115,68 @@ app.post('/api/signup', async (req, res) => {
       res.status(500).json({ message: 'Internal server error' });
     }
   });
+
+  const nodemailer = require('nodemailer');
+
+// Configure nodemailer
+const transporter = nodemailer.createTransport({
+  service: 'gmail', // Use your email service
+  auth: {
+    user: 'mekelcruzz@gmail.com', // Your email
+    pass: 'qpjn xxky mcrq qcop', // Your email password or app-specific password
+  },
+});
+
+// Function to generate a 6-digit OTP
+const generateOTP = () => {
+  return Math.floor(100000 + Math.random() * 900000).toString();
+};
+
+// Store OTPs temporarily (in-memory storage)
+const otpStorage = {};
+
+// Endpoint to send OTP
+app.post('/api/send-otp', async (req, res) => {
+  const { email } = req.body;
+
+  if (!email) {
+    return res.status(400).json({ message: 'Email is required' });
+  }
+
+  const otp = generateOTP();
+  otpStorage[email] = otp; // Store OTP in memory
+
+  const mailOptions = {
+    from: 'mekelcruzz@gmail.com',
+    to: email,
+    subject: 'Your OTP for Signup',
+    text: `Your OTP is: ${otp}`,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({ message: 'OTP sent successfully' });
+  } catch (error) {
+    console.error('Error sending OTP:', error);
+    res.status(500).json({ message: 'Failed to send OTP' });
+  }
+});
+
+// Endpoint to verify OTP
+app.post('/api/verify-otp', async (req, res) => {
+  const { email, otp } = req.body;
+
+  if (!email || !otp) {
+    return res.status(400).json({ message: 'Email and OTP are required' });
+  }
+
+  if (otpStorage[email] === otp) {
+    delete otpStorage[email]; // Clear OTP after successful verification
+    res.status(200).json({ message: 'OTP verified successfully' });
+  } else {
+    res.status(400).json({ message: 'Invalid OTP' });
+  }
+});
 
 app.post('/api/changeCustomerPassword', async (req, res) => {
     const { id, oldPassword, newPassword, confirmNewPassword } = req.body;
@@ -220,34 +289,35 @@ app.post('/api/web-orders', async (req, res) => {
 app.post('/api/orders', async (req, res) => {
   const client = await pool.connect(); // Get a client from the pool
   try {
-    // Start a transaction
-    await client.query('BEGIN');
+    await client.query('BEGIN'); // Start a transaction
 
-    // Destructure order and delivery details from request body
     const { cart, userId, mop, totalAmount, date, time, deliveryLocation, deliveryStatus } = req.body;
     
-    // Get the current date and time in the correct format
-    const currentDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
-    const currentTime = new Date().toTimeString().split(' ')[0]; // HH:MM:SS
+    // Check if user provided date and time
+    if (!date || !time) {
+      return res.status(400).json({ message: 'Date and time are required' });
+    }
 
-    const paymentResult = await pool.query('UPDATE payment SET payment_status = $1 WHERE user_id = $2', ['paid', userId])
+    // Update payment status
+    const paymentResult = await pool.query(
+      'UPDATE payment SET payment_status = $1 WHERE user_id = $2', 
+      ['paid', userId]
+    );
     if (paymentResult.rowCount === 0) {
       return res.status(400).json({ message: 'No payment found for the customer' });
     }
 
-    // Insert order into orders table
+    // Insert order with user-provided date and time
     const orderQuery = `
       INSERT INTO orders (user_id, mop, total_amount, date, time, delivery)
       VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING order_id;
     `;
-    const orderValues = [userId, mop, totalAmount, currentDate, currentTime, true]; // Assuming 'delivery' is true
+    const orderValues = [userId, mop, totalAmount, date, time, true];
     const orderResult = await client.query(orderQuery, orderValues);
-
-    // Retrieve the generated order_id
     const orderId = orderResult.rows[0].order_id;
 
-    // Insert order quantities into order_quantities table (from cart)
+    // Insert ordered items
     for (let item of cart) {
       await client.query(
         'INSERT INTO order_quantities (order_id, menu_id, order_quantity) VALUES ($1, $2, $3)',
@@ -255,7 +325,7 @@ app.post('/api/orders', async (req, res) => {
       );
     }
 
-    // Insert delivery details into deliveries table
+    // Insert delivery details if applicable
     const deliveryQuery = `
       INSERT INTO deliveries (order_id, delivery_location, delivery_status)
       VALUES ($1, $2, $3)
@@ -264,22 +334,19 @@ app.post('/api/orders', async (req, res) => {
     const deliveryValues = [orderId, deliveryLocation, deliveryStatus];
     const deliveryResult = await client.query(deliveryQuery, deliveryValues);
 
-    // Commit the transaction
-    await client.query('COMMIT');
+    await client.query('COMMIT'); // Commit transaction
 
-    // Return the new order and delivery details
     res.status(201).json({
       order: orderResult.rows[0],
-      delivery: deliveryResult.rows[0]
+      delivery: deliveryResult.rows[0],
     });
+
   } catch (err) {
-    // Rollback transaction on error
-    await client.query('ROLLBACK');
+    await client.query('ROLLBACK'); // Rollback on error
     console.error(err.message);
     res.status(500).send('Server Error');
   } finally {
-    // Release the client back to the pool
-    client.release();
+    client.release(); // Release the database connection
   }
 });
 
@@ -290,15 +357,13 @@ app.post('/api/reservations', async (req, res) => {
   try {
     await client.query('BEGIN');
 
-    // Destructure reservation details from request body
     const { guestNumber, userId, reservationDate, reservationTime, advanceOrder, totalAmount, cart } = req.body;
-    console.log(req.body);
-    const paymentResult = await pool.query('UPDATE payment SET payment_status = $1 WHERE user_id = $2', ['paid', userId])
+
+    const paymentResult = await pool.query('UPDATE payment SET payment_status = $1 WHERE user_id = $2', ['paid', userId]);
     if (paymentResult.rowCount === 0) {
       return res.status(400).json({ message: 'No payment found for the customer' });
-  }
+    }
 
-    // Insert reservation into reservations table
     const reservationQuery = `
       INSERT INTO reservations (user_id, guest_number, reservation_date, reservation_time, advance_order)
       VALUES ($1, $2, $3, $4, $5)
@@ -308,7 +373,6 @@ app.post('/api/reservations', async (req, res) => {
     const reservationResult = await client.query(reservationQuery, reservationValues);
     const reservationId = reservationResult.rows[0].reservation_id;
 
-    // Insert order associated with the reservation
     const orderQuery = `
       INSERT INTO orders (user_id, mop, total_amount, date, time, delivery, reservation_id)
       VALUES ($1, $2, $3, $4, $5, $6, $7)
@@ -320,7 +384,6 @@ app.post('/api/reservations', async (req, res) => {
     const orderResult = await client.query(orderQuery, orderValues);
     const orderId = orderResult.rows[0].order_id;
 
-    // Insert each item from the cart into order_quantities table
     for (let item of cart) {
       const orderQuantityQuery = `
         INSERT INTO order_quantities (order_id, menu_id, order_quantity)
@@ -329,10 +392,8 @@ app.post('/api/reservations', async (req, res) => {
       await client.query(orderQuantityQuery, [orderId, item.menu_id, item.quantity]);
     }
 
-    // Commit the transaction
     await client.query('COMMIT');
 
-    // Return reservation and order details
     res.status(201).json({
       reservation: {
         id: reservationId,
@@ -358,6 +419,7 @@ app.post('/api/reservations', async (req, res) => {
     client.release();
   }
 });
+
 
 app.post('/api/feedback', async (req, res) => {
   const { name, feedbackType, comment } = req.body;
@@ -492,26 +554,29 @@ app.get('/api/check-payment-status/:user_id', async (req, res) => {
 });
 
 
+//checkpoint
 app.get('/api/order-history', async (req, res) => {
-  const { user_id } = req.query; // Ensure you are using `user_id` from query params
+  const { user_id } = req.query;
 
   if (!user_id) {
     return res.status(400).json({ error: 'User ID is required.' });
   }
 
   try {
-    // Query to fetch orders, including date and time from the orders table
+    // Fetch orders with reservation details
     const result = await pool.query(
       `
-      SELECT o.order_id, o.user_id, o.mop, o.total_amount, o.date, o.time, o.delivery, o.reservation_id
+      SELECT o.order_id, o.user_id, o.mop, o.total_amount, o.date, o.time, o.delivery, o.reservation_id,
+             r.reservation_date, r.reservation_time
       FROM orders o
+      LEFT JOIN reservations r ON o.reservation_id = r.reservation_id
       WHERE o.user_id = $1
       ORDER BY o.date DESC;
       `,
       [user_id]
     );
 
-    // Fetch the items for each order from the order_quantities table
+    // Fetch the items for each order
     const orderIds = result.rows.map(order => order.order_id);
     const itemsResult = await pool.query(
       `
@@ -523,54 +588,30 @@ app.get('/api/order-history', async (req, res) => {
       [orderIds]
     );
 
-    // Fetch reservation details for orders that have a reservation_id
-    const reservationResult = await pool.query(
-      `
-      SELECT r.reservation_id, r.reservation_date, r.reservation_time
-      FROM reservations r
-      WHERE r.reservation_id = ANY($1);
-      `,
-      [orderIds]
-    );
-
     // Group the order items and combine with the orders
-    const groupedOrders = result.rows.reduce((acc, order) => {
-      const existingOrder = acc.find(o => o.order_id === order.order_id);
+    const groupedOrders = result.rows.map(order => {
       const orderItems = itemsResult.rows.filter(item => item.order_id === order.order_id);
 
-      // Get reservation details if the order is a reservation (not delivery)
-      const reservationDetails = order.reservation_id
-        ? reservationResult.rows.find(r => r.reservation_id === order.reservation_id)
-        : null;
+      return {
+        order_id: order.order_id,
+        date: order.date,
+        time: formatTimeTo12Hour(order.time),
+        total_amount: parseFloat(order.total_amount),
+        mop: order.mop,
+        order_type: order.delivery ? "Delivery" : order.reservation_id ? "Reservation" : "Unknown", // ✅ Order Type Logic
+        reservation_date: order.reservation_date,
+        reservation_time: order.reservation_time ? formatTimeTo12Hour(order.reservation_time) : null,
+        items: orderItems || [], // ✅ No need for two columns, just return items as an array
+      };
+    });
 
-      if (existingOrder) {
-        existingOrder.items.push(...orderItems); // Add items for the existing order
-      } else {
-        acc.push({
-          order_id: order.order_id,
-          date: order.date,  // Order date from the orders table
-          time: order.time,  // Order time from the orders table
-          total_amount: parseFloat(order.total_amount), // Ensure it's treated as a number
-          mop: order.mop,
-          delivery: order.delivery,
-          reservation_id: order.reservation_id,
-          reservation_date: reservationDetails ? reservationDetails.reservation_date : null, // Reservation date (if applicable)
-          reservation_time: reservationDetails ? reservationDetails.reservation_time : null, // Reservation time (if applicable)
-          items: orderItems, // Add the items for the new order
-        });
-      }
-      return acc;
-    }, []);
-
-    // Log the groupedOrders in a readable format
-    console.log(JSON.stringify(groupedOrders, null, 2)); // Now it will log properly
-
-    res.json(groupedOrders); // Send the response as a JSON object
+    res.json(groupedOrders);
   } catch (error) {
     console.error("Error fetching order history:", error.message);
     res.status(500).json({ error: 'Failed to fetch order history. Please try again later.' });
   }
 });
+
 
 app.get('/api/top-best-sellers', async (req, res) => {
   try {

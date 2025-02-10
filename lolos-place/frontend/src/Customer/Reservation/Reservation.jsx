@@ -166,41 +166,35 @@ const Reservation = () => {
   };
 
   const handleConfirmOrder = async () => {
-
     const orderDetails = {
-        cart: cartReservations.map(item => ({
-            menu_id: item.menu_id,
-            quantity: item.quantity,
-        })), // Cart items to send to the server
-        guestNumber: formData.guests, // Number of guests from formData
-        userId: customer.id,           // Customer ID
-        reservationDate: formData.date, // Date selected in the form
-        reservationTime: formData.time, // Time selected in the form
-        advanceOrder: isAdvanceOrder,   // Advance order boolean
-        totalAmount: getTotalAmount(),  // Total amount of the order
+      cart: cartReservations.map(item => ({
+        menu_id: item.menu_id,
+        quantity: item.quantity,
+      })),
+      guestNumber: formData.guests,
+      userId: customer.id,
+      reservationDate: formData.date,
+      reservationTime: formData.time,
+      advanceOrder: isAdvanceOrder,
+      totalAmount: getTotalAmount(),
     };
-
-
+  
     try {
-        const response = await axios.post('http://localhost:5000/api/reservations', orderDetails);
-
-        if (response.status === 201) {
-            setConfirmationPopupVisible(false);
-            setFormData(initialFormData);
-            setIsAdvanceOrder(false);
-        } else {
-            console.error('Failed to save reservation and order');
-        }
+      const response = await axios.post('http://localhost:5000/api/reservations', orderDetails);
+  
+      if (response.status === 201) {
+        setConfirmationPopupVisible(false);
+        setFormData(initialFormData);
+        setIsAdvanceOrder(false);
+        setCartReservations([]); // Clear the cart after successful reservation
+      } else {
+        console.error('Failed to save reservation and order');
+      }
     } catch (error) {
-        console.error('Error:', error);
+      console.error('Error:', error);
+      alert('Failed to confirm reservation. Please check your input and try again.');
     }
-};
-
-
-
-  
-  
-  
+  };
 
   const closeQrCodePopup = () => {
     setQrCodePopupVisible(false);

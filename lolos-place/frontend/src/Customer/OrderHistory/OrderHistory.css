@@ -25,6 +25,50 @@ body {
   margin-bottom: 30px;
   text-transform: capitalize;
 }
+/* Order Details - Two Columns */
+.order-details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.order-left {
+  text-align: left;
+  flex: 1;
+}
+
+.order-right {
+  text-align: right;
+  flex: 1;
+}
+
+/* Items in Two Columns */
+.items-columns {
+  display: flex;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.items-column {
+  flex: 1;
+}
+
+.item-row {
+  display: flex;
+  justify-content: space-between; /* Aligns item name to left, quantity to right */
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd; /* Optional: Adds separation between items */
+}
+
+.item-name {
+  font-weight: bold;
+  text-align: left;
+}
+
+.item-quantity {
+  text-align: right;
+}
+
 
 .order-history-page p {
   font-size: 1.1em;
