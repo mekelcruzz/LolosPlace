@@ -9,7 +9,7 @@
 }
 
 .landing-page .intro-section {
-  background-color: #CDA678;
+  background-color: #DFD6C7;
   display: flex;
   align-items: center; /* Vertically align content */
   justify-content: space-between; /* Space out text and image */
@@ -42,7 +42,7 @@
   padding: 10px 20px;
   font-size: 1em;
   color: #ffffff;
-  background-color: #6e4924;
+  background-color: #493628;
   border: none;
   border-radius: 5px;
   cursor: pointer;

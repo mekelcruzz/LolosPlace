@@ -23,12 +23,34 @@ const Reservation = () => {
   const [scrollPos, setScrollPos] = useState(window.scrollY);
   const [formValid, setFormValid] = useState(false);
   const navigate = useNavigate();
+  const [mainFilter, setMainFilter] = useState('all');
+  const [subFilter, setSubFilter] = useState(null);
+
+  const groupedCategories = menuData.reduce((acc, item) => {
+    const mainCategory = item.main_category;
+    if (!acc[mainCategory]) {
+      acc[mainCategory] = new Set();
+    }
+    acc[mainCategory].add(item.category);
+    return acc;
+  }, {});
+  
+  const mainCategories = Object.keys(groupedCategories);
 
   const validateForm = () => {
     const { name, date, time, guests, contact } = formData;
     const isValid = name.trim() && date.trim() && time.trim() && !isNaN(guests) && guests > 0 && contact.trim();
     setFormValid(isValid);
     return isValid;
+  };
+
+  const handleMainFilterClick = (selectedFilter) => {
+    setMainFilter(selectedFilter);
+    setSubFilter(null); // Reset subFilter when selecting a new main category
+  };
+  
+  const handleSubFilterClick = (selectedSubFilter) => {
+    setSubFilter(selectedSubFilter);
   };
 
   const [showCart, setShowCart] = useState(false);
@@ -89,9 +111,14 @@ const Reservation = () => {
   };
 
   const getFilteredMenu = () => {
-    return filter === 'all'
-      ? menuData
-      : menuData.filter((menuItem) => menuItem.category.toLowerCase() === filter.toLowerCase());
+    if (mainFilter === 'all') {
+      return menuData;
+    }
+    return menuData.filter(
+      (menuItem) =>
+        menuItem.main_category === mainFilter &&
+        (!subFilter || menuItem.category === subFilter)
+    );
   };
 
   const handleFilterClick = (selectedFilter) => {
@@ -467,13 +494,40 @@ oneYearLaterDate.setFullYear(today.getFullYear() + 1);
           {/* Conditional rendering of menu when isAdvanceOrder is true */}
           {isAdvanceOrder && (
             <>
-              <div className="filter-buttons">
-                {getUniqueCategories().map((category, index) => (
-                  <button key={index} onClick={() => handleFilterClick(category)}>
-                    {category.charAt(0).toUpperCase() + category.slice(1)}
-                  </button>
-                ))}
-              </div>
+              <div className="menu-buttons">
+  <button
+    data-filter="all"
+    className={`filter-button ${mainFilter === 'all' ? 'active' : ''}`}
+    onClick={() => handleMainFilterClick('all')}
+  >
+    All Food
+  </button>
+  {mainCategories.map((mainCategory, index) => (
+    <button
+      key={index}
+      data-filter={mainCategory}
+      className={`filter-button ${mainFilter === mainCategory ? 'active' : ''}`}
+      onClick={() => handleMainFilterClick(mainCategory)}
+    >
+      {mainCategory}
+    </button>
+  ))}
+</div>
+
+{mainFilter !== 'all' && groupedCategories[mainFilter] && (
+  <div className="subcategory-buttons">
+    {[...groupedCategories[mainFilter]].map((subcategory, index) => (
+      <button
+        key={index}
+        data-filter={subcategory}
+        className={`filter-button ${subFilter === subcategory ? 'active' : ''}`}
+        onClick={() => handleSubFilterClick(subcategory)}
+      >
+        {subcategory}
+      </button>
+    ))}
+  </div>
+)}
 
               <div className="menu">
   <h3>Our Menu</h3>
@@ -555,9 +609,6 @@ oneYearLaterDate.setFullYear(today.getFullYear() + 1);
         </div>
       )}
     </>
-
-              {/* Reserve with Advance Order button */}
-              <button type="submit" className="reserve-button" onClick={handleReserve}>Reserve with Advance Order</button>
             </>
           )}
 

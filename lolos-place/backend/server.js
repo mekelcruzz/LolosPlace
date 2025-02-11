@@ -359,9 +359,10 @@ app.post('/api/reservations', async (req, res) => {
 
     const { guestNumber, userId, reservationDate, reservationTime, advanceOrder, totalAmount, cart } = req.body;
 
-    const paymentResult = await pool.query('UPDATE payment SET payment_status = $1 WHERE user_id = $2', ['paid', userId]);
-    if (paymentResult.rowCount === 0) {
-      return res.status(400).json({ message: 'No payment found for the customer' });
+    // Optional: Check if payment exists, but don't enforce it
+    const paymentResult = await pool.query('SELECT * FROM payment WHERE user_id = $1', [userId]);
+    if (paymentResult.rows.length > 0) {
+      await pool.query('UPDATE payment SET payment_status = $1 WHERE user_id = $2', ['paid', userId]);
     }
 
     const reservationQuery = `

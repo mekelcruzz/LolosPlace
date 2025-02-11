@@ -362,6 +362,7 @@ footer {
   opacity: 0.8; /* Add hover effect */
 }
 
+
 /* Media query for very small screens */
 @media (max-width: 480px) {
   .social-buttons {
