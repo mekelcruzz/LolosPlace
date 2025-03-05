@@ -12,6 +12,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 import cartImage from '../../assets/cart.png';
+import { format } from 'date-fns';
 
 const Reservation = () => {
   const { customer, menuData, cartReservations, setCartReservations, formData, setFormData, isAdvanceOrder, setIsAdvanceOrder, initialFormData } = useCustomer();
@@ -25,6 +26,7 @@ const Reservation = () => {
   const navigate = useNavigate();
   const [mainFilter, setMainFilter] = useState('all');
   const [subFilter, setSubFilter] = useState(null);
+  const [availableSlots, setAvailableSlots] = useState(100); // State for available slots
 
   const groupedCategories = menuData.reduce((acc, item) => {
     const mainCategory = item.main_category;
@@ -39,7 +41,7 @@ const Reservation = () => {
 
   const validateForm = () => {
     const { name, date, time, guests, contact } = formData;
-    const isValid = name.trim() && date.trim() && time.trim() && !isNaN(guests) && guests > 0 && contact.trim();
+    const isValid = name.trim() && date.trim() && time.trim() && !isNaN(guests) && guests >= 2 && guests <= 100 && contact.trim(); // Updated to 100
     setFormValid(isValid);
     return isValid;
   };
@@ -160,16 +162,21 @@ const Reservation = () => {
   const handleReserve = (event) => {
     event.preventDefault(); // Prevent page reload
     setShowCart(false);
-    if (!customer || customer === '') {
-      setPopupVisibleLogin(true);
-      window.scrollTo(0, 0);
-    } else if (!validateForm()) {
-      setPopupVisible(true);
-    }else if (isAdvanceOrder && cartReservations.length === 0) {
-      setPopupVisible(true);
-    }else {
-      setConfirmationPopupVisible(true);
-    }
+
+     if (!customer || customer === '') {
+    setPopupVisibleLogin(true);
+    window.scrollTo(0, 0);
+  } else if (!validateForm()) {
+    setPopupVisible(true);
+  } else if (availableSlots <= 0) {
+    alert("No available slots for the selected date. Please choose another date.");
+  } else if (formData.guests > availableSlots) {
+    alert(`Only ${availableSlots} slots are available. Please reduce the number of guests or choos another date.`);
+  } else if (isAdvanceOrder && cartReservations.length === 0) {
+    setPopupVisible(true);
+  } else {
+    setConfirmationPopupVisible(true);
+  }
   };
 
   const closePopup = () => {
@@ -193,35 +200,47 @@ const Reservation = () => {
   };
 
   const handleConfirmOrder = async () => {
-    const orderDetails = {
-      cart: cartReservations.map(item => ({
-        menu_id: item.menu_id,
-        quantity: item.quantity,
-      })),
-      guestNumber: formData.guests,
-      userId: customer.id,
-      reservationDate: formData.date,
-      reservationTime: formData.time,
-      advanceOrder: isAdvanceOrder,
-      totalAmount: getTotalAmount(),
-    };
-  
-    try {
-      const response = await axios.post('http://localhost:5000/api/reservations', orderDetails);
-  
-      if (response.status === 201) {
-        setConfirmationPopupVisible(false);
-        setFormData(initialFormData);
-        setIsAdvanceOrder(false);
-        setCartReservations([]); // Clear the cart after successful reservation
-      } else {
-        console.error('Failed to save reservation and order');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Failed to confirm reservation. Please check your input and try again.');
+    if (availableSlots <= 0) {
+      alert("No available slots for the selected date. Please choose another date.");
+      return;
     }
+
+    if (formData.guests > availableSlots) {
+      alert(`Only ${availableSlots} slots are available. Please reduce the number of guests.`);
+      return;
+    }
+  
+
+     const orderDetails = {
+    cart: cartReservations.map(item => ({
+      menu_id: item.menu_id,
+      quantity: item.quantity,
+    })),
+    guestNumber: formData.guests,
+    userId: customer.id,
+    reservationDate: formData.date,
+    reservationTime: formData.time,
+    advanceOrder: isAdvanceOrder,
+    totalAmount: getTotalAmount(),
   };
+    
+  
+  try {
+    const response = await axios.post('http://localhost:5000/api/reservations', orderDetails);
+
+    if (response.status === 201) {
+      setConfirmationPopupVisible(false);
+      setFormData(initialFormData);
+      setIsAdvanceOrder(false);
+      setCartReservations([]); // Clear the cart after successful reservation
+    } else {
+      console.error('Failed to save reservation and order');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('Failed to confirm reservation. Please check your input and try again.');
+  }
+};
 
   const closeQrCodePopup = () => {
     setQrCodePopupVisible(false);
@@ -249,75 +268,44 @@ const Reservation = () => {
     return `${year}-${month}-${day}`;
   };
 ////////////////////////////////////////////////////////////////////////////////
-const handleInputChange = (e) => {
+const handleInputChange = async (e) => {
   const { id, value } = e.target;
 
-  // Handle 'guests' input
-  if (id === 'guests') {
-    const guestNumber = parseInt(value, 10);
-    // If value is not a number or empty, don't validate yet
-    if (isNaN(guestNumber) || value === '') {
-      setFormData((prevData) => ({
-        ...prevData,
-        [id]: value,
-      }));
-      return;
-    }
-    // Otherwise, update state
-    setFormData((prevData) => ({
-      ...prevData,
-      [id]: guestNumber,
-    }));
-  }
-
-  // Handle 'date' input with validation
-  else if (id === 'date') {
+  if (id === 'date') {
     const inputDate = new Date(value);
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // Ensure the time is set to 00:00:00 for today's date
+    today.setHours(0, 0, 0, 0);
     const oneYearLaterDate = new Date(today);
     oneYearLaterDate.setFullYear(today.getFullYear() + 1);
 
-    // If the date is not valid or is out of range, don't update the state
     if (inputDate < today || inputDate > oneYearLaterDate || isNaN(inputDate)) {
       setFormValid(false);
-      return; // Don't update the state if invalid
+      return;
     }
 
-    // Otherwise, update the state with the valid date
-    setFormValid(true);  // Reset form validity flag
+    try {
+      const response = await axios.get(`http://localhost:5000/api/total-guests/${value}`);
+      const totalGuests = response.data.totalGuests || 0;
+      const slotsLeft = 100 - totalGuests; // Calculate available slots
+      setAvailableSlots(slotsLeft); // Update available slots
+    } catch (error) {
+      console.error('Error fetching total guests:', error);
+      setAvailableSlots(100); // Fallback to 100 slots if there's an error
+    }
+
+    setFormValid(true);
     setFormData((prevData) => ({
       ...prevData,
       [id]: value,
     }));
-  }
-
-  // Handle 'time' input with validation
-  else if (id === 'time') {
-    // Define the allowed range for time
-    const minTime = "11:00";
-    const maxTime = "20:00";
-
-    // If the time is within the allowed range, update the state
-    if (value >= minTime && value <= maxTime) {
-      setFormData((prevData) => ({
-        ...prevData,
-        [id]: value,
-      }));
-    } else {
-      // Optionally show an alert or log for invalid time
-      alert("Please select a time between 11:00 AM and 8:00 PM.");
-    }
-  }
-
-  // Handle other inputs (if any)
-  else {
+  } else {
     setFormData((prevData) => ({
       ...prevData,
       [id]: value,
     }));
   }
 };
+
 
 
 
@@ -337,8 +325,8 @@ oneYearLaterDate.setFullYear(today.getFullYear() + 1);
     // Validate guest number on blur
     if (id === 'guests') {
       const guestNumber = parseInt(value, 10);
-      if (guestNumber < 2 || guestNumber > 60) {
-        alert("Number of guests must be between 2 and 60.");
+      if (guestNumber < 2 || guestNumber > 100) { // Updated from 60 to 100
+        alert("Number of guests must be between 2 and 100."); // Updated error message
         setFormData((prevData) => ({
           ...prevData,
           [id]: '',
@@ -346,6 +334,38 @@ oneYearLaterDate.setFullYear(today.getFullYear() + 1);
       }
     }
   };
+  
+  // In the form input field
+<div className="form-group">
+  <label htmlFor="guests">Number of Guests:</label>
+  <input
+    type="number"
+    id="guests"
+    required
+    placeholder="Number of guests"
+    value={formData.guests}
+    onChange={handleInputChange}
+    onBlur={handleInputBlur}
+    min="2"
+    max="100"
+    disabled={!customer} // Disable if no customer is logged in
+  />
+  {(formData.guests < 2 || formData.guests > 100) && (
+    <small className="error-message">Guests must be between 2 and 100.</small>
+  )}
+  {formData.guests > availableSlots && (
+    <small className="error-message">
+      Only {availableSlots} slots are available. Please reduce the number of guests.
+    </small>
+  )}
+  <small className="slots-message">
+    {formData.date
+      ? availableSlots >= 0
+        ? `${availableSlots} slots left for ${format(new Date(formData.date), 'MMM-dd-yyyy')}`
+        : "Unable to fetch available slots."
+      : "Select a date to see available slots."}
+  </small>
+</div>
   
   
 
@@ -413,24 +433,7 @@ oneYearLaterDate.setFullYear(today.getFullYear() + 1);
       {!formValid && <small className="error-message"></small>}
     </div>
 
-    <div className="form-group">
-      <label htmlFor="guests">Number of Guests:</label>
-      <input
-        type="number"
-        id="guests"
-        required
-        placeholder="Number of guests"
-        value={formData.guests}
-        onChange={handleInputChange}
-        onBlur={handleInputBlur}
-        min="2"
-        max="60"
-        disabled={!customer} // Disable if no customer is logged in
-      />
-      {(formData.guests < 2 || formData.guests > 60) && (
-        <small className="error-message">Guests must be between 2 and 60.</small>
-      )}
-    </div>
+        
 
     <div className="form-group">
       <label htmlFor="date">Reservation Date:</label>
@@ -452,6 +455,32 @@ oneYearLaterDate.setFullYear(today.getFullYear() + 1);
         </small>
       )}
     </div>
+
+    <div className="form-group">
+  <label htmlFor="guests">Number of Guests:</label>
+  <input
+    type="number"
+    id="guests"
+    required
+    placeholder="Number of guests"
+    value={formData.guests}
+    onChange={handleInputChange}
+    onBlur={handleInputBlur}
+    min="2"
+    max="100"
+    disabled={!customer} // Disable if no customer is logged in
+  />
+  {(formData.guests < 2 || formData.guests > 100) && (
+    <small className="error-message">Guests must be between 2 and 100.</small>
+  )}
+  <small className="slots-message">
+  {formData.date
+    ? availableSlots > 0
+      ? `${availableSlots} slots left for ${format(new Date(formData.date), 'MMM-dd-yyyy')}`
+      : "No slots available for the selected date."
+    : "Select a date to see available slots."}
+</small>
+</div>
 
     <div className="form-group">
       <label htmlFor="time">Reservation Time:</label>
@@ -484,9 +513,13 @@ oneYearLaterDate.setFullYear(today.getFullYear() + 1);
   </div>
 
   {!isAdvanceOrder && (
-    <button type="submit" className="reserve-button" disabled={!customer}>
-      Reserve Now
-    </button>
+   <button
+   type="submit"
+   className="reserve-button"
+   disabled={!customer || !formValid || availableSlots <= 0}
+ >
+   {availableSlots <= 0 ? "No Slots Available" : "Reserve Now"}
+ </button>
   )}
 </form>
           <div className='whitey'></div>
@@ -652,65 +685,80 @@ oneYearLaterDate.setFullYear(today.getFullYear() + 1);
 
       {confirmationPopupVisible && (
         <div className="confirmation-popup">
-          <div className="popup-content receipt">
-            {isAdvanceOrder ? (
-              <>
-                <h3>Reservation with Advance Ordering</h3>
-                <div className="receipt-header">
-                  <h1>Lolo's Place</h1>
-                  <p>Thank you for your reservation!</p>
-                </div>
-                <div className="receipt-details">
-                  <p><strong>Name:</strong> {formData.name}</p>
-                  <p><strong>Reservation Date:</strong> {formData.date}</p>
-                  <p><strong>Reservation Time:</strong> {formData.time}</p>
-                  <p><strong>Number of Guests:</strong> {formData.guests}</p>
-                  <p><strong>Contact Number:</strong> {formData.contact}</p>
-                </div>
-                <h4>Items Ordered:</h4>
-                <ul className="receipt-items">
-                  {cartReservations.map((item, index) => (
-                    <li key={index}>
-                      {item.name} (x{item.quantity}) - ₱{item.price * item.quantity}
-                    </li>
-                  ))}
-                </ul>
-                <h4 className="total">Total: ₱{getTotalAmount()}</h4>
-                <div className="receipt-footer">
-              <button className="confirm-btn" onClick={makePaymentGCash}>
-                Confirm
-              </button>
-              <button className="close-btn" onClick={closeConfirmationPopup}>
-                Close
-              </button>
+        <div className="popup-content receipt">
+          {/* Add warning message here */}
+          {formData.guests > availableSlots && (
+            <div className="warning-message">
+              <p>⚠️ Only {availableSlots} slots are available. Please reduce the number of guests.</p>
             </div>
-              </>
-            ) : (
-              <>
-                <h3>Reservation Confirmation</h3>
-                <div className="receipt-header">
-                  <h1>Lolo's Place</h1>
-                  <p>Thank you for your reservation!</p>
-                </div>
-                <div className="receipt-details">
-                  <p><strong>Name:</strong> {formData.name}</p>
-                  <p><strong>Reservation Date:</strong> {formData.date}</p>
-                  <p><strong>Reservation Time:</strong> {formData.time}</p>
-                  <p><strong>Number of Guests:</strong> {formData.guests}</p>
-                  <p><strong>Contact Number:</strong> {formData.contact}</p>
-                </div>
-                <div className="receipt-footer">
-              <button className="confirm-btn" onClick={handleConfirmOrder}>
-                Confirm
-              </button>
-              <button className="close-btn" onClick={closeConfirmationPopup}>
-                Close
-              </button>
-            </div>
-              </>
-            )}
-          </div>
+          )}
+      
+          {isAdvanceOrder ? (
+            <>
+              <h3>Reservation with Advance Ordering</h3>
+              <div className="receipt-header">
+                <h1>Lolo's Place</h1>
+                <p>Thank you for your reservation!</p>
+              </div>
+              <div className="receipt-details">
+                <p><strong>Name:</strong> {formData.name}</p>
+                <p><strong>Reservation Date:</strong> {formData.date}</p>
+                <p><strong>Reservation Time:</strong> {formData.time}</p>
+                <p><strong>Number of Guests:</strong> {formData.guests}</p>
+                <p><strong>Contact Number:</strong> {formData.contact}</p>
+              </div>
+              <h4>Items Ordered:</h4>
+              <ul className="receipt-items">
+                {cartReservations.map((item, index) => (
+                  <li key={index}>
+                    {item.name} (x{item.quantity}) - ₱{item.price * item.quantity}
+                  </li>
+                ))}
+              </ul>
+              <h4 className="total">Total: ₱{getTotalAmount()}</h4>
+              <div className="receipt-footer">
+                <button
+                  className="confirm-btn"
+                  onClick={makePaymentGCash}
+                  disabled={formData.guests > availableSlots} // Disable button if guests exceed slots
+                >
+                  Confirm
+                </button>
+                <button className="close-btn" onClick={closeConfirmationPopup}>
+                  Close
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <h3>Reservation Confirmation</h3>
+              <div className="receipt-header">
+                <h1>Lolo's Place</h1>
+                <p>Thank you for your reservation!</p>
+              </div>
+              <div className="receipt-details">
+                <p><strong>Name:</strong> {formData.name}</p>
+                <p><strong>Reservation Date:</strong> {formData.date}</p>
+                <p><strong>Reservation Time:</strong> {formData.time}</p>
+                <p><strong>Number of Guests:</strong> {formData.guests}</p>
+                <p><strong>Contact Number:</strong> {formData.contact}</p>
+              </div>
+              <div className="receipt-footer">
+                <button
+                  className="confirm-btn"
+                  onClick={handleConfirmOrder}
+                  disabled={formData.guests > availableSlots} // Disable button if guests exceed slots
+                >
+                  Confirm
+                </button>
+                <button className="close-btn" onClick={closeConfirmationPopup}>
+                  Close
+                </button>
+              </div>
+            </>
+          )}
         </div>
+      </div>
       )}
     </div>
     </section>
