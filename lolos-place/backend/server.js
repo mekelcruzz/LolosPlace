@@ -97,6 +97,19 @@ async function getTotalGuestsForDate(date) {
     client.release();
   }
 }
+async function getTotalGuestsForDate(date) {
+  const client = await pool.connect();
+  try {
+    const query = `SELECT COALESCE(SUM(guest_number), 0) AS total FROM reservations WHERE reservation_date = $1`;
+    const result = await client.query(query, [date]);
+    return result.rows[0].total;
+  } catch (err) {
+    console.error("Error fetching total guests:", err);
+    return 0; // Default to 0 if there's an error
+  } finally {
+    client.release();
+  }
+}
 
 app.post('/api/signup', async (req, res) => {
     const { firstName, lastName, address, email, phone, password } = req.body;
@@ -366,6 +379,14 @@ app.post('/api/orders', async (req, res) => {
 
 
 app.post('/api/reservations', async (req, res) => {
+  const { guestNumber, reservationDate } = req.body;
+  const totalGuests = await getTotalGuestsForDate(reservationDate);
+  const availableSlots = 100 - totalGuests;
+
+  if (guestNumber > availableSlots) {
+    return res.status(400).json({ error: `Only ${availableSlots} slots are available.` });
+  }
+
   const { guestNumber, reservationDate, downpayment } = req.body;
   const totalGuests = await getTotalGuestsForDate(reservationDate);
   const availableSlots = 100 - totalGuests;
@@ -446,6 +467,7 @@ app.post('/api/reservations', async (req, res) => {
 
 app.post('/api/feedback', async (req, res) => {
   const { name, ratings, comment, compound_score } = req.body;
+  const { name, ratings, comment, compound_score } = req.body;
 
   // Insert feedback data into the database
   try {
@@ -455,9 +477,18 @@ app.post('/api/feedback', async (req, res) => {
     `;
     const values = [name, JSON.stringify(ratings), comment, compound_score];
     const result = await pool.query(query, values);
+    const query = `
+      INSERT INTO feedback (name, ratings, comment, date, compound_score)
+      VALUES ($1, $2, $3, NOW(), $4)
+    `;
+    const values = [name, JSON.stringify(ratings), comment, compound_score];
+    const result = await pool.query(query, values);
 
     res.status(200).json({ message: 'Feedback successfully submitted!' });
+    res.status(200).json({ message: 'Feedback successfully submitted!' });
   } catch (err) {
+    console.error('Error inserting feedback:', err);
+    res.status(500).json({ message: 'Error submitting feedback' });
     console.error('Error inserting feedback:', err);
     res.status(500).json({ message: 'Error submitting feedback' });
   }
@@ -657,6 +688,22 @@ app.get('/api/top-best-sellers', async (req, res) => {
   } catch (error) {
     console.error('Error fetching best-sellers:', error.message);
     res.status(500).json({ message: 'Server error while fetching best sellers' });
+  }
+});
+
+// Example backend route (Node.js/Express)
+app.get('/api/total-guests/:date', async (req, res) => {
+  const { date } = req.params;
+  try {
+    const result = await pool.query('SELECT total_guests FROM total_guest WHERE reservation_date = $1', [date]);
+    if (result.rows.length > 0) {
+      res.json({ totalGuests: result.rows[0].total_guests });
+    } else {
+      res.json({ totalGuests: 0 }); // No reservations for this date
+    }
+  } catch (error) {
+    console.error('Error fetching total guests:', error);
+    res.status(500).json({ error: 'Failed to fetch total guests' });
   }
 });
 
